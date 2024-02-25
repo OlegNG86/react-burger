@@ -57,6 +57,10 @@ const App = () => {
         setOrderDetails({ ...orderDetails, isOpened: true });
     }
 
+    const handleItemClick = (ingredient: any) => {
+        setIngredientDetails({ isOpened: true, ingredient: ingredient });
+      };
+
     const closeAllModals = () => {
         setOrderDetails({ ...orderDetails, isOpened: false });
         setIngredientDetails({ ...ingredientDetails, isOpened: false });
@@ -70,7 +74,7 @@ const App = () => {
         <>
         <AppHeader />
         <div className={style.content}>
-            <BurgerIngredients cardsData={ingredients} />
+            <BurgerIngredients cardsData={ingredients} onItemClick={handleItemClick} />
             <BurgerConstructor  openOrder={openOrderDetails}/>
         </div>
         {orderDetails.isOpened &&

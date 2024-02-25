@@ -9,7 +9,7 @@ function filterData(data, type) {
 }
 
 
-const BurgerIngredients = ({ cardsData }) => {
+const BurgerIngredients = ({ cardsData, onItemClick  }) => {
   const [current, setCurrent] = useState('bun');
   const [selectedItems, setSelectedItems] = useState([]);
 
@@ -40,9 +40,9 @@ const BurgerIngredients = ({ cardsData }) => {
         </Tab>
       </div>
       <div className={styles.scrollableContainer}>
-          <GroupCards data={filterData(cardsData, 'bun')} groupName='Булки' onItemClick={handleAddItem} count={filteredSelectedItems.length}/>
-          <GroupCards data={filterData(cardsData, 'sauce')} groupName='Соусы' onItemClick={handleAddItem} count={filteredSelectedItems.length}/>
-          <GroupCards data={filterData(cardsData, 'main')} groupName='Начинки' onItemClick={handleAddItem} count={filteredSelectedItems.length}/>
+          <GroupCards data={filterData(cardsData, 'bun')} groupName='Булки' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
+          <GroupCards data={filterData(cardsData, 'sauce')} groupName='Соусы' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
+          <GroupCards data={filterData(cardsData, 'main')} groupName='Начинки' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
       </div>
     </section>
   );

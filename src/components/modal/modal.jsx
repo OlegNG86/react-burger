@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { ModalOverlay } from '../modal-overlay/modal-overlay';
 import styles from './modal.module.css';
-const modalsContainer = document.querySelector('#modals');
+import {ModalOverlay} from '../modal-overlay/modal-overlay';
+
+const modalsContainer = document.getElementById('modals');
 
 const Modal = ({ onOverlayClick, onEscKeydown, children }) => {
     React.useEffect(() => {
@@ -13,10 +14,14 @@ const Modal = ({ onOverlayClick, onEscKeydown, children }) => {
         }
     }, []);
 
-    return (
-        <div  className={styles.modal}>
-            {children}
-        </div>
+    return ReactDOM.createPortal(
+        <>
+            <div className={styles.modal}>
+                {children}
+            </div>
+            <ModalOverlay onClick={onOverlayClick} />
+        </>,
+        modalsContainer
     )
 }
 
