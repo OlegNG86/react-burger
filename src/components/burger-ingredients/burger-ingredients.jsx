@@ -14,29 +14,52 @@ filterData.propTypes = {
 
 const BurgerIngredients = ({ cardsData }) => {
   const [current, setCurrent] = React.useState('bun');
+  const bunRef = React.useRef(null);
+  const sauceRef = React.useRef(null);
+  const mainRef = React.useRef(null);
+
+  const scrollToRef = (ref) => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  React.useEffect(() => {
+    let ref;
+    switch (current) {
+      case 'bun':
+        ref = bunRef;
+        break;
+      case 'sauce':
+        ref = sauceRef;
+        break;
+      case 'main':
+        ref = mainRef;
+        break;
+      default:
+        ref = bunRef;
+    }
+    scrollToRef(ref);
+  }, [current]);
 
   return (
     <section className={styles.section}>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <p className={"text text_type_main-large mt-5 pl-1"}>Соберите бургер</p>
-        <div style={{ marginBottom: '20px' }}></div>
-        <div style={{ display: 'flex' }}>
-          <Tab value="bun" active={current === 'bun'} onClick={setCurrent}>
-            Булки
-          </Tab>
-          <Tab value="sauce" active={current === 'sauce'} onClick={setCurrent}>
-            Соусы
-          </Tab>
-          <Tab value="main" active={current === 'main'} onClick={setCurrent}>
-            Начинки
-          </Tab>
-        </div>
-        <div style={{ marginTop: '40px' }}></div>
+      ...
+      <div style={{ display: 'flex' }}>
+        <Tab value="bun" active={current === 'bun'} onClick={() => setCurrent('bun')}>
+          Булки
+        </Tab>
+        <Tab value="sauce" active={current === 'sauce'} onClick={() => setCurrent('sauce')}>
+          Соусы
+        </Tab>
+        <Tab value="main" active={current === 'main'} onClick={() => setCurrent('main')}>
+          Начинки
+        </Tab>
       </div>
       <div className={styles.scrollableContainer}>
-          <GroupCards data={ filterData(cardsData, 'bun') } groupName='Булки'/>
-          <GroupCards data={ filterData(cardsData, 'sauce') } groupName='Соусы'/>
-          <GroupCards data={ filterData(cardsData, 'main') } groupName='Начинки'/>
+          <GroupCards data={ filterData(cardsData, 'bun') } groupName='Булки' ref={bunRef}/>
+          <GroupCards data={ filterData(cardsData, 'sauce') } groupName='Соусы' ref={sauceRef}/>
+          <GroupCards data={ filterData(cardsData, 'main') } groupName='Начинки' ref={mainRef}/>
       </div>
     </section>
   );

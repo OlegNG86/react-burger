@@ -1,10 +1,10 @@
 import styles from './group-cards.module.css';
 import IngredientCard from '../ingredient-card/ingredient-card';
+import React from 'react';
 
-function GroupCards({ data, groupName }) {
-
+const GroupCards = React.forwardRef(({ data, groupName }, ref) => {
     return (
-        <div>
+        <div ref={ref}>
             <h3 className={`text text_type_main-medium`}>{groupName}</h3>
             <ul className={`ml-4 mt-6 mb-10 ${styles.cards__list}`}>
                 {data.map((cardData) => {
@@ -14,7 +14,7 @@ function GroupCards({ data, groupName }) {
                 })}
             </ul>
         </div>
-    )
-}
+    );
+});
 
 export default GroupCards;
