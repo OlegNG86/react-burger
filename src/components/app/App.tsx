@@ -4,13 +4,19 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import PropTypes from "prop-types";
+import Modal from '../modal/modal';
+import IngredientDetails from '../ingredient-details/ingredient-details';
+import OrderDetails from '../order-details/order-details';
 
 const API_URL = "https://norma.nomoreparties.space/api/ingredients";
+
 
 const App = () => {
     const [ingredients, setIngredients] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [orderDetails, setOrderDetails] = useState({ isOpened: false });
+    const [ingredientDetails, setIngredientDetails] = useState({ isOpened: false, ingredient: null })
 
     useEffect(() => {
         const fetchData = async () => {
@@ -47,38 +53,45 @@ const App = () => {
         return <div>Произошла ошибка: {error}</div>;
     }
 
-    // @ts-ignore
+    const openOrderDetails = () => {
+        setOrderDetails({ ...orderDetails, isOpened: true });
+    }
+
+    const closeAllModals = () => {
+        setOrderDetails({ ...orderDetails, isOpened: false });
+        setIngredientDetails({ ...ingredientDetails, isOpened: false });
+    }
+    const handleEscKeydown = (e: { key: string; }) => {
+        e.key === 'Escape' && closeAllModals();
+    }
+
+    console.log(orderDetails)
     return (
-        <div>
-            <h1>Список ингредиентов:</h1>
-            <ul>
-                
-            </ul>
+        <>
+        <AppHeader />
+        <div className={style.content}>
+            <BurgerIngredients cardsData={ingredients} />
+            <BurgerConstructor  openOrder={openOrderDetails}/>
         </div>
+        {orderDetails.isOpened &&
+                <Modal
+                    title={'Детали заказа'}
+                    onOverlayClick={closeAllModals}
+                    onEscKeydown={handleEscKeydown}>
+                    <OrderDetails orderId={`034536`} closeModal={closeAllModals} />
+                </Modal>}
+        {ingredientDetails.isOpened &&
+        <Modal
+            title={'Детали ингредиента'}
+            onOverlayClick={closeAllModals}
+            onEscKeydown={handleEscKeydown}>
+            <IngredientDetails title={`Детали ингредиента`} ingredientData={ingredientDetails.ingredient} closeModal={closeAllModals} />
+        </Modal>}
+        </>
+
     );
 };
 
-App.propTypes = {
-    ingredients: PropTypes.arrayOf(
-        PropTypes.arrayOf(
-            PropTypes.shape({
-                _id: PropTypes.string.isRequired,
-                name: PropTypes.string.isRequired,
-                type: PropTypes.string.isRequired,
-                proteins: PropTypes.number.isRequired,
-                fat: PropTypes.number.isRequired,
-                carbohydrates: PropTypes.number.isRequired,
-                calories: PropTypes.number.isRequired,
-                price: PropTypes.number.isRequired,
-                image: PropTypes.string.isRequired,
-                image_mobile: PropTypes.string.isRequired,
-                image_large: PropTypes.string.isRequired,
-                __v: PropTypes.number.isRequired
-            })
-        )
-    ).isRequired,
-    loading: PropTypes.bool.isRequired,
-    error: PropTypes.string,
-};
+
 
 export default App;
