@@ -1,0 +1,22 @@
+.section {
+    max-width: 600px;
+}
+
+.scrollableContainer {
+    overflow-y: auto; /* Добавляет вертикальную прокрутку, если содержимое выходит за пределы контейнера */
+    max-height: 716px; /* Максимальная высота контейнера, при которой появляется полоса прокрутки */
+    margin-bottom: 20px; /* Отступ снизу для разделения различных контейнеров */
+}
+
+/* Стилизация вертикального скроллбара */
+.scrollableContainer::-webkit-scrollbar {
+    width: 8px; /* Ширина скроллбара */
+  }
+  
+  .scrollableContainer::-webkit-scrollbar-thumb {
+    background-color: rgba(133, 133, 173, 1); /* Цвет ползунка скроллбара */
+  }
+  
+  .scrollableContainer::-webkit-scrollbar-track {
+    background-color: rgba(47, 47, 55, 1); /* Цвет фона скроллбара */
+  }
