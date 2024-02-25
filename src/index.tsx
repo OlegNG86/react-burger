@@ -8,10 +8,6 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-const modalsElement = document.createElement('div');
-modalsElement.id = 'modals';
-document.body.appendChild(modalsElement);
-
 root.render(
   <React.StrictMode>
     <App />

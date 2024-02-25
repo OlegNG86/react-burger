@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import styles from './modal.module.css';
 import {ModalOverlay} from '../modal-overlay/modal-overlay';
 
-const modalsContainer = document.getElementById('modals');
-
 const Modal = ({ onOverlayClick, onEscKeydown, children }) => {
     React.useEffect(() => {
         document.addEventListener('keydown', onEscKeydown);
@@ -21,7 +19,7 @@ const Modal = ({ onOverlayClick, onEscKeydown, children }) => {
             </div>
             <ModalOverlay onClick={onOverlayClick} />
         </>,
-        modalsContainer
+        document.getElementById('root')
     )
 }
 
