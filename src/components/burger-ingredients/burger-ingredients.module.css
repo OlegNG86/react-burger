@@ -2,6 +2,13 @@
     max-width: 600px;
 }
 
+.header {
+  font-family: 'JetBrains Mono';
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+}
+
 .scrollableContainer {
     overflow-y: auto; /* Добавляет вертикальную прокрутку, если содержимое выходит за пределы контейнера */
     max-height: 716px; /* Максимальная высота контейнера, при которой появляется полоса прокрутки */

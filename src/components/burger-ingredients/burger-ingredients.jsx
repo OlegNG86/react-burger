@@ -27,23 +27,27 @@ const BurgerIngredients = ({ cardsData, onItemClick  }) => {
   const filteredSelectedItems = selectedItems.filter(item => item.count > 0);
 
   return (
-    <section className={styles.section}>
-      <div style={{ display: 'flex' }}>
-        <Tab value="bun" active={current === 'bun'} onClick={() => setCurrent('bun')}>
-          Булки
-        </Tab>
-        <Tab value="sauce" active={current === 'sauce'} onClick={() => setCurrent('sauce')}>
-          Соусы
-        </Tab>
-        <Tab value="main" active={current === 'main'} onClick={() => setCurrent('main')}>
-          Начинки
-        </Tab>
-      </div>
-      <div className={styles.scrollableContainer}>
-          <GroupCards data={filterData(cardsData, 'bun')} groupName='Булки' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
-          <GroupCards data={filterData(cardsData, 'sauce')} groupName='Соусы' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
-          <GroupCards data={filterData(cardsData, 'main')} groupName='Начинки' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
-      </div>
+    <section className={`${styles.section}`}>
+      <>
+        <header className={`mt-10 mb-5 ${styles.header}`}>Соберите бургер</header>
+        <div style={{ display: 'flex' }}>
+          <Tab value="bun" active={current === 'bun'} onClick={() => setCurrent('bun')}>
+            Булки
+          </Tab>
+          <Tab value="sauce" active={current === 'sauce'} onClick={() => setCurrent('sauce')}>
+            Соусы
+          </Tab>
+          <Tab value="main" active={current === 'main'} onClick={() => setCurrent('main')}>
+            Начинки
+          </Tab>
+        </div>
+        <div className={styles.scrollableContainer}>
+            <GroupCards data={filterData(cardsData, 'bun')} groupName='Булки' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
+            <GroupCards data={filterData(cardsData, 'sauce')} groupName='Соусы' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
+            <GroupCards data={filterData(cardsData, 'main')} groupName='Начинки' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
+        </div>
+      </>
+
     </section>
   );
 };

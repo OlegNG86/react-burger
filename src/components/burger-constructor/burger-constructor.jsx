@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.css';
 import { DragIcon, ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
-function BurgerConstructor( {openOrder} ) {
+function BurgerConstructor( {openOrder, ingredients} ) {
   return (
-    <section className={`ml-22 mt-25 ${styles.section}`}>
+    <section className={`ml-22 mt-15 ${styles.section}`}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         <ConstructorElement
           type="top"
@@ -14,11 +14,19 @@ function BurgerConstructor( {openOrder} ) {
           price={200}
           thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
         />
-        <ConstructorElement
-          text="Краторная булка N-200i (верх)"
-          price={50}
-          thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
-        />
+        <div className={`mb-2 mt-2 ${styles.scrollableContainer}`}>
+            {ingredients.map((cardData) => {
+                return (
+                  <ConstructorElement
+                  className={`mb-2 mt-2`}
+                  text={cardData.name}
+                  price={cardData.price}
+                  thumbnail={cardData.image}
+                />
+                )
+            })}
+        </div>
+
         <ConstructorElement
           type="bottom"
           isLocked={true}
@@ -27,7 +35,7 @@ function BurgerConstructor( {openOrder} ) {
           thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
         />
       </div>
-      <div className={`mt-10 pb-10`}>
+      <div className={`mt-10 pb-10 ${styles.orderButton}`}>
                 <Button htmlType='submit' type="primary" size="large" onClick={openOrder}>Оформить заказ</Button>
             </div>
     </section>
@@ -42,7 +50,7 @@ BurgerConstructor.propTypes = {
 
 BurgerConstructor.propTypes = {
   openOrder: PropTypes.func.isRequired,
-  data: PropTypes.arrayOf(PropTypes.shape({
+  ingredients: PropTypes.arrayOf(PropTypes.shape({
       calories: PropTypes.number.isRequired,
       carbohydrates: PropTypes.number.isRequired,
       fat: PropTypes.number.isRequired,

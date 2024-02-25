@@ -75,7 +75,7 @@ const App = () => {
         <AppHeader />
         <div className={style.content}>
             <BurgerIngredients cardsData={ingredients} onItemClick={handleItemClick} />
-            <BurgerConstructor  openOrder={openOrderDetails}/>
+            <BurgerConstructor  openOrder={openOrderDetails} ingredients={ingredients} />
         </div>
         {orderDetails.isOpened &&
                 <Modal
