@@ -18,6 +18,7 @@ function BurgerConstructor( {openOrder, ingredients} ) {
         {ingredients.map((cardData) => {
             return (
               <ConstructorElement
+              key={cardData._id}
               className={`mb-2 mt-2`}
               text={cardData.name}
               price={cardData.price}
