@@ -10,11 +10,11 @@ function IngredientCard({ cardData, onClick }) {
     };
 
     return (
-        <li key={cardData._id} className={`${styles.card}`} onClick={() => {onClick(cardData); handleIncrement();}}>
+        <li key={cardData._id} className={styles.card} onClick={() => {onClick(cardData); handleIncrement();}}>
             <Counter count={localCount} size="default" />
-            <img src={cardData.image} alt={cardData.name} className={`mb-1 ${styles.card__image}`}></img>
-            <div className={`mb-1 ${styles.card__price}`}>
-                <p className={`mr-2`}>{cardData.price}</p>
+            <img src={cardData.image} alt={cardData.name} className={styles.card__image}></img>
+            <div className={styles.card__price}>
+                <p className={styles.p}>{cardData.price}</p>
                 <CurrencyIcon type="primary" />
             </div>
             <p className={`text text_type_main-small ${styles.card__name}`}>{cardData.name}</p>

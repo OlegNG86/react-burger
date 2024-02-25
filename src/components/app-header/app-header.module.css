@@ -14,7 +14,11 @@
     margin: 16px 40px 0;
   }
 
-  .div {
-    margin-right: 5px;
-  }
-  
+.button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.div {
+  margin-right: 5px;
+}

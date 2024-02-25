@@ -20,9 +20,18 @@
     font-size: 28px;
     line-height: 24px;
     align-items: center;
+    margin-bottom: 4px;
 }
 
 .card__name {
     text-align: center;
     max-width: 250px;
+}
+
+.card__image {
+    margin-bottom: 4px;
+}
+
+.p {
+    margin-right: 8px;
 }

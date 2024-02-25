@@ -19,7 +19,7 @@ const Modal = ({ onOverlayClick, onEscKeydown, children }) => {
             </div>
             <ModalOverlay onClick={onOverlayClick} />
         </>,
-        document.getElementById('root')
+        document.getElementById('modals')
     )
 }
 

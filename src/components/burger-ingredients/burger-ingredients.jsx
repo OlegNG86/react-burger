@@ -27,9 +27,9 @@ const BurgerIngredients = ({ cardsData, onItemClick  }) => {
   const filteredSelectedItems = selectedItems.filter(item => item.count > 0);
 
   return (
-    <section className={`${styles.section}`}>
+    <section className={styles.section}>
       <>
-        <header className={`mt-10 mb-5 ${styles.header}`}>Соберите бургер</header>
+        <header className={styles.header}>Соберите бургер</header>
         <div className={styles.div}>
           <Tab value="bun" active={current === 'bun'} onClick={() => setCurrent('bun')}>
             Булки

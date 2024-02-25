@@ -5,7 +5,7 @@ import { DragIcon, ConstructorElement, CurrencyIcon, Button } from '@ya.praktiku
 
 function BurgerConstructor( {openOrder, ingredients} ) {
   return (
-    <section className={`ml-22 mt-15 ${styles.section}`}>
+    <section className={styles.section}>
       <div className={styles.div}>
         <ConstructorElement
           type="top"
@@ -15,16 +15,16 @@ function BurgerConstructor( {openOrder, ingredients} ) {
           thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
         />
         <div className={`mb-2 mt-2 ${styles.scrollableContainer}`}>
-            {ingredients.map((cardData) => {
-                return (
-                  <ConstructorElement
-                  className={`mb-2 mt-2`}
-                  text={cardData.name}
-                  price={cardData.price}
-                  thumbnail={cardData.image}
-                />
-                )
-            })}
+        {ingredients.map((cardData) => {
+            return (
+              <ConstructorElement
+              className={`mb-2 mt-2`}
+              text={cardData.name}
+              price={cardData.price}
+              thumbnail={cardData.image}
+            />
+            )
+        })}
         </div>
 
         <ConstructorElement
