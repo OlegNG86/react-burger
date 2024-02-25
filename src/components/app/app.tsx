@@ -73,10 +73,10 @@ const App = () => {
     return (
         <>
         <AppHeader />
-        <div className={style.content}>
+        <main className={style.content}>
             <BurgerIngredients cardsData={ingredients} onItemClick={handleItemClick} />
             <BurgerConstructor  openOrder={openOrderDetails} ingredients={ingredients} />
-        </div>
+        </main>
         {orderDetails.isOpened &&
                 <Modal
                     title={'Детали заказа'}

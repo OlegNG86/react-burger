@@ -30,7 +30,7 @@ const BurgerIngredients = ({ cardsData, onItemClick  }) => {
     <section className={`${styles.section}`}>
       <>
         <header className={`mt-10 mb-5 ${styles.header}`}>Соберите бургер</header>
-        <div style={{ display: 'flex' }}>
+        <div className={styles.div}>
           <Tab value="bun" active={current === 'bun'} onClick={() => setCurrent('bun')}>
             Булки
           </Tab>

@@ -6,7 +6,7 @@ import { DragIcon, ConstructorElement, CurrencyIcon, Button } from '@ya.praktiku
 function BurgerConstructor( {openOrder, ingredients} ) {
   return (
     <section className={`ml-22 mt-15 ${styles.section}`}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+      <div className={styles.div}>
         <ConstructorElement
           type="top"
           isLocked={true}

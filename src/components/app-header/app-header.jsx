@@ -6,7 +6,7 @@ import styles from './app-header.module.css';
 function Button(props) {
   return (
     <nav className={styles.button}>
-      <div style={{ marginRight: '5px' }}>
+      <div className={styles.div}>
         {props.icon}
       </div> 
       <p className={"text text_type_main-default"} style={{color: props.color}}>
@@ -24,7 +24,7 @@ Button.propTypes = {
 
 function AppHeader() {
   return (
-    <>
+    <header>
       <nav className={styles.navigator}>
         <div>
           <Button icon={<BurgerIcon type="primary" />}>Конструктор</Button>
@@ -42,7 +42,7 @@ function AppHeader() {
           <Button icon={<ProfileIcon type="secondary" />} color='darkgrey'>Личный кабинет</Button>
         </div>
       </nav>
-    </>
+    </header>
   );
 }
 
