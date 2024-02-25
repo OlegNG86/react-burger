@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.css';
-import { DragIcon, ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function BurgerConstructor( {openOrder, ingredients} ) {
   return (
@@ -14,16 +14,16 @@ function BurgerConstructor( {openOrder, ingredients} ) {
           price={200}
           thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
         />
-        <div className={`mb-2 mt-2 ${styles.scrollableContainer}`}>
+        <div className={styles.scrollableContainer}>
         {ingredients.map((cardData) => {
             return (
-              <ConstructorElement
-              key={cardData._id}
-              className={`mb-2 mt-2`}
-              text={cardData.name}
-              price={cardData.price}
-              thumbnail={cardData.image}
-            />
+              <div key={cardData._id} className={styles.item}>
+                <ConstructorElement
+                text={cardData.name}
+                price={cardData.price}
+                thumbnail={cardData.image}
+                />
+              </div>
             )
         })}
         </div>
