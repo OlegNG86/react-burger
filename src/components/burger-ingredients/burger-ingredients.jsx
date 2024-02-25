@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredients.module.css';
@@ -8,43 +8,26 @@ function filterData(data, type) {
   return data.filter(item => item.type === type);
 }
 
-filterData.propTypes = {
-  type: PropTypes.string.isRequired
-}
 
 const BurgerIngredients = ({ cardsData }) => {
-  const [current, setCurrent] = React.useState('bun');
-  const bunRef = React.useRef(null);
-  const sauceRef = React.useRef(null);
-  const mainRef = React.useRef(null);
+  const [current, setCurrent] = useState('bun');
+  const [selectedItems, setSelectedItems] = useState([]);
 
-  const scrollToRef = (ref) => {
-    if (ref.current) {
-      ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const handleAddItem = (item) => {
+    const selectedItemIdx = selectedItems.findIndex(selectedItem => selectedItem._id === item._id);
+    if (selectedItemIdx !== -1) {
+      const updatedItems = [...selectedItems];
+      updatedItems[selectedItemIdx].count += 1;
+      setSelectedItems(updatedItems);
+    } else {
+      setSelectedItems([...selectedItems, { ...item, count: 1 }]);
     }
   };
 
-  React.useEffect(() => {
-    let ref;
-    switch (current) {
-      case 'bun':
-        ref = bunRef;
-        break;
-      case 'sauce':
-        ref = sauceRef;
-        break;
-      case 'main':
-        ref = mainRef;
-        break;
-      default:
-        ref = bunRef;
-    }
-    scrollToRef(ref);
-  }, [current]);
+  const filteredSelectedItems = selectedItems.filter(item => item.count > 0);
 
   return (
     <section className={styles.section}>
-      ...
       <div style={{ display: 'flex' }}>
         <Tab value="bun" active={current === 'bun'} onClick={() => setCurrent('bun')}>
           Булки
@@ -57,16 +40,18 @@ const BurgerIngredients = ({ cardsData }) => {
         </Tab>
       </div>
       <div className={styles.scrollableContainer}>
-          <GroupCards data={ filterData(cardsData, 'bun') } groupName='Булки' ref={bunRef}/>
-          <GroupCards data={ filterData(cardsData, 'sauce') } groupName='Соусы' ref={sauceRef}/>
-          <GroupCards data={ filterData(cardsData, 'main') } groupName='Начинки' ref={mainRef}/>
+          <GroupCards data={filterData(cardsData, 'bun')} groupName='Булки' onItemClick={handleAddItem} count={filteredSelectedItems.length}/>
+          <GroupCards data={filterData(cardsData, 'sauce')} groupName='Соусы' onItemClick={handleAddItem} count={filteredSelectedItems.length}/>
+          <GroupCards data={filterData(cardsData, 'main')} groupName='Начинки' onItemClick={handleAddItem} count={filteredSelectedItems.length}/>
       </div>
     </section>
   );
 };
 
+BurgerIngredients.propTypes = {
+  className: PropTypes.any,
+  cardsData: PropTypes.any,
+};
+
 export default BurgerIngredients;
 
-BurgerIngredients.propTypes = {
-  className: PropTypes.any
-}

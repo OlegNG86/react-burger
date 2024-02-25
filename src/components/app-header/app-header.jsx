@@ -47,3 +47,7 @@ function AppHeader() {
 }
 
 export default AppHeader;
+
+AppHeader.propTypes = {
+  className: PropTypes.any
+}
