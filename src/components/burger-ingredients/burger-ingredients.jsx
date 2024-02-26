@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredients.module.css';
 import GroupCards from '../group-cards/group-cards';
+import { ingredientType } from '../utils/types';
 
 function filterData(data, type) {
   return data.filter(item => item.type === type);
@@ -54,19 +55,7 @@ const BurgerIngredients = ({ cardsData, onItemClick  }) => {
 
 BurgerIngredients.propTypes = {
   onItemClick: PropTypes.func.isRequired,
-  cardsData: PropTypes.arrayOf(PropTypes.shape({
-      calories: PropTypes.number.isRequired,
-      carbohydrates: PropTypes.number.isRequired,
-      fat: PropTypes.number.isRequired,
-      image: PropTypes.string.isRequired,
-      image_large: PropTypes.string.isRequired,
-      image_mobile: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      proteins: PropTypes.number.isRequired,
-      type: PropTypes.string.isRequired,
-      _id: PropTypes.string
-  }))
+  cardsData: PropTypes.arrayOf(ingredientType)
 }
 
 export default BurgerIngredients;
