@@ -5,13 +5,13 @@ import styles from './modal.module.css';
 import { ModalOverlay } from '../modal-overlay/modal-overlay';
 
 const Modal = ({ onClose, children }) => {
-    const handleEscKeydown = (e) => {
-        if (e.key === 'Escape') {
-            onClose();
-        }
-    };
-
     React.useEffect(() => {
+        const handleEscKeydown = (e) => {
+            if (e.key === 'Escape') {
+                onClose();
+            }
+        };
+        
         document.addEventListener('keydown', handleEscKeydown);
         return () => {
             document.removeEventListener('keydown', handleEscKeydown);
