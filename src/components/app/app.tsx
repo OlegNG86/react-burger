@@ -65,9 +65,6 @@ const App = () => {
         setOrderDetails({ ...orderDetails, isOpened: false });
         setIngredientDetails({ ...ingredientDetails, isOpened: false });
     }
-    const handleEscKeydown = (e: { key: string; }) => {
-        e.key === 'Escape' && closeAllModals();
-    }
 
     console.log(orderDetails)
     return (
@@ -75,20 +72,18 @@ const App = () => {
         <AppHeader />
         <main className={style.content}>
             <BurgerIngredients cardsData={ingredients} onItemClick={handleItemClick} />
-            <BurgerConstructor  openOrder={openOrderDetails} ingredients={ingredients} />
+            <BurgerConstructor openOrder={openOrderDetails} ingredients={ingredients} />
         </main>
         {orderDetails.isOpened &&
                 <Modal
                     title={'Детали заказа'}
-                    onOverlayClick={closeAllModals}
-                    onEscKeydown={handleEscKeydown}>
+                    onOverlayClick={closeAllModals}>
                     <OrderDetails orderId={`034536`} closeModal={closeAllModals} />
                 </Modal>}
         {ingredientDetails.isOpened &&
         <Modal
             title={'Детали ингредиента'}
-            onOverlayClick={closeAllModals}
-            onEscKeydown={handleEscKeydown}>
+            onOverlayClick={closeAllModals}>
             <IngredientDetails title={`Детали ингредиента`} ingredientData={ingredientDetails.ingredient} closeModal={closeAllModals} />
         </Modal>}
         </>
