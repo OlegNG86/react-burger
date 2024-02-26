@@ -11,7 +11,7 @@ function IngredientDetails({ closeModal, title, ingredientData }) {
                 <h2 className={`text text_type_main-large ${styles.ingredient__title}`}>{title}</h2>
                 <button onClick={closeModal} type='button' className={`${styles.ingredient__closeButton}`}><img src={iconClose} alt='Закрыть окно' /></button>
             </div>
-            <img className={`mt-15 mb-15 ${styles.ingredient__image}`} src={image_large} alt='Ингредиент' />
+            <img className={`mt-15 mb-15 ${styles.ingredient__image}`} src={image_large} alt='имя картинки вставлять' />
             <p className={`text text_type_main-medium mt-4 mb-8 ${styles.ingredient__name}`}>{name}</p>
             <ul className={`text text_type_main-default mb-15 ${styles.ingredient__listItem}`}>
                 <li className={`text text_type_main-default ${styles.ingredient__item}`}>
