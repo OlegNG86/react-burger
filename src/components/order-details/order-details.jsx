@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import styles from './order-details.module.css';
 import iconDone from '../images/icon-done.svg';
-import iconClose from '../images/icon-close.svg';
+import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function OrderDetails({ orderId, closeModal }) {
 
     return (
         <div className={styles.order}>
-            <button onClick={closeModal} type='button' className={`${styles.order__closeButton}`}><img src={iconClose} alt='Закрыть окно' /></button>
+            <button onClick={closeModal} type='button' className={`${styles.order__closeButton}`}><CloseIcon /></button>
             <h2 className={`text text_type_digits-large mt-30 mb-8 ${styles.order__title}`}>{orderId}</h2>
             <p className={`text text_type_main-medium ${styles.order__id}`}>Идентификатор заказа</p>
             <img className={`mt-15 mb-15 ${styles.order__image}`} src={iconDone} alt='Ваш заказ принят' />
