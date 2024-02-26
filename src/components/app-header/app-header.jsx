@@ -17,7 +17,7 @@ function Button(props) {
 }
 
 Button.propTypes = {
-  icon: PropTypes.any,
+  icon: PropTypes.element.isRequired,
   color: PropTypes.string,
   children: PropTypes.string.isRequired
 }
@@ -49,5 +49,5 @@ function AppHeader() {
 export default AppHeader;
 
 AppHeader.propTypes = {
-  className: PropTypes.any
+  className: PropTypes.string
 }
