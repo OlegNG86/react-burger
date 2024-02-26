@@ -69,23 +69,23 @@ const App = () => {
     console.log(orderDetails)
     return (
         <>
-        <AppHeader />
-        <main className={style.content}>
-            <BurgerIngredients cardsData={ingredients} onItemClick={handleItemClick} />
-            <BurgerConstructor openOrder={openOrderDetails} ingredients={ingredients} />
-        </main>
-        {orderDetails.isOpened &&
+            <AppHeader />
+            <main className={style.content}>
+                <BurgerIngredients cardsData={ingredients} onItemClick={handleItemClick} />
+                <BurgerConstructor openOrder={openOrderDetails} ingredients={ingredients} />
+            </main>
+            {orderDetails.isOpened &&
                 <Modal
                     title={'Детали заказа'}
-                    onOverlayClick={closeAllModals}>
+                    onClose={closeAllModals}>
                     <OrderDetails orderId={`034536`} closeModal={closeAllModals} />
                 </Modal>}
-        {ingredientDetails.isOpened &&
-        <Modal
-            title={'Детали ингредиента'}
-            onOverlayClick={closeAllModals}>
-            <IngredientDetails title={`Детали ингредиента`} ingredientData={ingredientDetails.ingredient} closeModal={closeAllModals} />
-        </Modal>}
+            {ingredientDetails.isOpened &&
+                <Modal
+                    title={'Детали ингредиента'}
+                    onClose={closeAllModals}>
+                    <IngredientDetails title={`Детали ингредиента`} ingredientData={ingredientDetails.ingredient} closeModal={closeAllModals} />
+                </Modal>}
         </>
 
     );

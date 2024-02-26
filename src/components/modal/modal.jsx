@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import styles from './modal.module.css';
 import { ModalOverlay } from '../modal-overlay/modal-overlay';
 
-const Modal = ({ onOverlayClick, children }) => {
+const Modal = ({ onClose, children }) => {
     const handleEscKeydown = (e) => {
         if (e.key === 'Escape') {
-            onOverlayClick();
+            onClose();
         }
     };
 
@@ -16,14 +16,14 @@ const Modal = ({ onOverlayClick, children }) => {
         return () => {
             document.removeEventListener('keydown', handleEscKeydown);
         };
-    }, [onOverlayClick]);
+    }, [onClose]);
 
     return ReactDOM.createPortal(
         <>
             <div className={styles.modal}>
                 {children}
             </div>
-            <ModalOverlay onClick={onOverlayClick} />
+            <ModalOverlay onClick={onClose} />
         </>,
         document.getElementById('modals')
     );
@@ -31,7 +31,7 @@ const Modal = ({ onOverlayClick, children }) => {
 
 Modal.propTypes = {
     title: PropTypes.string.isRequired,
-    onOverlayClick: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired
 };
 
