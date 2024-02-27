@@ -18,16 +18,16 @@ function BurgerConstructor( {openOrder, ingredients} ) {
         />
       </div>
         <div className={styles.scrollableContainer}>
-        {ingredients.map((cardData) => {
+        {ingredients.filter(cardData => cardData.type !== 'bun').map((cardData) => {
             return (
-              <div key={cardData._id} className={styles.item}>
-                <img src={pointsIcon} className={styles.svgImage} />
-                <ConstructorElement
-                text={cardData.name}
-                price={cardData.price}
-                thumbnail={cardData.image}
-                />
-              </div>
+                <div key={cardData._id} className={styles.item}>
+                    <img src={pointsIcon} className={styles.svgImage} />
+                    <ConstructorElement
+                        text={cardData.name}
+                        price={cardData.price}
+                        thumbnail={cardData.image}
+                    />
+                </div>
             )
         })}
         </div>
