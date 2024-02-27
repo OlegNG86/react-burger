@@ -29,7 +29,6 @@ const BurgerIngredients = ({ cardsData, onItemClick  }) => {
 
   return (
     <section className={styles.section}>
-      <>
         <header className={styles.header}>Соберите бургер</header>
         <div className={styles.div}>
           <Tab value="bun" active={current === 'bun'} onClick={() => setCurrent('bun')}>
@@ -47,8 +46,6 @@ const BurgerIngredients = ({ cardsData, onItemClick  }) => {
             <GroupCards data={filterData(cardsData, 'sauce')} groupName='Соусы' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
             <GroupCards data={filterData(cardsData, 'main')} groupName='Начинки' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
         </div>
-      </>
-
     </section>
   );
 };
