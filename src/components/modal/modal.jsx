@@ -24,7 +24,7 @@ const Modal = ({ onClose, children }) => {
             <div className={styles.modal}>
                 <Button 
                     onClick={onClose}
-                    type='button' 
+                    htmlType='button' 
                     className={styles.closeButton}
                 >
                     <CloseIcon />

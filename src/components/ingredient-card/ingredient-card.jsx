@@ -25,7 +25,7 @@ function IngredientCard({ cardData, onClick }) {
 };
 
 IngredientCard.propTypes = {
-    cardData: PropTypes.arrayOf(ingredientType),
+    cardData: ingredientType,
     onClick: PropTypes.func.isRequired,
   }
 
