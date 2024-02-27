@@ -5,7 +5,7 @@ import styles from './modal.module.css';
 import { ModalOverlay } from '../modal-overlay/modal-overlay';
 import { Button, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
-const Modal = ({ onClose, children }) => {
+const Modal = ({ title, onClose, children }) => {
     React.useEffect(() => {
         const handleEscKeydown = (e) => {
             if (e.key === 'Escape') {
@@ -19,16 +19,19 @@ const Modal = ({ onClose, children }) => {
         };
     }, [onClose]);
 
+    const modalTitle = title ? title : '';
+
     return ReactDOM.createPortal(
         <>
             <div className={styles.modal}>
-                <Button 
-                    onClick={onClose}
-                    htmlType='button' 
-                    className={styles.closeButton}
-                >
+
+                <div className={`mt-10 ${styles.header}`}>
+                    <h2 className={`text text_type_main-large ${styles.title}`}>{modalTitle}</h2>
+                </div>
+                <Button onClick={onClose} htmlType='button' className={styles.closeButton}>
                     <CloseIcon />
                 </Button>
+
                 {children}
             </div>
             <ModalOverlay onClick={onClose} />
@@ -38,7 +41,7 @@ const Modal = ({ onClose, children }) => {
 };
 
 Modal.propTypes = {
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     onClose: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired
 };

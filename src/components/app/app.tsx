@@ -75,7 +75,6 @@ const App = () => {
             </main>
             {orderDetails.isOpened &&
                 <Modal
-                    title={'Детали заказа'}
                     onClose={closeAllModals}>
                     <OrderDetails orderId={`034536`} />
                 </Modal>}
@@ -83,7 +82,7 @@ const App = () => {
                 <Modal
                     title={'Детали ингредиента'}
                     onClose={closeAllModals}>
-                    <IngredientDetails title={`Детали ингредиента`} ingredientData={ingredientDetails.ingredient} />
+                    <IngredientDetails ingredientData={ingredientDetails.ingredient} />
                 </Modal>}
         </>
 

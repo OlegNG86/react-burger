@@ -33,3 +33,15 @@
     opacity: 0.6;
     outline: none;
 }
+
+.header {
+    display: flex;
+    width: 640px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title {
+    max-width: 520px;
+    margin: auto;
+}
