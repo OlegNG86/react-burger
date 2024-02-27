@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styles from './order-details.module.css';
-import iconDone from '../images/icon-done.svg';
+import iconDone from '../../images/icon-done.svg';
 
 
 function OrderDetails({ orderId }) {

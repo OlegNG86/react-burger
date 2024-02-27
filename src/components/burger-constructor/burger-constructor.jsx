@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.css';
-import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import pointsIcon from '../images/icon-constructor-left-points.svg';
+import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ingredientType } from '../utils/types';
 
 function BurgerConstructor( {openOrder, ingredients} ) {
@@ -21,7 +20,7 @@ function BurgerConstructor( {openOrder, ingredients} ) {
         {ingredients.filter(cardData => cardData.type !== 'bun').map((cardData) => {
             return (
                 <div key={cardData._id} className={styles.item}>
-                    <img src={pointsIcon} className={styles.svgImage} />
+                    <DragIcon />
                     <ConstructorElement
                         text={cardData.name}
                         price={cardData.price}
