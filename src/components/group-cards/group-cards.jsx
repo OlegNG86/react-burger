@@ -2,7 +2,7 @@ import styles from './group-cards.module.css';
 import IngredientCard from '../ingredient-card/ingredient-card';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ingredientType } from '../utils/types';
+import { ingredientType } from '../../utils/types';
 
 const GroupCards = React.forwardRef(({ data, groupName, onItemClick, count }, ref) => {
     const handleItemClick = (item) => {

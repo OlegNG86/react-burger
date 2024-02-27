@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './ingredient-card.module.css';
 import PropTypes from 'prop-types';
-import { ingredientType } from '../utils/types';
+import { ingredientType } from '../../utils/types';
 
 function IngredientCard({ cardData, onClick }) {
     const [localCount, setLocalCount] = useState(0);

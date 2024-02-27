@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredients.module.css';
 import GroupCards from '../group-cards/group-cards';
-import { ingredientType } from '../utils/types';
+import { ingredientType } from '../../utils/types';
 
 function filterData(data, type) {
   return data.filter(item => item.type === type);

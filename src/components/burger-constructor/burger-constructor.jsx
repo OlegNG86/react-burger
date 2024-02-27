@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
-import { ingredientType } from '../utils/types';
+import { ingredientType } from '../../utils/types';
 
 function BurgerConstructor( {openOrder, ingredients} ) {
   return (
