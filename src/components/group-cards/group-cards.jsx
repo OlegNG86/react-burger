@@ -1,6 +1,8 @@
 import styles from './group-cards.module.css';
+import PropTypes from 'prop-types';
 import IngredientCard from '../ingredient-card/ingredient-card';
 import React from 'react';
+import { ingredientType } from '../utils/types';
 
 const GroupCards = React.forwardRef(({ data, groupName, onItemClick, count }, ref) => {
     const handleItemClick = (item) => {
@@ -26,5 +28,12 @@ const GroupCards = React.forwardRef(({ data, groupName, onItemClick, count }, re
         </div>
     );
 });
+
+GroupCards.propTypes = {
+    data: PropTypes.arrayOf(ingredientType),
+    groupName: PropTypes.string.isRequired,
+    onItemClick: PropTypes.func.isRequired,
+    count: PropTypes.number,
+  }
 
 export default GroupCards;
