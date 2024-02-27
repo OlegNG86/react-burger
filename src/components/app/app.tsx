@@ -34,10 +34,10 @@ const App = () => {
                 }
 
                 setIngredients(responseData.data);
-                setLoading(false);
             } catch (error) {
                 // @ts-ignore
                 setError(error.message);
+            } finally {
                 setLoading(false);
             }
         };
