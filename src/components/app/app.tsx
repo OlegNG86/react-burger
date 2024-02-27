@@ -78,13 +78,13 @@ const App = () => {
                 <Modal
                     title={'Детали заказа'}
                     onClose={closeAllModals}>
-                    <OrderDetails orderId={`034536`} closeModal={closeAllModals} />
+                    <OrderDetails orderId={`034536`} />
                 </Modal>}
             {ingredientDetails.isOpened &&
                 <Modal
                     title={'Детали ингредиента'}
                     onClose={closeAllModals}>
-                    <IngredientDetails title={`Детали ингредиента`} ingredientData={ingredientDetails.ingredient} closeModal={closeAllModals} />
+                    <IngredientDetails title={`Детали ингредиента`} ingredientData={ingredientDetails.ingredient} />
                 </Modal>}
         </>
 

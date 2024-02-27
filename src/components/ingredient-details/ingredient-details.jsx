@@ -1,15 +1,13 @@
 import styles from './ingredient-details.module.css';
 import PropTypes from 'prop-types';
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
-function IngredientDetails({ closeModal, title, ingredientData }) {
+function IngredientDetails({ title, ingredientData }) {
     const { image_large, name, calories, carbohydrates, fat, proteins } = ingredientData;
 
     return (
         <div className={`pl-10 pr-10 ${styles.ingredient}`}>
             <div className={`mt-10 ${styles.ingredient__header}`}>
                 <h2 className={`text text_type_main-large ${styles.ingredient__title}`}>{title}</h2>
-                <button onClick={closeModal} type='button' className={`${styles.ingredient__closeButton}`}><CloseIcon /></button>
             </div>
             <img className={`mt-15 mb-15 ${styles.ingredient__image}`} src={image_large} alt='имя картинки вставлять' />
             <p className={`text text_type_main-medium mt-4 mb-8 ${styles.ingredient__name}`}>{name}</p>
@@ -36,8 +34,7 @@ function IngredientDetails({ closeModal, title, ingredientData }) {
 }
 
 IngredientDetails.propTypes = {
-    closeModal: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
 }
 
 export default IngredientDetails;

@@ -12,3 +12,24 @@
     width: 720px;
     transition: all 0.3s;
 }
+
+.flex {
+    cursor: pointer;
+}
+
+.closeButton {
+    position: absolute;
+    top: 60px;
+    right: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 100;
+}
+
+.closeButton:hover,
+.closeButton:focus {
+    opacity: 0.6;
+    outline: none;
+}
