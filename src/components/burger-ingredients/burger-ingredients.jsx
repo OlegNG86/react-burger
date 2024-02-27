@@ -29,7 +29,7 @@ const BurgerIngredients = ({ cardsData, onItemClick  }) => {
 
   return (
     <section className={styles.section}>
-        <header className={styles.header}>Соберите бургер</header>
+        <h1 className={styles.header}>Соберите бургер</h1>
         <div className={styles.div}>
           <Tab value="bun" active={current === 'bun'} onClick={() => setCurrent('bun')}>
             Булки
