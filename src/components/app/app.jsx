@@ -9,9 +9,11 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
+import { openModal, closeModal } from '../../services/actions/modal';
 
 
 const App = () => {
+    const dispatch = useDispatch();
     const [orderDetails, setOrderDetails] = useState({ isOpened: false });
     const [ingredientDetails, setIngredientDetails] = useState({ isOpened: false, ingredient: null })
 
@@ -40,12 +42,6 @@ const App = () => {
                 <Modal
                     onClose={closeAllModals}>
                     <OrderDetails orderId={`034536`} />
-                </Modal>}
-            {ingredientDetails.isOpened &&
-                <Modal
-                    title={'Детали ингредиента'}
-                    onClose={closeAllModals}>
-                    <IngredientDetails ingredientData={ingredientDetails.ingredient} />
                 </Modal>}
             </DndProvider>
         </>

@@ -5,7 +5,7 @@ import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktiku
 import { ingredientType } from '../../utils/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
-import { addBun, addIngredient } from '../../services/actions/burger-constructor';
+import { addBun, addIngredient, deleteIngredient } from '../../services/actions/burger-constructor';
 
 function BurgerConstructor( {openOrder} ) {
   const dispatch = useDispatch();
@@ -26,7 +26,9 @@ function BurgerConstructor( {openOrder} ) {
     }
   });
 
-  
+  const deleteElement = (id) => {
+    dispatch(deleteIngredient(id));
+  }
 
   return (
     <section className={styles.section}>
@@ -52,6 +54,7 @@ function BurgerConstructor( {openOrder} ) {
                         text={cardData.name}
                         price={cardData.price}
                         thumbnail={cardData.image}
+                        handleClose={() => deleteElement(cardData.id)}
                     />
                 </div>
             )

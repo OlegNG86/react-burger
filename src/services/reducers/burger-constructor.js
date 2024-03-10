@@ -1,6 +1,7 @@
 import {
     ADD_BUN,
-    ADD_INGREDIENT
+    ADD_INGREDIENT,
+    DELETE_INGREDIENT
 } from '../actions/burger-constructor';
 
 const initialState = {
@@ -20,6 +21,11 @@ const burgerConstructorReducer = (state = initialState, action) => {
         return {
           ...state,
           topping: [...(state.topping || []), action.payload],
+        };
+    case DELETE_INGREDIENT:
+        return {
+            ...state,
+            topping: state.topping.filter((item) => item.id !== action.id),
         };
       default:
         return state;
