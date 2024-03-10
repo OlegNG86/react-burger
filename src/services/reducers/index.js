@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
+import burgerIngredientsReducer from './burger-ingredients';
 
 export const rootReducer = combineReducers({
-    // step: stepReducer,
-    // cart: cartReducer,
-    // delivery: deliveryReducer,
-    // checkout: checkoutReducer
+    ingredients: burgerIngredientsReducer
   });

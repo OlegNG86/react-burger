@@ -1,20 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredients.module.css';
 import GroupCards from '../group-cards/group-cards';
 import { ingredientType } from '../../utils/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIngredients } from '../../services/actions/burger-ingredients'
 
 function filterData(data, type) {
   return data.filter(item => item.type === type);
 }
 
-
-const BurgerIngredients = ({ cardsData, onItemClick  }) => {
+const BurgerIngredients = ({ onItemClick  }) => {
   const [current, setCurrent] = useState('bun');
-  const [selectedItems, setSelectedItems] = useState([]);
 
-  const filteredSelectedItems = selectedItems.filter(item => item.count > 0);
+  const dispatch = useDispatch();
+  const ingredients = useSelector(state => state.ingredients.data);
+  const loading = useSelector(state => state.loading);
+  const error = useSelector(state => state.error);
+
+  useEffect(() => {
+      dispatch(getIngredients());
+  }, [dispatch]);
+
+  if (loading) {
+      return <div>Загрузка данных...</div>;
+  }
+
+  if (error) {
+      return <div>Произошла ошибка: {error}</div>;
+  }
+
+  const filteredSelectedItems = ingredients;
+  // .filter(item => item.count > 0);
 
   return (
     <section className={styles.section}>
@@ -31,9 +49,9 @@ const BurgerIngredients = ({ cardsData, onItemClick  }) => {
           </Tab>
         </div>
         <div className={styles.scrollableContainer}>
-            <GroupCards data={filterData(cardsData, 'bun')} groupName='Булки' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
-            <GroupCards data={filterData(cardsData, 'sauce')} groupName='Соусы' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
-            <GroupCards data={filterData(cardsData, 'main')} groupName='Начинки' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
+            <GroupCards data={filterData(ingredients, 'bun')} groupName='Булки' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
+            <GroupCards data={filterData(ingredients, 'sauce')} groupName='Соусы' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
+            <GroupCards data={filterData(ingredients, 'main')} groupName='Начинки' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
         </div>
     </section>
   );

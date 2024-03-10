@@ -7,7 +7,7 @@ import Modal from '../modal/modal';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import OrderDetails from '../order-details/order-details';
 
-const API_URL = "https://norma.nomoreparties.space/api/ingredients";
+
 
 
 const App = () => {
@@ -17,40 +17,7 @@ const App = () => {
     const [orderDetails, setOrderDetails] = useState({ isOpened: false });
     const [ingredientDetails, setIngredientDetails] = useState({ isOpened: false, ingredient: null })
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(API_URL);
 
-                if (!response.ok) {
-                    throw new Error("Ошибка при получении данных");
-                }
-
-                const responseData = await response.json();
-
-                if (!responseData.success) {
-                    throw new Error("Ошибка при получении данных");
-                }
-
-                setIngredients(responseData.data);
-            } catch (error) {
-                // @ts-ignore
-                setError(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    if (loading) {
-        return <div>Загрузка данных...</div>;
-    }
-
-    if (error) {
-        return <div>Произошла ошибка: {error}</div>;
-    }
 
     const openOrderDetails = () => {
         setOrderDetails({ ...orderDetails, isOpened: true });
