@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import style from './app.module.css';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
@@ -11,9 +12,8 @@ import OrderDetails from '../order-details/order-details';
 
 
 const App = () => {
-    const [ingredients, setIngredients] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const ingredients = useSelector(state => state.ingredients.data);
+
     const [orderDetails, setOrderDetails] = useState({ isOpened: false });
     const [ingredientDetails, setIngredientDetails] = useState({ isOpened: false, ingredient: null })
 
@@ -23,7 +23,7 @@ const App = () => {
         setOrderDetails({ ...orderDetails, isOpened: true });
     }
 
-    const handleItemClick = (ingredient: any) => {
+    const handleItemClick = (ingredient) => {
         setIngredientDetails({ isOpened: true, ingredient: ingredient });
       };
 
@@ -37,7 +37,7 @@ const App = () => {
         <>
             <AppHeader />
             <main className={style.content}>
-                <BurgerIngredients cardsData={ingredients} onItemClick={handleItemClick} />
+                <BurgerIngredients onItemClick={handleItemClick} />
                 <BurgerConstructor openOrder={openOrderDetails} ingredients={ingredients} />
             </main>
             {orderDetails.isOpened &&
