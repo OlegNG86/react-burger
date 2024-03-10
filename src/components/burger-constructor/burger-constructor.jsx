@@ -4,22 +4,47 @@ import styles from './burger-constructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ingredientType } from '../../utils/types';
 import { useDispatch, useSelector } from 'react-redux';
+import { useDrop } from 'react-dnd';
+import { addBun, addIngredient } from '../../services/actions/burger-constructor';
 
 function BurgerConstructor( {openOrder} ) {
-  const ingredients = useSelector(state => state.ingredients.data);
+  const dispatch = useDispatch();
+  const { bun, topping } = useSelector(store => store.constructor);
+
+  function handleDrop(item) {
+    if (item.type === "bun") {
+      dispatch(addBun(item));
+    } else {
+      dispatch(addIngredient(item));
+    }
+  }
+
+  const [, dropTarget] = useDrop({
+    accept: "ingredient",
+    drop(item) {
+      handleDrop(item);
+    }
+  });
+
+  
+
   return (
     <section className={styles.section}>
-      <div className={styles.borders}>
-        <ConstructorElement
-          type="top"
-          isLocked={true}
-          text="Краторная булка N-200i (верх)"
-          price={200}
-          thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
-        />
+      <div className={styles.borders} ref={dropTarget}>
+        {bun ?
+              <ConstructorElement
+                type="top"
+                isLocked={true}
+                text={bun.name + " (верх)"}
+                price={bun.price}
+                thumbnail={bun.image}
+              />
+              :
+              <ConstructorElement type="top" text="Нет булки" />
+            }
       </div>
         <div className={styles.scrollableContainer}>
-        {ingredients.filter(cardData => cardData.type !== 'bun').map((cardData) => {
+        {topping && Array.isArray(topping) && topping.map((cardData) => {
             return (
                 <div key={cardData._id} className={styles.item}>
                     <DragIcon />
@@ -33,13 +58,17 @@ function BurgerConstructor( {openOrder} ) {
         })}
         </div>
         <div className={styles.borders}>
-        <ConstructorElement
-          type="bottom"
-          isLocked={true}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={"https://code.s3.yandex.net/react/code/bun-02.png"}
-        />
+        {bun ?
+            <ConstructorElement
+              type="bottom"
+              isLocked={true}
+              text={bun.name + " (низ)"}
+              price={bun.price}
+              thumbnail={bun.image}
+            />
+            :
+            <ConstructorElement type="bottom" text="Нет булки" />
+          }
       </div>
       <div className={styles.orderButton}>
         <p className={styles.text}>610</p>

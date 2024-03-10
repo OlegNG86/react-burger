@@ -15,12 +15,12 @@ const GroupCards = React.forwardRef(({ data, groupName, onItemClick, count }, re
         <div ref={ref}>
             <h3 className={`text text_type_main-medium`}>{groupName}</h3>
             <ul className={styles.cards__list}>
-                {data.map((cardData) => {
+                {data.map((ingredient) => {
                     return (
                         <IngredientCard 
-                        key={cardData._id} 
-                        cardData={cardData} 
-                        onClick={() => handleItemClick(cardData)} 
+                        key={ingredient._id} 
+                        ingredient={ingredient} 
+                        onClick={() => handleItemClick(ingredient)} 
                         count={count} />
                     )
                 })}
