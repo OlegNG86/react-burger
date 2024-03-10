@@ -14,17 +14,6 @@ const BurgerIngredients = ({ cardsData, onItemClick  }) => {
   const [current, setCurrent] = useState('bun');
   const [selectedItems, setSelectedItems] = useState([]);
 
-  const handleAddItem = (item) => {
-    const selectedItemIdx = selectedItems.findIndex(selectedItem => selectedItem._id === item._id);
-    if (selectedItemIdx !== -1) {
-      const updatedItems = [...selectedItems];
-      updatedItems[selectedItemIdx].count += 1;
-      setSelectedItems(updatedItems);
-    } else {
-      setSelectedItems([...selectedItems, { ...item, count: 1 }]);
-    }
-  };
-
   const filteredSelectedItems = selectedItems.filter(item => item.count > 0);
 
   return (
