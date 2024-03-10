@@ -12,12 +12,8 @@ import OrderDetails from '../order-details/order-details';
 
 
 const App = () => {
-    const ingredients = useSelector(state => state.ingredients.data);
-
     const [orderDetails, setOrderDetails] = useState({ isOpened: false });
     const [ingredientDetails, setIngredientDetails] = useState({ isOpened: false, ingredient: null })
-
-
 
     const openOrderDetails = () => {
         setOrderDetails({ ...orderDetails, isOpened: true });
@@ -38,7 +34,7 @@ const App = () => {
             <AppHeader />
             <main className={style.content}>
                 <BurgerIngredients onItemClick={handleItemClick} />
-                <BurgerConstructor openOrder={openOrderDetails} ingredients={ingredients} />
+                <BurgerConstructor openOrder={openOrderDetails} />
             </main>
             {orderDetails.isOpened &&
                 <Modal

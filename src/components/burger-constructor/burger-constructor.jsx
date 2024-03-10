@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ingredientType } from '../../utils/types';
+import { useDispatch, useSelector } from 'react-redux';
 
-function BurgerConstructor( {openOrder, ingredients} ) {
+function BurgerConstructor( {openOrder} ) {
+  const ingredients = useSelector(state => state.ingredients.data);
   return (
     <section className={styles.section}>
       <div className={styles.borders}>
