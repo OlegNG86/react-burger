@@ -86,7 +86,6 @@ const BurgerIngredients = ({ onItemClick }) => {
 
 BurgerIngredients.propTypes = {
   onItemClick: PropTypes.func.isRequired,
-  cardsData: PropTypes.arrayOf(ingredientType),
 };
 
 export default BurgerIngredients;

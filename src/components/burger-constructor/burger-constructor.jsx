@@ -142,5 +142,4 @@ export default BurgerConstructor;
 
 BurgerConstructor.propTypes = {
   openOrder: PropTypes.func.isRequired,
-  ingredients: PropTypes.arrayOf(ingredientType),
 };
