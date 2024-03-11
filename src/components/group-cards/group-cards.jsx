@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { ingredientType } from '../../utils/types';
 
 const GroupCards = React.forwardRef(({ data, groupName, onItemClick, count }, ref) => {
+    
     const handleItemClick = (item) => {
         if (onItemClick) {
             onItemClick(item);

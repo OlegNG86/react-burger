@@ -1,21 +1,14 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './order-details.module.css';
 import iconDone from '../../images/icon-done.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { openModal, closeModal } from '../../services/actions/modal';
-import Modal from '../modal/modal';
+import { setOrderId, setError } from '../../services/actions/order-details';
 
-function OrderDetails({ orderId }) {
+function OrderDetails() {
     const dispatch = useDispatch();
-    const { isModalOpen } = useSelector(store => store.modal);
+    const { orderId, error } = useSelector(store => store.order);
 
-    function handleOpenModal() {
-        dispatch(openModal());
-    }
-
-    function handleCloseModal() {
-        dispatch(closeModal());
-    }
     return (
         <>
             <div className={styles.order}>

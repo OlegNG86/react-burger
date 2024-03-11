@@ -38,11 +38,6 @@ const App = () => {
                 <BurgerIngredients onItemClick={handleItemClick} />
                 <BurgerConstructor openOrder={openOrderDetails} />
             </main>
-            {orderDetails.isOpened &&
-                <Modal
-                    onClose={closeAllModals}>
-                    <OrderDetails orderId={`034536`} />
-                </Modal>}
             </DndProvider>
         </>
 

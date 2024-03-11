@@ -6,10 +6,16 @@ import { ingredientType } from '../../utils/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import { addBun, addIngredient, deleteIngredient } from '../../services/actions/burger-constructor';
+import { getOrderId, resetOrderId } from '../../services/actions/order-details';
+import { openModal, closeModal } from '../../services/actions/modal';
+import Modal from '../modal/modal';
+import OrderDetails from '../order-details/order-details';
 
-function BurgerConstructor( {openOrder} ) {
+function BurgerConstructor() {
   const dispatch = useDispatch();
   const { bun, topping } = useSelector(store => store.constructor);
+  const { isModalOpen } = useSelector(store => store.modal);
+  const { orderId, error } = useSelector(store => store.order);
 
   function handleDrop(item) {
     if (item.type === "bun") {
@@ -28,6 +34,17 @@ function BurgerConstructor( {openOrder} ) {
 
   const deleteElement = (id) => {
     dispatch(deleteIngredient(id));
+  }
+
+  const handleSubmit = () => {
+    const ingredientsId = [bun, ...topping, bun].map(item => item._id);
+    dispatch(getOrderId(ingredientsId));
+    dispatch(openModal());
+  }
+
+  function handleCloseModal() {
+      dispatch(closeModal());
+      dispatch(resetOrderId())
   }
 
   return (
@@ -78,7 +95,12 @@ function BurgerConstructor( {openOrder} ) {
         <div className={styles.icon}>
           <CurrencyIcon type="primary" />
         </div>
-        <Button htmlType='submit' type="primary" size="large" onClick={openOrder}>Оформить заказ</Button>
+        <Button htmlType='submit' type="primary" size="large" onClick={handleSubmit}>Оформить заказ</Button>
+        {isModalOpen && orderId &&
+                <Modal
+                    onClose={handleCloseModal}>
+                    <OrderDetails />
+                </Modal>}
       </div>
     </section>
   );
