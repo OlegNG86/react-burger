@@ -90,7 +90,7 @@ function BurgerConstructor() {
           Array.isArray(topping) &&
           topping.map((cardData) => {
             return (
-              <div key={cardData._id} className={styles.item}>
+              <div key={cardData.uniqueId} className={styles.item}>
                 <DragIcon />
                 <ConstructorElement
                   text={cardData.name}
