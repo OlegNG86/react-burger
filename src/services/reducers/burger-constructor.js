@@ -6,7 +6,8 @@ import {
 
 const initialState = {
     bun: {},
-    topping: []
+    topping: [],
+    totalPrice: 0
     
 };
 

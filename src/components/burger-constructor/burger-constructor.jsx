@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styles from './burger-constructor.module.css';
 import { ConstructorElement, CurrencyIcon, Button, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -16,6 +16,20 @@ function BurgerConstructor() {
   const { bun, topping } = useSelector(store => store.constructor);
   const { isModalOpen } = useSelector(store => store.modal);
   const { orderId, error } = useSelector(store => store.order);
+
+  const calcTotalPrice = useMemo(() => {
+    let totalPrice = 0;
+
+    if (bun && bun.price) {
+        totalPrice += bun.price * 2;
+    }
+
+    if (topping && topping.length > 0) {
+        totalPrice += topping.reduce((acc, curr) => acc + curr.price, 0);
+    }
+
+    return totalPrice;
+  }, [bun, topping]);
 
   function handleDrop(item) {
     if (item.type === "bun") {
@@ -91,7 +105,7 @@ function BurgerConstructor() {
           }
       </div>
       <div className={styles.orderButton}>
-        <p className={styles.text}>610</p>
+        <p className={styles.text}>{calcTotalPrice}</p>
         <div className={styles.icon}>
           <CurrencyIcon type="primary" />
         </div>
