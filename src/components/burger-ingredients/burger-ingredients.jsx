@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useInView } from "react-intersection-observer";
 import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients.module.css";
 import GroupCards from "../group-cards/group-cards";
 import { ingredientType } from "../../utils/types";
-import { useDispatch, useSelector } from "react-redux";
 import { getIngredients } from "../../services/actions/burger-ingredients";
 
 function filterData(data, type) {
@@ -12,7 +13,21 @@ function filterData(data, type) {
 }
 
 const BurgerIngredients = ({ onItemClick }) => {
-  const [current, setCurrent] = useState("bun");
+  const [bunRef, inViewBun] = useInView({ threshold: 0 });
+  const [mainRef, inViewMain] = useInView({ threshold: 0 });
+  const [sauceRef, inViewSauce] = useInView({ threshold: 0 });
+
+  const setCurrent = useCallback(() => {
+    if (inViewBun) {
+      return "bun";
+    } else if (inViewSauce) {
+      return "sauce";
+    } else if (inViewMain) {
+      return "main";
+    }
+  }, [inViewBun, inViewSauce, inViewMain]);
+
+  const current = useMemo(() => setCurrent(), [setCurrent]);
 
   const dispatch = useDispatch();
   const ingredients = useSelector((state) => state.ingredients.data);
@@ -62,18 +77,21 @@ const BurgerIngredients = ({ onItemClick }) => {
       </div>
       <div className={styles.scrollableContainer}>
         <GroupCards
+          ref={bunRef}
           data={filterData(ingredients, "bun")}
           groupName="Булки"
           onItemClick={onItemClick}
           count={filteredSelectedItems.length}
         />
         <GroupCards
+          ref={sauceRef}
           data={filterData(ingredients, "sauce")}
           groupName="Соусы"
           onItemClick={onItemClick}
           count={filteredSelectedItems.length}
         />
         <GroupCards
+          ref={mainRef}
           data={filterData(ingredients, "main")}
           groupName="Начинки"
           onItemClick={onItemClick}
