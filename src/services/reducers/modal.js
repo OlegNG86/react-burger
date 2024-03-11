@@ -1,7 +1,7 @@
-import { OPEN_MODAL, CLOSE_MODAL } from '../actions/modal';
+import { OPEN_MODAL, CLOSE_MODAL } from "../actions/modal";
 
 const initialModalState = {
-  isModalOpen: false
+  isModalOpen: false,
 };
 
 export const modalReducer = (state = initialModalState, action) => {

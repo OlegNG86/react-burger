@@ -1,40 +1,42 @@
-import styles from './group-cards.module.css';
-import IngredientCard from '../ingredient-card/ingredient-card';
-import React from 'react';
-import PropTypes from 'prop-types';
-import { ingredientType } from '../../utils/types';
+import styles from "./group-cards.module.css";
+import IngredientCard from "../ingredient-card/ingredient-card";
+import React from "react";
+import PropTypes from "prop-types";
+import { ingredientType } from "../../utils/types";
 
-const GroupCards = React.forwardRef(({ data, groupName, onItemClick, count }, ref) => {
-    
+const GroupCards = React.forwardRef(
+  ({ data, groupName, onItemClick, count }, ref) => {
     const handleItemClick = (item) => {
-        if (onItemClick) {
-            onItemClick(item);
-        }
+      if (onItemClick) {
+        onItemClick(item);
+      }
     };
 
     return (
-        <div ref={ref}>
-            <h3 className={`text text_type_main-medium`}>{groupName}</h3>
-            <ul className={styles.cards__list}>
-                {data.map((ingredient) => {
-                    return (
-                        <IngredientCard 
-                        key={ingredient._id} 
-                        ingredient={ingredient} 
-                        onClick={() => handleItemClick(ingredient)} 
-                        count={count} />
-                    )
-                })}
-            </ul>
-        </div>
+      <div ref={ref}>
+        <h3 className={`text text_type_main-medium`}>{groupName}</h3>
+        <ul className={styles.cards__list}>
+          {data.map((ingredient) => {
+            return (
+              <IngredientCard
+                key={ingredient._id}
+                ingredient={ingredient}
+                onClick={() => handleItemClick(ingredient)}
+                count={count}
+              />
+            );
+          })}
+        </ul>
+      </div>
     );
-});
+  }
+);
 
 GroupCards.propTypes = {
-    data: PropTypes.arrayOf(ingredientType),
-    groupName: PropTypes.string.isRequired,
-    onItemClick: PropTypes.func.isRequired,
-    count: PropTypes.number,
-  }
+  data: PropTypes.arrayOf(ingredientType),
+  groupName: PropTypes.string.isRequired,
+  onItemClick: PropTypes.func.isRequired,
+  count: PropTypes.number,
+};
 
 export default GroupCards;

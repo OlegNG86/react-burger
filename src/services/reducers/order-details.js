@@ -1,4 +1,8 @@
-import { SET_ORDER_ID, SET_ERROR, RESET_ORDER_ID } from '../actions/order-details';
+import {
+  SET_ORDER_ID,
+  SET_ERROR,
+  RESET_ORDER_ID,
+} from "../actions/order-details";
 
 const initialState = {
   orderId: null,
@@ -13,10 +17,10 @@ const orderReducer = (state = initialState, action) => {
         orderId: action.payload,
       };
     case RESET_ORDER_ID:
-        return {
-            ...state,
-            orderId: null
-        }
+      return {
+        ...state,
+        orderId: null,
+      };
     case SET_ERROR:
       return {
         ...state,

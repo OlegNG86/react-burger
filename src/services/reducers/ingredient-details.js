@@ -1,7 +1,10 @@
-import { SHOW_INGREDIENT_IN_MODAL, DELETE_INGREDIENT_FROM_MODAL } from '../actions/ingredient-details';
+import {
+  SHOW_INGREDIENT_IN_MODAL,
+  DELETE_INGREDIENT_FROM_MODAL,
+} from "../actions/ingredient-details";
 
 const initialModalState = {
-  selectedIngredient: {}
+  selectedIngredient: {},
 };
 
 export const ingredientDetailsReducer = (state = initialModalState, action) => {
