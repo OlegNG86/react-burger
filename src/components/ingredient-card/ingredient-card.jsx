@@ -16,7 +16,7 @@ import { openModal, closeModal } from "../../services/actions/modal";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 
-function IngredientCard({ ingredient }) {
+function IngredientCard({ ingredient, count }) {
   const [localCount, setLocalCount] = useState(0);
 
   const { isModalOpen } = useSelector((store) => store.modal);
@@ -48,7 +48,7 @@ function IngredientCard({ ingredient }) {
         onClick={handleOpenModal}
         ref={dragRef}
       >
-        <Counter count={localCount} size="default" />
+        <Counter count={count} size="default" />
         <img
           src={ingredient.image}
           alt={ingredient.name}
@@ -73,6 +73,7 @@ function IngredientCard({ ingredient }) {
 
 IngredientCard.propTypes = {
   ingredient: ingredientType.isRequired,
+  count: PropTypes.number.isRequired,
 };
 
 export default IngredientCard;

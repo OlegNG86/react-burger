@@ -19,7 +19,7 @@ export const addIngredient = (item) => {
   };
 };
 
-export const deleteIngredient = (id) => ({
+export const deleteIngredient = (uniqueId) => ({
   type: DELETE_INGREDIENT,
-  id,
+  uniqueId,
 });

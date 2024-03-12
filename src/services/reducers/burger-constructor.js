@@ -25,7 +25,7 @@ const burgerConstructorReducer = (state = initialState, action) => {
     case DELETE_INGREDIENT:
       return {
         ...state,
-        topping: state.topping.filter((item) => item.id !== action.id),
+        topping: state.topping.filter((item) => item.uniqueId !== action.uniqueId),
       };
     default:
       return state;

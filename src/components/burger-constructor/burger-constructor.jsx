@@ -22,7 +22,7 @@ import OrderDetails from "../order-details/order-details";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const { bun, topping } = useSelector((store) => store.constructor);
+  const { bun, topping } = useSelector((store) => store.burgerConstructor);
   const { isModalOpen } = useSelector((store) => store.modal);
   const { orderId, error } = useSelector((store) => store.order);
 
@@ -55,8 +55,8 @@ function BurgerConstructor() {
     },
   });
 
-  const deleteElement = (id) => {
-    dispatch(deleteIngredient(id));
+  const deleteElement = (uniqueId) => {
+    dispatch(deleteIngredient(uniqueId));
   };
 
   const handleSubmit = () => {
@@ -96,7 +96,7 @@ function BurgerConstructor() {
                   text={cardData.name}
                   price={cardData.price}
                   thumbnail={cardData.image}
-                  handleClose={() => deleteElement(cardData.id)}
+                  handleClose={() => deleteElement(cardData.uniqueId)}
                 />
               </div>
             );
