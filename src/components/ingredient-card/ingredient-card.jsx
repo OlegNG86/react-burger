@@ -64,7 +64,7 @@ function IngredientCard({ ingredient, count }) {
           {ingredient.name}
         </p>
       </li>
-      {isModalOpen && (
+      {selectedIngredient && isModalOpen && (
         <Modal title={"Детали ингредиента"} onClose={handleCloseModal}>
           <IngredientDetails ingredientData={selectedIngredient} />
         </Modal>
