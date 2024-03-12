@@ -2,6 +2,7 @@ import {
   ADD_BUN,
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
+  CHANGE_INDEXES,
 } from "../actions/burger-constructor";
 
 const initialState = {
@@ -25,8 +26,23 @@ const burgerConstructorReducer = (state = initialState, action) => {
     case DELETE_INGREDIENT:
       return {
         ...state,
-        topping: state.topping.filter((item) => item.uniqueId !== action.uniqueId),
+        topping: state.topping.filter(
+          (item) => item.uniqueId !== action.uniqueId
+        ),
       };
+    case CHANGE_INDEXES: {
+      const newTopping = [ ...state.topping ]
+      const swapItems = {
+        from: newTopping[action.from],
+        to: newTopping[action.to],
+       }
+       newTopping[action.from] = swapItems.to;
+       newTopping[action.to] = swapItems.from;
+      return {
+        ...state,
+        topping: newTopping
+      };
+    }
     default:
       return state;
   }

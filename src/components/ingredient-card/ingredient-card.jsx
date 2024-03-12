@@ -47,8 +47,10 @@ function IngredientCard({ ingredient, count }) {
         className={styles.card}
         onClick={handleOpenModal}
         ref={dragRef}
-      >
+      > {count > 0 && 
         <Counter count={count} size="default" />
+        }
+        
         <img
           src={ingredient.image}
           alt={ingredient.name}

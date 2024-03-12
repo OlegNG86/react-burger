@@ -19,6 +19,7 @@ import { getOrderId, resetOrderId } from "../../services/actions/order-details";
 import { openModal, closeModal } from "../../services/actions/modal";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
+import SortableIngredient from "../sortable-ingredient/sortable-ingredient";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -88,19 +89,7 @@ function BurgerConstructor() {
       <div className={styles.scrollableContainer}>
         {topping &&
           Array.isArray(topping) &&
-          topping.map((cardData) => {
-            return (
-              <div key={cardData.uniqueId} className={styles.item}>
-                <DragIcon />
-                <ConstructorElement
-                  text={cardData.name}
-                  price={cardData.price}
-                  thumbnail={cardData.image}
-                  handleClose={() => deleteElement(cardData.uniqueId)}
-                />
-              </div>
-            );
-          })}
+          topping.map((cardData, index) => <SortableIngredient key={cardData.uniqueId} cardData={cardData} index={index} />)}
       </div>
       <div className={styles.borders}>
         {bun ? (

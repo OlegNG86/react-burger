@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styles from "./order-details.module.css";
-import iconDone from "../../images/icon-done.svg";
+import iconDone from "../../images/icon-done.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrderId, setError } from "../../services/actions/order-details";
 
