@@ -36,8 +36,4 @@ function OrderDetails() {
   );
 }
 
-OrderDetails.propTypes = {
-  orderId: PropTypes.string.isRequired,
-};
-
 export default OrderDetails;
