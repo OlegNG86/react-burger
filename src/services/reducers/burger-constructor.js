@@ -3,6 +3,7 @@ import {
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
   CHANGE_INDEXES,
+  RESET_CONSTRUCTOR
 } from "../actions/burger-constructor";
 
 const initialState = {
@@ -43,6 +44,12 @@ const burgerConstructorReducer = (state = initialState, action) => {
         topping: newTopping
       };
     }
+    case RESET_CONSTRUCTOR:
+      return {
+        ...state,
+        bun: {},
+        topping: []
+      };
     default:
       return state;
   }

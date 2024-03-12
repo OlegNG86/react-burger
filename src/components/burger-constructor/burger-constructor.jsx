@@ -20,6 +20,7 @@ import { openModal, closeModal } from "../../services/actions/modal";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import SortableIngredient from "../sortable-ingredient/sortable-ingredient";
+import { resetConstructor } from "../../services/actions/burger-constructor";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -63,6 +64,7 @@ function BurgerConstructor() {
   const handleSubmit = () => {
     const ingredientsId = [bun, ...topping, bun].map((item) => item._id);
     dispatch(getOrderId(ingredientsId));
+    dispatch(resetConstructor())
     dispatch(openModal());
   };
 
