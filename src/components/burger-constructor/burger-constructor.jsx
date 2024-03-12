@@ -116,6 +116,7 @@ function BurgerConstructor() {
           type="primary"
           size="large"
           onClick={handleSubmit}
+          disabled={!bun || !bun.name}
         >
           Оформить заказ
         </Button>
