@@ -1,59 +1,109 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import styles from './burger-ingredients.module.css';
-import GroupCards from '../group-cards/group-cards';
-import { ingredientType } from '../../utils/types';
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useInView } from "react-intersection-observer";
+import PropTypes from "prop-types";
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import styles from "./burger-ingredients.module.css";
+import GroupCards from "../group-cards/group-cards";
+import { ingredientType } from "../../utils/types";
+import { getIngredients } from "../../services/actions/burger-ingredients";
 
 function filterData(data, type) {
-  return data.filter(item => item.type === type);
+  return data.filter((item) => item.type === type);
 }
 
+const BurgerIngredients = ({ onItemClick }) => {
+  const [bunRef, inViewBun] = useInView({ threshold: 0 });
+  const [mainRef, inViewMain] = useInView({ threshold: 0 });
+  const [sauceRef, inViewSauce] = useInView({ threshold: 0 });
 
-const BurgerIngredients = ({ cardsData, onItemClick  }) => {
-  const [current, setCurrent] = useState('bun');
-  const [selectedItems, setSelectedItems] = useState([]);
-
-  const handleAddItem = (item) => {
-    const selectedItemIdx = selectedItems.findIndex(selectedItem => selectedItem._id === item._id);
-    if (selectedItemIdx !== -1) {
-      const updatedItems = [...selectedItems];
-      updatedItems[selectedItemIdx].count += 1;
-      setSelectedItems(updatedItems);
-    } else {
-      setSelectedItems([...selectedItems, { ...item, count: 1 }]);
+  const setCurrent = useCallback(() => {
+    if (inViewBun) {
+      return "bun";
+    } else if (inViewSauce) {
+      return "sauce";
+    } else if (inViewMain) {
+      return "main";
     }
-  };
+  }, [inViewBun, inViewSauce, inViewMain]);
 
-  const filteredSelectedItems = selectedItems.filter(item => item.count > 0);
+  const current = useMemo(() => setCurrent(), [setCurrent]);
+
+  const dispatch = useDispatch();
+  const ingredients = useSelector((state) => state.ingredients.data);
+  const loading = useSelector((state) => state.loading);
+  const error = useSelector((state) => state.error);
+
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, [dispatch]);
+
+  if (loading) {
+    return <div>Загрузка данных...</div>;
+  }
+
+  if (error) {
+    return <div>Произошла ошибка: {error}</div>;
+  }
+
+  const filteredSelectedItems = ingredients;
+  // .filter(item => item.count > 0);
 
   return (
     <section className={styles.section}>
-        <h1 className={styles.header}>Соберите бургер</h1>
-        <div className={styles.div}>
-          <Tab value="bun" active={current === 'bun'} onClick={() => setCurrent('bun')}>
-            Булки
-          </Tab>
-          <Tab value="sauce" active={current === 'sauce'} onClick={() => setCurrent('sauce')}>
-            Соусы
-          </Tab>
-          <Tab value="main" active={current === 'main'} onClick={() => setCurrent('main')}>
-            Начинки
-          </Tab>
-        </div>
-        <div className={styles.scrollableContainer}>
-            <GroupCards data={filterData(cardsData, 'bun')} groupName='Булки' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
-            <GroupCards data={filterData(cardsData, 'sauce')} groupName='Соусы' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
-            <GroupCards data={filterData(cardsData, 'main')} groupName='Начинки' onItemClick={onItemClick} count={filteredSelectedItems.length}/>
-        </div>
+      <h1 className={styles.header}>Соберите бургер</h1>
+      <div className={styles.div}>
+        <Tab
+          value="bun"
+          active={current === "bun"}
+          onClick={() => setCurrent("bun")}
+        >
+          Булки
+        </Tab>
+        <Tab
+          value="sauce"
+          active={current === "sauce"}
+          onClick={() => setCurrent("sauce")}
+        >
+          Соусы
+        </Tab>
+        <Tab
+          value="main"
+          active={current === "main"}
+          onClick={() => setCurrent("main")}
+        >
+          Начинки
+        </Tab>
+      </div>
+      <div className={styles.scrollableContainer}>
+        <GroupCards
+          ref={bunRef}
+          data={filterData(ingredients, "bun")}
+          groupName="Булки"
+          onItemClick={onItemClick}
+          count={filteredSelectedItems.length}
+        />
+        <GroupCards
+          ref={sauceRef}
+          data={filterData(ingredients, "sauce")}
+          groupName="Соусы"
+          onItemClick={onItemClick}
+          count={filteredSelectedItems.length}
+        />
+        <GroupCards
+          ref={mainRef}
+          data={filterData(ingredients, "main")}
+          groupName="Начинки"
+          onItemClick={onItemClick}
+          count={filteredSelectedItems.length}
+        />
+      </div>
     </section>
   );
 };
 
 BurgerIngredients.propTypes = {
   onItemClick: PropTypes.func.isRequired,
-  cardsData: PropTypes.arrayOf(ingredientType)
-}
+};
 
 export default BurgerIngredients;
-
