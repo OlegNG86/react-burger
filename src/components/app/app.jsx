@@ -1,6 +1,8 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import style from "./app.module.css";
 import AppHeader from "../app-header/app-header";
 import HomePage from '../pages/home';
+import LoginPage from "../pages/login";
 
 const App = () => {
 
@@ -8,7 +10,11 @@ const App = () => {
     <>
       <AppHeader />
       <main className={style.content}>
-        <HomePage />
+        <Router>
+          <Routes>
+              <Route path="/login" element={<LoginPage />}/>
+          </Routes>
+        </Router>
       </main>
     </>
   );
