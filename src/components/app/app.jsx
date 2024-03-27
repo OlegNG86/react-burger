@@ -15,6 +15,7 @@ const App = () => {
       <main className={style.content}>
         <Router>
           <Routes>
+              <Route path="/" element={<HomePage />}/>
               <Route path="/login" element={<LoginPage />}/>
               <Route path="/home" element={<HomePage />}/>
               <Route path="/register" element={<RegisterPage />}/>
