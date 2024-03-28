@@ -32,7 +32,7 @@ function ProfilePage() {
        <menu className={styles.menu}>
         <section className={styles.profile} >
         <nav className={styles.mainmenu}>
-          <url className={styles.lists_mainmenu}>
+          <ul className={styles.lists_mainmenu}>
            <li className={styles.list_item_mainmenu}>
              <h2 className={styles.heading_menu}>Профиль</h2>
           </li>
@@ -45,7 +45,7 @@ function ProfilePage() {
         <li>
           <p>В этом разделе вы можете изменить свои персональные данные</p>
         </li>
-        </url>
+        </ul>
         </nav>
         </section>
         <form className={styles.form}>

@@ -10,11 +10,11 @@
  
     color: rgb(133, 133, 173, 1);
     cursor: pointer;
-    list-style: none;
     
 }
 .lists_mainmenu {
     cursor: pointer;
+    list-style: none;
 }
 li {
     width: 320px;
