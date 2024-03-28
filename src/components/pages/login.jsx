@@ -1,69 +1,71 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './login.module.css';
-import { request } from "../../utils/connector";
 import {
   Button,
-  Input,
   EmailInput,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { tryAuthorization } from '../../services/actions/authorization';
 
-const handlerSubmit = async (event) => {
-  event.preventDefault();
-  const formData = Object.fromEntries(new FormData(event.target));
-  tryAuthorization(formData.email, formData.password);
-  console.log(formData.email, formData.password)
-}
-
 export function LoginPage() {
-  const [valueEmailInput, setValueEmailInput] = React.useState('bob@example.com')
-  const onChange = e => {
-    setValueEmailInput(e.target.value)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector(state => state.authorization.auth);
+
+  const [valueEmailInput, setValueEmailInput] = React.useState('bob@example.com');
+  const [valuePasswordInput, setValuePasswordInput] = React.useState('password');
+
+  const handlerSubmit = async (event) => {
+    event.preventDefault();
+    const formData = Object.fromEntries(new FormData(event.target));
+    dispatch(tryAuthorization(formData.email, formData.password));
   }
-  const [valuePasswordInput, setValuePasswordInput] = React.useState('password')
+
+  const onChangeEmailInput = e => {
+    setValueEmailInput(e.target.value);
+  }
+
   const onChangePasswordInput = e => {
-    setValuePasswordInput(e.target.value)
+    setValuePasswordInput(e.target.value);
   }
+
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated, navigate]);
+
   return (
     <div className={styles.wrapper}>
       <form className={styles.form} onSubmit={handlerSubmit}>
-      <section className={styles.fields}>
-      <h1 className={styles.heading}>Вход</h1>
-      <EmailInput
-        onChange={onChange}
-        value={valueEmailInput}
-        name={'email'}
-        isIcon={false}
-      />
-      <PasswordInput
-        onChange={onChangePasswordInput}
-        value={valuePasswordInput}
-        name={'password'}
-        extraClass="mb-2"
-      />
-      <Link to='/'>
-        <Button htmlType="submit" type="primary" size="medium" extraClass="ml-2">
-          Войти
-        </Button>
-      </Link>
-      <div  className={styles.enter} >
-        Вы - новый пользователь? 
-      <Link to='/register'>
-        Зарегистрироваться
-      </Link> 
-     </div>
-     <div  className={styles.enter} >
-        Забыли пароль? 
-      <Link to='/forgot-password'>
-        Восстановить пароль
-      </Link> 
-     </div>
-      </section>
+        <section className={styles.fields}>
+          <h1 className={styles.heading}>Вход</h1>
+          <EmailInput
+            onChange={onChangeEmailInput}
+            value={valueEmailInput}
+            name="email"
+            isIcon={false}
+          />
+          <PasswordInput
+            onChange={onChangePasswordInput}
+            value={valuePasswordInput}
+            name="password"
+            extraClass="mb-2"
+          />
+          <Button htmlType="submit" type="primary" size="medium" extraClass="ml-2">
+            Войти
+          </Button>
+          <div className={styles.enter}>
+            Вы - новый пользователь? <Link className={styles.linkEnter} to="/register">Зарегистрироваться</Link>
+          </div>
+          <div className={styles.enter}>
+            Забыли пароль? <Link className={styles.linkEnter} to="/forgot-password">Восстановить пароль</Link>
+          </div>
+        </section>
       </form>
     </div>
-    
   );
 } 
 

@@ -1,39 +1,89 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./order-details.module.css";
+import { Link } from 'react-router-dom';
+import styles from "./profile.module.css";
 import iconDone from "../../images/icon-done.png";
 import { useDispatch, useSelector } from "react-redux";
 import { setOrderId, setError } from "../../services/actions/order-details";
+import {
+  Button,
+  PasswordInput,
+  Input,
+  EmailInput,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 
 function ProfilePage() {
-  const dispatch = useDispatch();
-  const { orderId, error } = useSelector((store) => store.order);
-
+  const [valueInput, setValueInput] = React.useState('value')
+  const inputRef = React.useRef(null)
+  const onIconClick = () => {
+    setTimeout(() => inputRef.current.focus(), 0)
+    alert('Icon Click Callback')
+  }
+  const [valueEmailInput, setValueEmailInput] = React.useState('bob@example.com')
+  const onChange = e => {
+    setValueEmailInput(e.target.value)
+  }
+  const [valuePasswordInput, setValuePasswordInput] = React.useState('password')
+  const onChangePasswordInput = e => {
+    setValuePasswordInput(e.target.value)
+  }
   return (
-    <div className={styles.order}>
-      <h2
-        className={`text text_type_digits-large mt-30 mb-8 ${styles.order__title}`}
-      >
-        {orderId}
-      </h2>
-      <p className={`text text_type_main-medium ${styles.order__id}`}>
-        Идентификатор заказа
-      </p>
-      <img
-        className={`mt-15 mb-15 ${styles.order__image}`}
-        src={iconDone}
-        alt="Ваш заказ принят"
-      />
-      <p className={`text text_type_main-default ${styles.order__description}`}>
-        Ваш заказ начали готовить
-      </p>
-      <p
-        className={`text text_type_main-default mt-2 mb-30 ${styles.order__descriptionReady}`}
-      >
-        Дождитесь готовности на орбитальной станции
-      </p>
+    <div className={styles.wrapper}>
+       <menu className={styles.menu}>
+        <section className={styles.profile} >
+        <nav className={styles.mainmenu}>
+          <url className={styles.lists_mainmenu}>
+           <li className={styles.list_item_mainmenu}>
+             <h2 className={styles.heading_menu}>Профиль</h2>
+          </li>
+          <li className={styles.list_item_mainmenu}>
+            <h2 className={styles.heading_menu}>История заказов</h2>
+        </li>
+        <li className={styles.list_item_mainmenu}>
+           <h2 className={styles.heading_menu}>Выход</h2>
+        </li>
+        <li>
+          <p>В этом разделе вы можете изменить свои персональные данные</p>
+        </li>
+        </url>
+        </nav>
+        </section>
+        <form className={styles.form}>
+        <section className={styles.profile_fields}>
+        <Input
+          type={'text'}
+          placeholder={'Имя'}
+          onChange={e => setValueInput(e.target.value)}
+          value={valueInput}
+          name={'name'}
+          error={false}
+          ref={inputRef}
+          onIconClick={onIconClick}
+          errorText={'Ошибка'}
+          size={'default'}
+          extraClass="ml-1"
+          disabled={true}
+          icon={"EditIcon"}
+          />
+        <EmailInput
+          onChange={onChange}
+          value={valueEmailInput}
+          name={'email'}
+          isIcon={true}
+        />
+        <PasswordInput
+          onChange={onChangePasswordInput}
+          value={valuePasswordInput}
+          name={'password'}
+          extraClass="mb-2"
+          icon={'EditIcon'}
+        />
+        </section>
+      </form>
+    </menu>
     </div>
+    
   );
-}
+} 
 
 export default ProfilePage;

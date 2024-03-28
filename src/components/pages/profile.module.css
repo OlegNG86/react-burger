@@ -1,0 +1,35 @@
+.menu {
+    margin-block-start: 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+.profile {
+    gap: 24px;
+}
+.mainmenu {
+ 
+    color: rgb(133, 133, 173, 1);
+    cursor: pointer;
+    list-style: none;
+    
+}
+.lists_mainmenu {
+    cursor: pointer;
+}
+li {
+    width: 320px;
+}
+
+ li:hover{ 
+    color: white;
+ }
+
+.profile_fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+p {
+    padding-block-start: 80px;
+}

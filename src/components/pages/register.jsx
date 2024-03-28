@@ -61,7 +61,7 @@ function RegisterPage() {
         </Link>
         <div  className={styles.enter} >
           Уже зарегистрированы? 
-        <Link to='/login'>
+        <Link className={styles.linkEnter} to='/login'>
           Войти
         </Link> 
        </div>
