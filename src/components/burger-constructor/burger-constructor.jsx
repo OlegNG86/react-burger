@@ -64,7 +64,7 @@ function BurgerConstructor() {
   const handleSubmit = () => {
     const ingredientsId = [bun, ...topping, bun].map((item) => item._id);
     dispatch(getOrderId(ingredientsId));
-    dispatch(resetConstructor())
+    dispatch(resetConstructor());
     dispatch(openModal());
   };
 
@@ -91,7 +91,13 @@ function BurgerConstructor() {
       <div className={styles.scrollableContainer}>
         {topping &&
           Array.isArray(topping) &&
-          topping.map((cardData, index) => <SortableIngredient key={cardData.uniqueId} cardData={cardData} index={index} />)}
+          topping.map((cardData, index) => (
+            <SortableIngredient
+              key={cardData.uniqueId}
+              cardData={cardData}
+              index={index}
+            />
+          ))}
       </div>
       <div className={styles.borders}>
         {bun ? (

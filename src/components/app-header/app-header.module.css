@@ -1,22 +1,22 @@
 .navigator {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    align-items: center;
-    height: 1fr;
-    background-color: black;
-    color: white;
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  height: 1fr;
+  background-color: black;
+  color: white;
+}
 
 .button {
-    display: flex;
-    align-items: center;
-    border-radius: 32px;
-    margin: 16px 40px 0;
-  }
+  display: flex;
+  align-items: center;
+  border-radius: 32px;
+  margin: 16px 40px 0;
+}
 
 .button:hover {
-    cursor: pointer;
-    opacity: 0.8;
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 .div {

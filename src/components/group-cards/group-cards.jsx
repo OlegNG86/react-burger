@@ -14,13 +14,15 @@ const GroupCards = React.forwardRef(
     };
 
     const { bun, topping } = useSelector((store) => store.burgerConstructor);
-    const constructorIngredients = [bun, ...topping, bun];  
+    const constructorIngredients = [bun, ...topping, bun];
     return (
       <div ref={ref}>
         <h3 className={`text text_type_main-medium`}>{groupName}</h3>
         <ul className={styles.cards__list}>
           {data.map((ingredient) => {
-            const count = constructorIngredients.filter(item => ingredient._id === item._id).length
+            const count = constructorIngredients.filter(
+              (item) => ingredient._id === item._id
+            ).length;
             return (
               <IngredientCard
                 key={ingredient._id}
