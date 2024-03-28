@@ -1,20 +1,19 @@
 .heading {
-    text-align: center;
-
+  text-align: center;
 }
 
 .fields {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
 }
 .enter {
-    padding-block-start: 80px;
-    color:rgba(133, 133, 173, 1);
-    gap: 10px;
+  padding-block-start: 80px;
+  color: rgba(133, 133, 173, 1);
+  gap: 10px;
 }
 .linkEnter {
-    padding-inline-start: 8px;
-    text-decoration: none;
+  padding-inline-start: 8px;
+  text-decoration: none;
 }

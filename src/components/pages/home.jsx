@@ -5,7 +5,6 @@ import style from "./home.module.css";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 
-
 const HomePage = () => {
   const [orderDetails, setOrderDetails] = useState({ isOpened: false });
   const [ingredientDetails, setIngredientDetails] = useState({
@@ -22,12 +21,10 @@ const HomePage = () => {
   };
 
   return (
-
-      <DndProvider backend={HTML5Backend}>
-          <BurgerIngredients onItemClick={handleItemClick} />
-          <BurgerConstructor openOrder={openOrderDetails} />
-      </DndProvider>
-
+    <DndProvider backend={HTML5Backend}>
+      <BurgerIngredients onItemClick={handleItemClick} />
+      <BurgerConstructor openOrder={openOrderDetails} />
+    </DndProvider>
   );
 };
 

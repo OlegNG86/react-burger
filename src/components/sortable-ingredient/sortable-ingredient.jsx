@@ -7,7 +7,10 @@ import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 import styles from "./sortable-ingredient.module.css";
 import { ingredientType } from "../../utils/types";
-import { deleteIngredient, changeIndexes } from "../../services/actions/burger-constructor";
+import {
+  deleteIngredient,
+  changeIndexes,
+} from "../../services/actions/burger-constructor";
 
 function SortableIngredient({ cardData, index }) {
   const dispatch = useDispatch();
@@ -15,7 +18,7 @@ function SortableIngredient({ cardData, index }) {
     dispatch(deleteIngredient(uniqueId));
   };
   const moveItem = (from, to) => {
-    dispatch(changeIndexes(from, to))
+    dispatch(changeIndexes(from, to));
   };
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({

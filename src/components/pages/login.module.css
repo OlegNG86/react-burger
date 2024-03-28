@@ -1,26 +1,26 @@
 .heading {
-    text-align: center;
+  text-align: center;
 }
 
 .fields {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    align-items: center;
-    gap: 24px;
+  align-items: center;
+  gap: 24px;
 }
 .fields:last-child {
-    gap: 16px;
+  gap: 16px;
 }
 
 .enter {
-    padding-block-start: 80px;
-    color:rgba(133, 133, 173, 1);
+  padding-block-start: 80px;
+  color: rgba(133, 133, 173, 1);
 }
 .linkEnter {
-    padding-inline-start: 8px;
-    text-decoration: none;
+  padding-inline-start: 8px;
+  text-decoration: none;
 }
 .enter:last-child {
-    padding-block-start: 0px;
+  padding-block-start: 0px;
 }

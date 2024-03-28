@@ -25,18 +25,20 @@ export const tryAuthorization = (email, password) => async (dispatch) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "email": email, 
-        "password": password 
-      } ),
+        email: email,
+        password: password,
+      }),
     });
 
     dispatch(setUserData(response.user));
   } catch (err) {
     console.log(err);
-    dispatch(setUserData({
-        "email": "",
-        "name": "",
-    }));
+    dispatch(
+      setUserData({
+        email: "",
+        name: "",
+      })
+    );
   }
 };
 
@@ -48,7 +50,7 @@ export const resetPasswordRequest = (email) => async (dispatch) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "email": email,
+        email: email,
       }),
     });
 

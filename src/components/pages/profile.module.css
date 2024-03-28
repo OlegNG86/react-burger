@@ -1,35 +1,33 @@
 .menu {
-    margin-block-start: 60px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  margin-block-start: 60px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 .profile {
-    gap: 24px;
+  gap: 24px;
 }
 .mainmenu {
- 
-    color: rgb(133, 133, 173, 1);
-    cursor: pointer;
-    
+  color: rgb(133, 133, 173, 1);
+  cursor: pointer;
 }
 .lists_mainmenu {
-    cursor: pointer;
-    list-style: none;
+  cursor: pointer;
+  list-style: none;
 }
 li {
-    width: 320px;
+  width: 320px;
 }
 
- li:hover{ 
-    color: white;
- }
+li:hover {
+  color: white;
+}
 
 .profile_fields {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
 }
 p {
-    padding-block-start: 80px;
+  padding-block-start: 80px;
 }

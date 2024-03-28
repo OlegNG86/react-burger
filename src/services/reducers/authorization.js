@@ -1,14 +1,14 @@
 import {
-    SET_USER_DATA,
-    RESET_PASSWORD_SUCCESS,
-    RESET_PASSWORD_FAILURE,
+  SET_USER_DATA,
+  RESET_PASSWORD_SUCCESS,
+  RESET_PASSWORD_FAILURE,
 } from "../actions/authorization";
 
 const initialState = {
   auth: false,
   profile: {
     email: "",
-    name: "", 
+    name: "",
   },
   resetPasswordSuccess: false,
 };
