@@ -2,6 +2,8 @@ import {
   SET_USER_DATA,
   RESET_PASSWORD_SUCCESS,
   RESET_PASSWORD_FAILURE,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAILURE,
 } from "../actions/authorization";
 
 const initialState = {
@@ -11,6 +13,7 @@ const initialState = {
     name: "",
   },
   resetPasswordSuccess: false,
+  changePasswordSuccess: false,
 };
 
 const authorizationReducer = (state = initialState, action) => {
@@ -30,6 +33,17 @@ const authorizationReducer = (state = initialState, action) => {
       return {
         ...state,
         resetPasswordSuccess: false,
+      };
+    case CHANGE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        resetPasswordSuccess: false,
+        changePasswordSuccess: true,
+      };
+    case CHANGE_PASSWORD_FAILURE:
+      return {
+        ...state,
+        changePasswordSuccess: false,
       };
     default:
       return state;

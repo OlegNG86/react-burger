@@ -6,6 +6,8 @@ export const SET_USER_DATA = "SET_USER_DATA";
 export const FETCH_USER_DATA = "FETCH_USER_DATA";
 export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
 export const RESET_PASSWORD_FAILURE = "RESET_PASSWORD_FAILURE";
+export const CHANGE_PASSWORD_SUCCESS = "CHANGE_PASSWORD_SUCCESS";
+export const CHANGE_PASSWORD_FAILURE = "CHANGE_PASSWORD_FAILURE";
 
 export const setUserData = (userData) => ({
   type: SET_USER_DATA,
@@ -32,6 +34,14 @@ export const resetPasswordSuccess = () => ({
 
 export const resetPasswordFailure = () => ({
   type: RESET_PASSWORD_FAILURE,
+});
+
+export const changePasswordSuccess = () => ({
+  type: CHANGE_PASSWORD_SUCCESS,
+});
+
+export const changePasswordFailure = () => ({
+  type: CHANGE_PASSWORD_FAILURE,
 });
 
 export const tryAuthorization = (email, password) => async (dispatch) => {
@@ -105,5 +115,29 @@ export const resetPasswordRequest = (email) => async (dispatch) => {
   } catch (err) {
     console.log(err);
     dispatch(resetPasswordFailure());
+  }
+};
+
+export const changePasswordRequest = (password, token) => async (dispatch) => {
+  try {
+    const response = await request("password-reset/reset", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        password: password,
+        token: token,
+      }),
+    });
+
+    if (response.success) {
+      dispatch(changePasswordSuccess());
+    } else {
+      dispatch(changePasswordFailure());
+    }
+  } catch (err) {
+    console.log(err);
+    dispatch(changePasswordFailure());
   }
 };
