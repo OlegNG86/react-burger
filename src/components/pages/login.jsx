@@ -14,8 +14,9 @@ export function LoginPage() {
   const navigate = useNavigate();
   const isAuthenticated = useSelector((state) => state.authorization.auth);
 
-  const [valueEmailInput, setValueEmailInput] =
-    React.useState("pykhalov.oleg@gmail.com");
+  const [valueEmailInput, setValueEmailInput] = React.useState(
+    "pykhalov.oleg@gmail.com"
+  );
   const [valuePasswordInput, setValuePasswordInput] =
     React.useState("password");
 
@@ -35,7 +36,7 @@ export function LoginPage() {
 
   React.useEffect(() => {
     if (isAuthenticated) {
-      navigate("/profile");
+      navigate("/");
     }
   }, [isAuthenticated, navigate]);
 
