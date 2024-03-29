@@ -22,8 +22,11 @@ export function ForgotPasswordPage() {
   const onChange = (e) => {
     setValueEmailInput(e.target.value);
   };
-  const handleResetPassword = () => {
-    dispatch(resetPasswordRequest(valueEmailInput));
+
+  const handlerSubmit = async (event) => {
+    event.preventDefault();
+    const formData = Object.fromEntries(new FormData(event.target));
+    dispatch(resetPasswordRequest(formData.email));
   };
 
   React.useEffect(() => {
@@ -34,7 +37,7 @@ export function ForgotPasswordPage() {
 
   return (
     <div className={styles.wrapper}>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handlerSubmit}>
         <section className={styles.fields}>
           <h1 className={styles.heading}>Вход</h1>
           <EmailInput
@@ -43,20 +46,20 @@ export function ForgotPasswordPage() {
             name={"email"}
             isIcon={false}
           />
-          <Link to="/">
+
             <Button
-              onClick={handleResetPassword}
-              htmlType="button"
+              onSubmit={handlerSubmit}
+              htmlType="submit"
               type="primary"
               size="medium"
               extraClass="ml-2"
             >
               Восстановить
             </Button>
-          </Link>
+
           <div className={styles.enter}>
             Вспомнили пароль?
-            <Link className={styles.linkEnter} to="/reset-password">
+            <Link className={styles.linkEnter} to="/login">
               Войти
             </Link>
           </div>
