@@ -12,6 +12,7 @@ import ProfilePage from "../pages/profile";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData } from "../../services/actions/authorization";
 import { getTokens } from "../../utils/persistant-token";
+import NotFoundPage from "../pages/not-found";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Router>
       </main>

@@ -1,0 +1,25 @@
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .error__title {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .error__description {
+    margin-bottom: 20px;
+  }
+  
+  .error__link {
+    margin-top: 10px;
+    text-decoration: none;
+    color: #0079bf;
+    cursor: pointer;
+  }
+  
+  .error__link:hover {
+    text-decoration: underline;
+  }
