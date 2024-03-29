@@ -1,9 +1,12 @@
 .navigator {
+  padding-block-start: 20px;
+  margin-block-start: 20px;
+  padding-block-end: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
   height: 1fr;
-  background-color: black;
+  background-color: rgba(28, 28, 33, 1);
   color: white;
 }
 
@@ -11,7 +14,7 @@
   display: flex;
   align-items: center;
   border-radius: 32px;
-  margin: 16px 40px 0;
+  margin: 0px 40px 0;
 }
 
 .button:hover {
@@ -22,3 +25,4 @@
 .div {
   margin-right: 5px;
 }
+

@@ -41,25 +41,23 @@ function ProfilePage() {
         <section className={styles.profile}>
           <nav className={styles.mainmenu}>
             <ul className={styles.lists_mainmenu}>
-              <li className={styles.list_item_mainmenu}>
+              <li>
                 <Link to="/profile" className={`${styles.link} ${location.pathname === "/profile" && styles.active}`}>
                   <h2>Профиль</h2>
                 </Link>
               </li>
-              <li className={styles.list_item_mainmenu}>
+              <li>
                 <Link to="/profile/orders" className={`${styles.link} ${location.pathname === "/profile/orders" && styles.active}`}>
                   <h2>История заказов</h2>
                 </Link>
               </li>
-              <li className={styles.list_item_mainmenu}>
+              <li>
                 <button onClick={handleLogout} className={styles.link}>
                   <h2>Выход</h2>
                 </button>
               </li>
-              <li>
-                <p className={styles.link}>
-                  В этом разделе вы можете изменить свои персональные данные
-                </p>
+              <li className={styles.link}>
+             <h5>В этом разделе вы можете изменить свои персональные данные</h5>
               </li>
             </ul>
           </nav>

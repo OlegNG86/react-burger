@@ -6,7 +6,7 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 const IngredientPage = () => {
   const { id } = useParams();
   const ingredients = useSelector((state) => state.ingredients.data);
-  const ingredient = ingredients[id]; // Получаем ингредиент по индексу
+  const ingredient = ingredients.find((item) => item._id === id);
 
   return (
     <div>

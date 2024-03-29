@@ -58,7 +58,14 @@ const App = () => {
               <Route path="orders" element={<NotFoundPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
-            <Route path="/ingredients/:id" element={<ProtectedRoute><IngredientPage /></ProtectedRoute>} />
+            <Route
+              path="/ingredients/:id"
+              element={
+                <ProtectedRoute>
+                  <IngredientPage />
+                </ProtectedRoute>
+              }
+            />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Router>

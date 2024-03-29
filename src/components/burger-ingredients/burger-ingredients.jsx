@@ -38,7 +38,7 @@ const BurgerIngredients = ({ onItemClick }) => {
 
   useEffect(() => {
     dispatch(getIngredients());
-  }, [dispatch]);
+  }, []);
 
   if (loading) {
     return <div>Загрузка данных...</div>;
