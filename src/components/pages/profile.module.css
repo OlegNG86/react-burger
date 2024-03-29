@@ -6,19 +6,31 @@
 .profile {
   gap: 24px;
 }
-.mainmenu {
-  color: rgb(133, 133, 173, 1);
-  cursor: pointer;
-}
+
 .lists_mainmenu {
   cursor: pointer;
   list-style: none;
+  
+
 }
-li {
+.link {
   width: 320px;
+  text-decoration: none;
+  color:  rgb(133, 133, 173, 1);
+  background-color: transparent;
+  text-align: start;
+  outline: none;
+  border: none;
 }
 
-li:hover {
+.link:hover {
+  color: white;
+}
+.link:focus {
+  outline: none;
+  text-decoration: none;
+}
+.link:focus-visible {
   color: white;
 }
 
@@ -28,6 +40,8 @@ li:hover {
   align-items: center;
   gap: 24px;
 }
-p {
-  padding-block-start: 80px;
+
+.link:last-child {
+  margin-block-end: 80px;
+  
 }

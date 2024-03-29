@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData } from "../../services/actions/authorization";
 import { getTokens } from "../../utils/persistant-token";
 import NotFoundPage from "../pages/not-found";
+import IngredientPage from "../pages/ingredient";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -47,13 +48,17 @@ const App = () => {
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route
-              path="/profile"
+              path="/profile/*"
               element={
                 <ProtectedRoute>
                   <ProfilePage />
                 </ProtectedRoute>
               }
-            />
+            >
+              <Route path="orders" element={<NotFoundPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
+            <Route path="/ingredients/:id" element={<ProtectedRoute><IngredientPage /></ProtectedRoute>} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Router>
