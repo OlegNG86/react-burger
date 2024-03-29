@@ -1,6 +1,5 @@
-// Ваш компонент App обновляется для использования AuthGuard
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import React from "react";
 import style from "./app.module.css";
 import AppHeader from "../app-header/app-header";
 import HomePage from "../pages/home";
@@ -8,10 +7,21 @@ import LoginPage from "../pages/login";
 import RegisterPage from "../pages/register";
 import ForgotPasswordPage from "../pages/forgot-password";
 import ResetPasswordPage from "../pages/reset-password";
-import AuthGuard from "../auth-guard/auth-guard";
+import ProtectedRoute from "../protected-route/protected-route";
 import ProfilePage from "../pages/profile";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserData } from "../../services/actions/authorization";
+import { getTokens } from "../../utils/persistant-token";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    const accessToken = getTokens().accessToken;
+    if (accessToken) {
+      dispatch(fetchUserData());
+    }
+  }, [dispatch]);
   return (
     <>
       <AppHeader />
@@ -25,12 +35,19 @@ const App = () => {
             <Route
               path="/"
               element={
-                <AuthGuard>
+                <ProtectedRoute>
                   <HomePage />
-                </AuthGuard>
+                </ProtectedRoute>
               }
             />
-            <Route path="/profile" element={<ProfilePage />} />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </Router>
       </main>

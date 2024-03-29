@@ -15,7 +15,7 @@ export function LoginPage() {
   const isAuthenticated = useSelector((state) => state.authorization.auth);
 
   const [valueEmailInput, setValueEmailInput] =
-    React.useState("bob@example.com");
+    React.useState("pykhalov.oleg@gmail.com");
   const [valuePasswordInput, setValuePasswordInput] =
     React.useState("password");
 

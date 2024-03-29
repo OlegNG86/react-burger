@@ -1,3 +1,5 @@
+import { setTokens, getTokens } from "./persistant-token";
+
 // 1 раз объявляем базовый урл
 export const BASE_URL = "https://norma.nomoreparties.space/api/";
 
@@ -26,4 +28,43 @@ export const request = (endpoint, options) => {
   return fetch(`${BASE_URL}${endpoint}`, options)
     .then(checkResponse)
     .then(checkSuccess);
+};
+
+export const refreshToken = () => {
+  return fetch(`${BASE_URL}auth/token`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify({
+      token: getTokens().refreshToken,
+    }),
+  })
+  .then(checkResponse)
+   // !! Важно для обновления токена в мидлваре, чтобы запись
+   // была тут, а не в fetchWithRefresh
+  .then((refreshData) => {
+    if (!refreshData.success) {
+        return Promise.reject(refreshData);
+      }
+    setTokens({ accessToken: refreshData.accessToken, refreshToken: refreshData.refreshToken });
+    return refreshData;
+  });
+};
+
+export const fetchWithRefresh = async (endpoint, options) => {
+  const fullUrl = `${BASE_URL}${endpoint}`
+  try {
+    const res = await fetch(fullUrl, options);
+    return await checkResponse(res);
+  } catch (err) {
+    if (err.message === "jwt expired") {
+      const refreshData = await refreshToken(); //обновляем токен
+      options.headers.authorization = refreshData.accessToken;
+      const res = await fetch(fullUrl, options); //повторяем запрос
+      return await checkResponse(res);
+    } else {
+      return Promise.reject(err);
+    }
+  }
 };

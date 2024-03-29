@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const AuthGuard = ({ children }) => {
+const ProtectedRoute = ({ children }) => {
   const isAuthenticated = useSelector((state) => state.authorization.auth);
 
   if (!isAuthenticated) {
@@ -12,4 +12,4 @@ const AuthGuard = ({ children }) => {
   return <>{children}</>;
 };
 
-export default AuthGuard;
+export default ProtectedRoute;

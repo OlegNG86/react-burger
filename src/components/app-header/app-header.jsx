@@ -7,6 +7,7 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./app-header.module.css";
+import { useSelector } from "react-redux";
 
 function Button(props) {
   return (
@@ -29,6 +30,10 @@ Button.propTypes = {
 };
 
 function AppHeader() {
+  const isAuthenticated = useSelector((state) => state.authorization.auth);
+  const name = useSelector((state) => state.authorization.profile.name);
+
+  const nameField = isAuthenticated ? name : "Личный кабинет";
   return (
     <header>
       <nav className={styles.navigator}>
@@ -46,7 +51,7 @@ function AppHeader() {
         <div></div>
         <div>
           <Button icon={<ProfileIcon type="secondary" />} color="darkgrey">
-            Личный кабинет
+            {nameField}
           </Button>
         </div>
       </nav>

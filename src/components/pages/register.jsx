@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./register.module.css";
 import {
   Button,
@@ -7,16 +7,22 @@ import {
   EmailInput,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { tryRegistration } from "../../services/actions/authorization";
+import { useDispatch, useSelector } from "react-redux";
 
 function RegisterPage() {
-  const [valueInput, setValueInput] = React.useState("value");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isAuthenticated = useSelector((state) => state.authorization.auth);
+  
+  const [valueInput, setValueInput] = React.useState("Oleg");
   const inputRef = React.useRef(null);
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0);
     alert("Icon Click Callback");
   };
   const [valueEmailInput, setValueEmailInput] =
-    React.useState("bob@example.com");
+    React.useState("pykhalov.oleg@gmail.com");
   const onChange = (e) => {
     setValueEmailInput(e.target.value);
   };
@@ -25,14 +31,24 @@ function RegisterPage() {
   const onChangePasswordInput = (e) => {
     setValuePasswordInput(e.target.value);
   };
+  const handlerSubmit = async (event) => {
+    event.preventDefault();
+    const formData = Object.fromEntries(new FormData(event.target));
+    dispatch(tryRegistration(formData.email, formData.password, formData.name));
+  };
+  React.useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
   return (
     <div className={styles.wrapper}>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handlerSubmit}>
         <section className={styles.fields}>
           <h1 className={styles.heading}>Регистрация</h1>
           <Input
             type={"text"}
-            placeholder={"placeholder"}
+            placeholder={"Имя"}
             onChange={(e) => setValueInput(e.target.value)}
             icon={"CurrencyIcon"}
             value={valueInput}
@@ -56,16 +72,16 @@ function RegisterPage() {
             name={"password"}
             extraClass="mb-2"
           />
-          <Link to="/login">
+
             <Button
-              htmlType="button"
+              htmlType="submit"
               type="primary"
               size="medium"
               extraClass="ml-2"
             >
               Зарегистрироваться
             </Button>
-          </Link>
+
           <div className={styles.enter}>
             Уже зарегистрированы?
             <Link className={styles.linkEnter} to="/login">
