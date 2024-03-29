@@ -17,7 +17,6 @@ function ProfilePage() {
   const inputRef = React.useRef(null);
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0);
-    alert("Icon Click Callback");
   };
   const [valueEmailInput, setValueEmailInput] =
     React.useState("bob@example.com");
@@ -57,7 +56,7 @@ function ProfilePage() {
             <Input
               type={"text"}
               placeholder={"Имя"}
-              onChange={(e) => setValueInput(e.target.value)}
+              onChange={onChange}
               value={valueInput}
               name={"name"}
               error={false}
@@ -76,7 +75,7 @@ function ProfilePage() {
               isIcon={true}
             />
             <PasswordInput
-              onChange={onChangePasswordInput}
+              onChange={onChange}
               value={valuePasswordInput}
               name={"password"}
               extraClass="mb-2"

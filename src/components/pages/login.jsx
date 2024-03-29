@@ -35,7 +35,7 @@ export function LoginPage() {
 
   React.useEffect(() => {
     if (isAuthenticated) {
-      navigate("/");
+      navigate("/profile");
     }
   }, [isAuthenticated, navigate]);
 

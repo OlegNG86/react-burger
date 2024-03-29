@@ -8,51 +8,86 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./app-header.module.css";
 import { useSelector } from "react-redux";
+import { NavLink, useLocation } from "react-router-dom";
 
-function Button(props) {
+function Button({ to, icon: Icon, text, isActive }) {
   return (
-    <nav className={styles.button}>
-      <div className={styles.div}>{props.icon}</div>
-      <p
-        className={"text text_type_main-default"}
-        style={{ color: props.color }}
-      >
-        {props.children}
-      </p>
-    </nav>
+    <NavLink to={to}>
+      {isActive ? (
+        <>
+          <nav className={styles.button}>
+            <div className={styles.div}>{<Icon type={"primary"} />}</div>
+            <p
+              className={"text text_type_main-default"}
+              style={{ color: "white" }}
+            >
+              {text}
+            </p>
+          </nav>
+        </>
+      ) : (
+        <>
+          <nav className={styles.button}>
+            <div className={styles.div}>{<Icon type={"secondary"} />}</div>
+            <p
+              className={"text text_type_main-default"}
+              style={{ color: "darkgrey" }}
+            >
+              {text}
+            </p>
+          </nav>
+        </>
+      )}
+    </NavLink>
   );
 }
 
 Button.propTypes = {
-  icon: PropTypes.element.isRequired,
+  icon: PropTypes.func.isRequired,
   color: PropTypes.string,
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node,
 };
 
 function AppHeader() {
   const isAuthenticated = useSelector((state) => state.authorization.auth);
   const name = useSelector((state) => state.authorization.profile.name);
-
   const nameField = isAuthenticated ? name : "Личный кабинет";
+
+  const location = useLocation();
+
+  const homeActive = location.pathname === "/";
+  const feedActive = location.pathname.includes("/feed");
+  const profileActive = location.pathname.includes("/profile");
   return (
     <header>
       <nav className={styles.navigator}>
         <div>
-          <Button icon={<BurgerIcon type="primary" />}>Конструктор</Button>
+          <Button
+            to={"/"}
+            icon={BurgerIcon}
+            text="Конструктор"
+            isActive={homeActive}
+          />
         </div>
         <div>
-          <Button icon={<MenuIcon type="secondary" />} color="darkgrey">
-            Лента заказов
-          </Button>
+          <Button
+            to={"/feed"}
+            icon={MenuIcon}
+            text="Лента заказов"
+            isActive={feedActive}
+          />
         </div>
         <div>
           <Logo />
         </div>
         <div></div>
         <div>
-          <Button icon={<ProfileIcon type="secondary" />} color="darkgrey">
-            {nameField}
-          </Button>
+          <Button
+            to={"/profile"}
+            icon={ProfileIcon}
+            text={nameField}
+            isActive={profileActive}
+          />
         </div>
       </nav>
     </header>

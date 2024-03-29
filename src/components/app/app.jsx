@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import React from "react";
 import style from "./app.module.css";
 import AppHeader from "../app-header/app-header";
@@ -25,14 +30,10 @@ const App = () => {
   }, [dispatch]);
   return (
     <>
-      <AppHeader />
       <main className={style.content}>
         <Router>
+          <AppHeader />
           <Routes>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-            <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route
               path="/"
               element={
@@ -41,6 +42,10 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route
               path="/profile"
               element={
