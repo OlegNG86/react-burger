@@ -6,7 +6,6 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients.module.css";
 import GroupCards from "../group-cards/group-cards";
 import { ingredientType } from "../../utils/types";
-import { getIngredients } from "../../services/actions/burger-ingredients";
 import { useNavigate } from "react-router-dom";
 
 function filterData(data, type) {
@@ -36,9 +35,7 @@ const BurgerIngredients = ({ onItemClick }) => {
   const loading = useSelector((state) => state.loading);
   const error = useSelector((state) => state.error);
 
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, []);
+
 
   if (loading) {
     return <div>Загрузка данных...</div>;

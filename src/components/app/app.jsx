@@ -19,16 +19,21 @@ import { fetchUserData } from "../../services/actions/authorization";
 import { getTokens } from "../../utils/persistant-token";
 import NotFoundPage from "../pages/not-found";
 import IngredientPage from "../pages/ingredient";
-
+import { getIngredients } from "../../services/actions/burger-ingredients";
 const App = () => {
   const dispatch = useDispatch();
-
+  
   React.useEffect(() => {
     const accessToken = getTokens().accessToken;
     if (accessToken) {
       dispatch(fetchUserData());
     }
   }, [dispatch]);
+
+  React.useEffect(() => {
+    dispatch(getIngredients());
+  }, []);
+  
   return (
     <>
       <main className={style.content}>
