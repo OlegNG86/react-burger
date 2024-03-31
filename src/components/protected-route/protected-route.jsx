@@ -1,15 +1,24 @@
 import React from "react";
-import { Route, Navigate } from "react-router-dom";
+import { Route, Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = useSelector((state) => state.authorization.auth);
+export default function ProtectedRoute({ children, anonymous = false }) {
+  const isLoggedIn = useSelector((store) => store.authorization.auth);
 
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
+  const location = useLocation();
+  const from = location.state?.from || '/';
+  // Если разрешен неавторизованный доступ, а пользователь авторизован...
+  if (anonymous && isLoggedIn) {
+    // ...то отправляем его на предыдущую страницу
+    return <Navigate to={ from } />;
   }
 
-  return <>{children}</>;
-};
+  // Если требуется авторизация, а пользователь не авторизован...
+  if (!anonymous && !isLoggedIn) {
+    // ...то отправляем его на страницу логин
+    return <Navigate to="/login" state={{ from: location}}/>;
+  }
 
-export default ProtectedRoute;
+  // Если все ок, то рендерим внутреннее содержимое
+  return children;
+}
