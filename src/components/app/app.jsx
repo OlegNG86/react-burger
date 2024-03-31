@@ -3,6 +3,8 @@ import {
   Routes,
   Route,
   useNavigate,
+  Navigate, 
+  useLocation,
 } from "react-router-dom";
 import React from "react";
 import style from "./app.module.css";
@@ -22,7 +24,7 @@ import IngredientPage from "../pages/ingredient";
 import { getIngredients } from "../../services/actions/burger-ingredients";
 const App = () => {
   const dispatch = useDispatch();
-  
+
   React.useEffect(() => {
     const accessToken = getTokens().accessToken;
     if (accessToken) {
@@ -33,13 +35,19 @@ const App = () => {
   React.useEffect(() => {
     dispatch(getIngredients());
   }, []);
-  
+
   return (
     <>
       <main className={style.content}>
         <Router>
           <AppHeader />
           <Routes>
+            <Route
+              path="/ingredients/:id"
+              element={
+                  <IngredientPage />
+              }
+            />
             <Route
               path="/"
               element={
@@ -63,14 +71,6 @@ const App = () => {
               <Route path="orders" element={<NotFoundPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
-            <Route
-              path="/ingredients/:id"
-              element={
-                <ProtectedRoute>
-                  <IngredientPage />
-                </ProtectedRoute>
-              }
-            />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Router>
