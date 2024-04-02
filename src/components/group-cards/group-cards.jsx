@@ -7,11 +7,6 @@ import { ingredientType } from "../../utils/types";
 
 const GroupCards = React.forwardRef(
   ({ data, groupName, onItemClick, count }, ref) => {
-    const handleItemClick = (item) => {
-      if (onItemClick) {
-        onItemClick(item);
-      }
-    };
 
     const { bun, topping } = useSelector((store) => store.burgerConstructor);
     const constructorIngredients = [bun, ...topping, bun];
@@ -27,7 +22,6 @@ const GroupCards = React.forwardRef(
               <IngredientCard
                 key={ingredient._id}
                 ingredient={ingredient}
-                onClick={() => handleItemClick(ingredient)}
                 count={count}
               />
             );
@@ -41,7 +35,6 @@ const GroupCards = React.forwardRef(
 GroupCards.propTypes = {
   data: PropTypes.arrayOf(ingredientType),
   groupName: PropTypes.string.isRequired,
-  onItemClick: PropTypes.func.isRequired,
 };
 
 export default GroupCards;

@@ -24,6 +24,7 @@ import { resetConstructor } from "../../services/actions/burger-constructor";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.authorization.auth);
   const { bun, topping } = useSelector((store) => store.burgerConstructor);
   const { isModalOpen } = useSelector((store) => store.modal);
   const { orderId, error } = useSelector((store) => store.order);

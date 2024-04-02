@@ -36,11 +36,6 @@ function RegisterPage() {
     const formData = Object.fromEntries(new FormData(event.target));
     dispatch(tryRegistration(formData.email, formData.password, formData.name));
   };
-  React.useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/");
-    }
-  }, [isAuthenticated, navigate]);
   return (
     <div className={styles.wrapper}>
       <form className={styles.form} onSubmit={handlerSubmit}>

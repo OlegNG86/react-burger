@@ -28,15 +28,10 @@ function ResetPasswordPage() {
   const handlerSubmit = async (event) => {
     event.preventDefault();
     const formData = Object.fromEntries(new FormData(event.target));
-    dispatch(changePasswordRequest(formData.password, formData.token));
+    await dispatch(changePasswordRequest(formData.password, formData.token));
+    navigate("/");
+
   };
-
-  React.useEffect(() => {
-    if (changePasswordSuccess) {
-      navigate("/");
-    }
-  }, [changePasswordSuccess, navigate]);
-
   return (
     <div className={styles.wrapper}>
       <form className={styles.form} onSubmit={handlerSubmit}>

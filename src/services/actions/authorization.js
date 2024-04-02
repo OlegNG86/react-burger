@@ -8,10 +8,15 @@ export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
 export const RESET_PASSWORD_FAILURE = "RESET_PASSWORD_FAILURE";
 export const CHANGE_PASSWORD_SUCCESS = "CHANGE_PASSWORD_SUCCESS";
 export const CHANGE_PASSWORD_FAILURE = "CHANGE_PASSWORD_FAILURE";
+export const SET_READY_STATE = "SET_READY_STATE";
 
 export const setUserData = (userData) => ({
   type: SET_USER_DATA,
   payload: userData,
+});
+
+export const setReadyState = () => ({
+  type: SET_READY_STATE,
 });
 
 export const fetchUserData = () => async (dispatch) => {
@@ -26,6 +31,8 @@ export const fetchUserData = () => async (dispatch) => {
     })
     dispatch(setUserData(response.user));
   }
+  dispatch(setReadyState());
+
 };
 
 export const resetPasswordSuccess = () => ({

@@ -26,15 +26,9 @@ export function ForgotPasswordPage() {
   const handlerSubmit = async (event) => {
     event.preventDefault();
     const formData = Object.fromEntries(new FormData(event.target));
-    dispatch(resetPasswordRequest(formData.email));
+    await dispatch(resetPasswordRequest(formData.email));
+    navigate("/reset-password")
   };
-
-  React.useEffect(() => {
-    if (resetPasswordSuccess) {
-      navigate("/reset-password");
-    }
-  }, [resetPasswordSuccess, navigate]);
-
   return (
     <div className={styles.wrapper}>
       <form className={styles.form} onSubmit={handlerSubmit}>

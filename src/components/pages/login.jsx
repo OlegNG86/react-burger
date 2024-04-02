@@ -33,13 +33,6 @@ export function LoginPage() {
   const onChangePasswordInput = (e) => {
     setValuePasswordInput(e.target.value);
   };
-
-  React.useEffect(() => {
-    if (isAuthenticated) {
-      navigate("/");
-    }
-  }, [isAuthenticated, navigate]);
-
   return (
     <div className={styles.wrapper}>
       <form className={styles.form} onSubmit={handlerSubmit}>

@@ -35,8 +35,6 @@ const BurgerIngredients = ({ onItemClick }) => {
   const loading = useSelector((state) => state.loading);
   const error = useSelector((state) => state.error);
 
-
-
   if (loading) {
     return <div>Загрузка данных...</div>;
   }
@@ -46,10 +44,6 @@ const BurgerIngredients = ({ onItemClick }) => {
   }
 
   const filteredSelectedItems = ingredients;
-
-  const handleItemClick = (id) => {
-    navigate(`/ingredients/${id}`);
-  };
 
   return (
     <section className={styles.section}>
@@ -82,21 +76,18 @@ const BurgerIngredients = ({ onItemClick }) => {
           ref={bunRef}
           data={filterData(ingredients, "bun")}
           groupName="Булки"
-          onItemClick={handleItemClick}
           count={filteredSelectedItems.length}
         />
         <GroupCards
           ref={sauceRef}
           data={filterData(ingredients, "sauce")}
           groupName="Соусы"
-          onItemClick={handleItemClick}
           count={filteredSelectedItems.length}
         />
         <GroupCards
           ref={mainRef}
           data={filterData(ingredients, "main")}
           groupName="Начинки"
-          onItemClick={handleItemClick}
           count={filteredSelectedItems.length}
         />
       </div>
