@@ -27,6 +27,7 @@ export function ForgotPasswordPage() {
     event.preventDefault();
     const formData = Object.fromEntries(new FormData(event.target));
     await dispatch(resetPasswordRequest(formData.email));
+    localStorage.setItem("forgotPasswordVisited", "true");
     navigate("/reset-password")
   };
   return (

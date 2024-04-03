@@ -80,6 +80,7 @@ function BurgerConstructor() {
 
   function handleCloseModal() {
     // setOrderPath(`/profile/orders/${orderId}`)
+    setIsWaiting(!isWaiting);
     dispatch(closeModal());
     dispatch(resetOrderId());
   }

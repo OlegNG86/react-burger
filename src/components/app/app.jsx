@@ -37,6 +37,8 @@ const App = () => {
     navigate(-1);
   }, [navigate]);
 
+  const wasOnForgotPassword = localStorage.getItem("forgotPasswordVisited") === "true";
+
   React.useEffect(() => {
     dispatch(getIngredients());
     dispatch(fetchUserData());
@@ -78,9 +80,13 @@ const App = () => {
           <Route
             path="/reset-password"
             element={
-              <ProtectedRoute anonymous={true}>
-                <ResetPasswordPage />
-              </ProtectedRoute>
+              wasOnForgotPassword ? (
+                <ProtectedRoute anonymous={true}>
+                  <ResetPasswordPage />
+                </ProtectedRoute>
+              ) : (
+                <Navigate to="/forgot-password" />
+              )
             }
           />
           <Route
