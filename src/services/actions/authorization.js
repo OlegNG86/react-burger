@@ -20,19 +20,23 @@ export const setReadyState = () => ({
 });
 
 export const fetchUserData = () => async (dispatch) => {
-  const accessToken = getTokens().accessToken;
-  if (accessToken) {
-    const response = await fetchWithRefresh("auth/user", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "authorization": accessToken,
-      },
-    })
-    dispatch(setUserData(response.user));
+  try {
+    const accessToken = getTokens().accessToken;
+    if (accessToken) {
+      const response = await fetchWithRefresh("auth/user", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "authorization": accessToken,
+        },
+      });
+      dispatch(setUserData(response.user));
+    }
+  } catch (err) {
+    console.error(err);
+  } finally {
+    dispatch(setReadyState());
   }
-  dispatch(setReadyState());
-
 };
 
 export const resetPasswordSuccess = () => ({
