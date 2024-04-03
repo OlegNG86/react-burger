@@ -30,41 +30,46 @@ export const request = (endpoint, options) => {
     .then(checkSuccess);
 };
 
-export const refreshToken = () => {
-  return fetch(`${BASE_URL}auth/token`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-    body: JSON.stringify({
-      token: getTokens().refreshToken,
-    }),
-  })
-  .then(checkResponse)
-   // !! Важно для обновления токена в мидлваре, чтобы запись
-   // была тут, а не в fetchWithRefresh
-  .then((refreshData) => {
+export const refreshToken = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}auth/token`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({
+        token: getTokens().refreshToken,
+      }),
+    });
+    const refreshData = await checkResponse(response);
     if (!refreshData.success) {
-        return Promise.reject(refreshData);
-      }
+      return Promise.reject(refreshData);
+    }
     setTokens({ accessToken: refreshData.accessToken, refreshToken: refreshData.refreshToken });
     return refreshData;
-  });
+  } catch (err) {
+    return Promise.reject(err);
+  }
 };
 
 export const fetchWithRefresh = async (endpoint, options) => {
-  const fullUrl = `${BASE_URL}${endpoint}`
   try {
-    const res = await fetch(fullUrl, options);
-    return await checkResponse(res);
+    const fullUrl = `${BASE_URL}${endpoint}`;
+    const response = await fetch(fullUrl, options);
+    return await checkResponse(response);
   } catch (err) {
-    if (err.message === "jwt expired") {
-      const refreshData = await refreshToken(); //обновляем токен
-      options.headers.authorization = refreshData.accessToken;
-      const res = await fetch(fullUrl, options); //повторяем запрос
-      return await checkResponse(res);
-    } else {
-      return Promise.reject(err);
+    try {
+      if (err.message === "jwt expired") {
+        const refreshData = await refreshToken(); //обновляем токен
+        options.headers.authorization = refreshData.accessToken;
+        const fullUrl = `${BASE_URL}${endpoint}`; // Define fullUrl again
+        const response = await fetch(fullUrl, options); //повторяем запрос
+        return await checkResponse(response);
+      } else {
+        return Promise.reject(err);
+      }
+    } catch (refreshErr) {
+      return Promise.reject(refreshErr);
     }
   }
 };
