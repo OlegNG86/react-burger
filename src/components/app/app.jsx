@@ -9,21 +9,21 @@ import {
 import React, { useCallback } from "react";
 import style from "./app.module.css";
 import AppHeader from "../app-header/app-header";
-import HomePage from "../pages/home";
-import LoginPage from "../pages/login";
-import RegisterPage from "../pages/register";
-import ForgotPasswordPage from "../pages/forgot-password";
-import ResetPasswordPage from "../pages/reset-password";
+import HomePage from "../../pages/home";
+import LoginPage from "../../pages/login";
+import RegisterPage from "../../pages/register";
+import ForgotPasswordPage from "../../pages/forgot-password";
+import ResetPasswordPage from "../../pages/reset-password";
 import ProtectedRoute from "../protected-route/protected-route";
-import ProfilePage from "../pages/profile";
+import ProfilePage from "../../pages/profile";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchUserData,
   setReadyState,
 } from "../../services/actions/authorization";
 import { getTokens } from "../../utils/persistant-token";
-import NotFoundPage from "../pages/not-found";
-import IngredientPage from "../pages/ingredient";
+import NotFoundPage from "../../pages/not-found";
+import IngredientPage from "../../pages/ingredient";
 import { getIngredients } from "../../services/actions/burger-ingredients";
 import Modal from "../modal/modal";
 

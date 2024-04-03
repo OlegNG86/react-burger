@@ -7,7 +7,7 @@ import {
   EmailInput,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { tryRegistration } from "../../services/actions/authorization";
+import { tryRegistration } from "../services/actions/authorization";
 import { useDispatch, useSelector } from "react-redux";
 
 function RegisterPage() {

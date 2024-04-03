@@ -7,7 +7,7 @@ import {
   PasswordInput,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { changePasswordRequest } from "../../services/actions/authorization";
+import { changePasswordRequest } from "../services/actions/authorization";
 
 function ResetPasswordPage() {
   const dispatch = useDispatch();

@@ -7,7 +7,7 @@ import {
   Button,
   EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { resetPasswordRequest } from "../../services/actions/authorization";
+import { resetPasswordRequest } from "../services/actions/authorization";
 
 export function ForgotPasswordPage() {
   const dispatch = useDispatch();

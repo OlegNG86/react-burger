@@ -2,16 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
 import styles from "./profile.module.css";
-import iconDone from "../../images/icon-done.png";
+import iconDone from "../images/icon-done.png";
 import { useDispatch, useSelector } from "react-redux";
-import { setOrderId, setError } from "../../services/actions/order-details";
+import { setOrderId, setError } from "../services/actions/order-details";
 import {
   Button,
   PasswordInput,
   Input,
   EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { clearTokens } from "../../utils/persistant-token";
+import { clearTokens } from "../utils/persistant-token";
 
 function ProfilePage() {
   const location = useLocation();

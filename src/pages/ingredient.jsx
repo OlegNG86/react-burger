@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import IngredientDetails from "../ingredient-details/ingredient-details";
+import IngredientDetails from "../components/ingredient-details/ingredient-details";
 
 const IngredientPage = () => {
   const { id } = useParams();

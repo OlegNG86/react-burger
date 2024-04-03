@@ -7,7 +7,7 @@ import {
   EmailInput,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { tryAuthorization } from "../../services/actions/authorization";
+import { tryAuthorization } from "../services/actions/authorization";
 
 export function LoginPage() {
   const dispatch = useDispatch();
