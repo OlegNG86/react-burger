@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 import {
@@ -21,6 +21,8 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import SortableIngredient from "../sortable-ingredient/sortable-ingredient";
 import { resetConstructor } from "../../services/actions/burger-constructor";
+import ProtectedRoute from "../protected-route/protected-route";
+import { Navigate } from "react-router";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -28,6 +30,8 @@ function BurgerConstructor() {
   const { bun, topping } = useSelector((store) => store.burgerConstructor);
   const { isModalOpen } = useSelector((store) => store.modal);
   const { orderId, error } = useSelector((store) => store.order);
+  const [orderPath, setOrderPath] = useState(null);
+  const [isWaiting, setIsWaiting] = useState(false);
 
   const calcTotalPrice = useMemo(() => {
     let totalPrice = 0;
@@ -63,15 +67,37 @@ function BurgerConstructor() {
   };
 
   const handleSubmit = () => {
-    const ingredientsId = [bun, ...topping, bun].map((item) => item._id);
-    dispatch(getOrderId(ingredientsId));
-    dispatch(resetConstructor());
-    dispatch(openModal());
+    if (!isAuthenticated) {
+      setOrderPath(true)
+    } else {
+      setIsWaiting(true);
+      const ingredientsId = [bun, ...topping, bun].map((item) => item._id);
+      dispatch(getOrderId(ingredientsId));
+      dispatch(resetConstructor());
+      dispatch(openModal());
+    }
   };
 
   function handleCloseModal() {
+    setOrderPath(`/profile/orders/${orderId}`)
     dispatch(closeModal());
     dispatch(resetOrderId());
+  }
+
+  switch (orderPath) {
+    case null: {
+      break;
+    }
+    case true: {
+      return (
+        <ProtectedRoute />
+      );
+    }
+    default: {
+      return (
+        <Navigate to={orderPath} />
+      )
+    }
   }
 
   return (
@@ -123,9 +149,9 @@ function BurgerConstructor() {
           type="primary"
           size="large"
           onClick={handleSubmit}
-          disabled={!bun || !bun.name}
+          disabled={!bun || !bun.name || isWaiting}
         >
-          Оформить заказ
+          {isWaiting? "Загрузка..." : "Оформить заказ"}
         </Button>
         {isModalOpen && orderId && (
           <Modal onClose={handleCloseModal}>

@@ -5,6 +5,8 @@
   width: 272px;
   position: relative;
   transition: all 0.3s;
+  text-decoration: none;
+  color: inherit;
 }
 
 .card:hover {
