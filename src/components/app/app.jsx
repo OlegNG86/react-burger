@@ -37,7 +37,8 @@ const App = () => {
     navigate(-1);
   }, [navigate]);
 
-  const wasOnForgotPassword = localStorage.getItem("forgotPasswordVisited") === "true";
+  const wasOnForgotPassword =
+    localStorage.getItem("forgotPasswordVisited") === "true";
 
   React.useEffect(() => {
     dispatch(getIngredients());
@@ -48,8 +49,8 @@ const App = () => {
   }
   return (
     <>
+      <AppHeader />
       <main className={style.content}>
-        <AppHeader />
         <Routes location={location.state?.backgroundLocation || location}>
           <Route path="/ingredient/:id" element={<IngredientPage />} />
           <Route path="/" element={<HomePage />} />
