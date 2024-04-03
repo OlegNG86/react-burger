@@ -79,7 +79,7 @@ function BurgerConstructor() {
   };
 
   function handleCloseModal() {
-    setOrderPath(`/profile/orders/${orderId}`)
+    // setOrderPath(`/profile/orders/${orderId}`)
     dispatch(closeModal());
     dispatch(resetOrderId());
   }
