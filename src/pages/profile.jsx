@@ -1,39 +1,47 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Link, useLocation } from "react-router-dom";
-import styles from "./profile.module.css";
-import iconDone from "../images/icon-done.png";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setOrderId, setError } from "../services/actions/order-details";
+import { getUserData, updateUserData } from "../services/actions/user";
+import { useForm } from "../hooks/useForm";
 import {
   Button,
+  EmailInput,
   PasswordInput,
   Input,
-  EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link, useLocation } from "react-router-dom";
+import styles from "./profile.module.css";
 import { clearTokens } from "../utils/persistant-token";
 
 function ProfilePage() {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user.userData);
+  const isLoading = useSelector((state) => state.user.isLoading);
+  const error = useSelector((state) => state.user.error);
 
-  const [valueInput, setValueInput] = React.useState("value");
-  const inputRef = React.useRef(null);
-  const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0);
-  };
-  const [valueEmailInput, setValueEmailInput] = React.useState("bob@example.com");
-  const onChange = (e) => {
-    setValueEmailInput(e.target.value);
-  };
-  const [valuePasswordInput, setValuePasswordInput] = React.useState("password");
-  const onChangePasswordInput = (e) => {
-    setValuePasswordInput(e.target.value);
-  };
+  useEffect(() => {
+    dispatch(getUserData());
+  }, [dispatch]);
 
+  // Использование useForm для управления состоянием формы
+  const { values, handleChange, setValues } = useForm(userData || {});
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(updateUserData(values));
+  };
+  const handleCancel = () => {
+    setValues(userData || {}); // Восстанавливаем исходные данные пользователя из Redux store
+  };
   const handleLogout = () => {
     clearTokens();
     window.location.href = "/login"; // простой способ перенаправления
   };
+
+  // Обновление значений формы при изменении данных пользователя
+  useEffect(() => {
+    setValues(userData || {});
+  }, [userData, setValues]);
 
   return (
     <div className={styles.wrapper}>
@@ -42,12 +50,22 @@ function ProfilePage() {
           <nav className={styles.mainmenu}>
             <ul className={styles.lists_mainmenu}>
               <li>
-                <Link to="/profile" className={`${styles.link} ${location.pathname === "/profile" && styles.active}`}>
+                <Link
+                  to="/profile"
+                  className={`${styles.link} ${
+                    location.pathname === "/profile" && styles.active
+                  }`}
+                >
                   <h2>Профиль</h2>
                 </Link>
               </li>
               <li>
-                <Link to="/profile/orders" className={`${styles.link} ${location.pathname === "/profile/orders" && styles.active}`}>
+                <Link
+                  to="/profile/orders"
+                  className={`${styles.link} ${
+                    location.pathname === "/profile/orders" && styles.active
+                  }`}
+                >
                   <h2>История заказов</h2>
                 </Link>
               </li>
@@ -57,41 +75,53 @@ function ProfilePage() {
                 </button>
               </li>
               <li className={styles.link}>
-             <h5>В этом разделе вы можете изменить свои персональные данные</h5>
+                <h5>
+                  В этом разделе вы можете изменить свои персональные данные
+                </h5>
               </li>
             </ul>
           </nav>
         </section>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <section className={styles.profile_fields}>
             <Input
               type={"text"}
               placeholder={"Имя"}
-              onChange={onChange}
-              value={valueInput}
+              onChange={handleChange}
+              value={values.name || ""}
               name={"name"}
-              error={false}
-              ref={inputRef}
-              onIconClick={onIconClick}
-              errorText={"Ошибка"}
-              size={"default"}
-              extraClass="ml-1"
-              disabled={true}
-              icon={"EditIcon"}
+              disabled={isLoading}
             />
             <EmailInput
-              onChange={onChange}
-              value={valueEmailInput}
+              onChange={handleChange}
+              value={values.email || ""}
               name={"email"}
-              isIcon={true}
+              disabled={isLoading}
             />
             <PasswordInput
-              onChange={onChange}
-              value={valuePasswordInput}
+              onChange={handleChange}
+              value={values.password || ""}
               name={"password"}
-              extraClass="mb-2"
-              icon={"EditIcon"}
+              disabled={isLoading}
             />
+            {isLoading ? (
+              <div>Загрузка...</div>
+            ) : (
+              <div className={styles.buttonContainer}>
+                <Button type="primary" size="medium" htmlType="submit">
+                  Сохранить
+                </Button>
+                <Button
+                  type="secondary"
+                  size="medium"
+                  htmlType="button"
+                  onClick={handleCancel}
+                >
+                  Отмена
+                </Button>
+              </div>
+            )}
+            {error && <div className={styles.error}>{error}</div>}
           </section>
         </form>
       </menu>
