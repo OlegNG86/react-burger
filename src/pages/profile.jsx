@@ -52,9 +52,7 @@ function ProfilePage() {
               <li>
                 <Link
                   to="/profile"
-                  className={`${styles.link} ${
-                    location.pathname === "/profile" && styles.active
-                  }`}
+                  className={`${styles.link} ${location.pathname === "/profile" && styles.active}`}
                 >
                   <h2>Профиль</h2>
                 </Link>
@@ -62,9 +60,7 @@ function ProfilePage() {
               <li>
                 <Link
                   to="/profile/orders"
-                  className={`${styles.link} ${
-                    location.pathname === "/profile/orders" && styles.active
-                  }`}
+                  className={`${styles.link} ${location.pathname === "/profile/orders" && styles.active}`}
                 >
                   <h2>История заказов</h2>
                 </Link>

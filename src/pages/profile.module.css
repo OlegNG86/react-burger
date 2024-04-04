@@ -7,12 +7,11 @@
 .lists_mainmenu {
   cursor: pointer;
   list-style: none;
-  
 }
 .link {
   width: 320px;
   text-decoration: none;
-  color:  rgb(133, 133, 173, 1);
+  color: rgb(133, 133, 173, 1);
   background-color: transparent;
   text-align: start;
   outline: none;
@@ -42,4 +41,8 @@
 .link:last-child {
   margin-block-end: 80px;
   cursor: pointer;
+}
+
+.active {
+  color: white;
 }
