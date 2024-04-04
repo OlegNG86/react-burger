@@ -25,8 +25,7 @@ export function ForgotPasswordPage() {
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
-    const formData = Object.fromEntries(new FormData(event.target));
-    await dispatch(resetPasswordRequest(formData.email));
+    await dispatch(resetPasswordRequest(valueEmailInput));
     localStorage.setItem("forgotPasswordVisited", "true");
     navigate("/reset-password")
   };

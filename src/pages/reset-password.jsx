@@ -27,8 +27,7 @@ function ResetPasswordPage() {
   };
   const handlerSubmit = async (event) => {
     event.preventDefault();
-    const formData = Object.fromEntries(new FormData(event.target));
-    await dispatch(changePasswordRequest(formData.password, formData.token));
+    await dispatch(changePasswordRequest(valuePasswordInput, valueInput));
     navigate("/");
 
   };

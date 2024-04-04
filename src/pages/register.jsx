@@ -33,8 +33,7 @@ function RegisterPage() {
   };
   const handlerSubmit = async (event) => {
     event.preventDefault();
-    const formData = Object.fromEntries(new FormData(event.target));
-    dispatch(tryRegistration(formData.email, formData.password, formData.name));
+    dispatch(tryRegistration(valueEmailInput, valuePasswordInput, valueInput));
   };
   return (
     <div className={styles.wrapper}>

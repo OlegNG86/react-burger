@@ -22,8 +22,7 @@ export function LoginPage() {
 
   const handlerSubmit = async (event) => {
     event.preventDefault();
-    const formData = Object.fromEntries(new FormData(event.target));
-    dispatch(tryAuthorization(formData.email, formData.password));
+    dispatch(tryAuthorization(valueEmailInput, valuePasswordInput));
   };
 
   const onChangeEmailInput = (e) => {
