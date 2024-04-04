@@ -78,7 +78,9 @@ function AppHeader() {
           />
         </div>
         <div>
-          <Logo />
+          <NavLink to="/">
+            <Logo />
+          </NavLink>
         </div>
         <div></div>
         <div>
