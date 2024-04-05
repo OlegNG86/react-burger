@@ -1,47 +1,47 @@
 .modal {
-    border-radius: 40px;
-    background: #1C1C21;
-    z-index: 1;
-    position: absolute;
-    overflow: hidden;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    width: 720px;
-    transition: all 0.3s;
+  border-radius: 40px;
+  background: #1c1c21;
+  z-index: 1;
+  position: absolute;
+  overflow: hidden;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  width: 720px;
+  transition: all 0.3s;
 }
 
 .flex {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .closeButton {
-    position: absolute;
-    top: 60px;
-    right: 40px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 100;
+  position: absolute;
+  top: 60px;
+  right: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 100;
 }
 
 .closeButton:hover,
 .closeButton:focus {
-    opacity: 0.6;
-    outline: none;
+  opacity: 0.6;
+  outline: none;
 }
 
 .header {
-    display: flex;
-    width: 640px;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  width: 640px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .title {
-    max-width: 520px;
-    margin: auto;
+  max-width: 520px;
+  margin: auto;
 }

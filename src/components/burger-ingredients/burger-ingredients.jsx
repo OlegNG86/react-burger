@@ -6,7 +6,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients.module.css";
 import GroupCards from "../group-cards/group-cards";
 import { ingredientType } from "../../utils/types";
-import { getIngredients } from "../../services/actions/burger-ingredients";
+import { useNavigate } from "react-router-dom";
 
 function filterData(data, type) {
   return data.filter((item) => item.type === type);
@@ -16,6 +16,7 @@ const BurgerIngredients = ({ onItemClick }) => {
   const [bunRef, inViewBun] = useInView({ threshold: 0 });
   const [mainRef, inViewMain] = useInView({ threshold: 0 });
   const [sauceRef, inViewSauce] = useInView({ threshold: 0 });
+  const navigate = useNavigate();
 
   const setCurrent = useCallback(() => {
     if (inViewBun) {
@@ -34,10 +35,6 @@ const BurgerIngredients = ({ onItemClick }) => {
   const loading = useSelector((state) => state.loading);
   const error = useSelector((state) => state.error);
 
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
-
   if (loading) {
     return <div>Загрузка данных...</div>;
   }
@@ -47,7 +44,6 @@ const BurgerIngredients = ({ onItemClick }) => {
   }
 
   const filteredSelectedItems = ingredients;
-  // .filter(item => item.count > 0);
 
   return (
     <section className={styles.section}>
@@ -80,21 +76,18 @@ const BurgerIngredients = ({ onItemClick }) => {
           ref={bunRef}
           data={filterData(ingredients, "bun")}
           groupName="Булки"
-          onItemClick={onItemClick}
           count={filteredSelectedItems.length}
         />
         <GroupCards
           ref={sauceRef}
           data={filterData(ingredients, "sauce")}
           groupName="Соусы"
-          onItemClick={onItemClick}
           count={filteredSelectedItems.length}
         />
         <GroupCards
           ref={mainRef}
           data={filterData(ingredients, "main")}
           groupName="Начинки"
-          onItemClick={onItemClick}
           count={filteredSelectedItems.length}
         />
       </div>

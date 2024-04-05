@@ -1,0 +1,28 @@
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    color:  rgb(133, 133, 173, 1);
+  }
+  
+  .error__title {
+    margin-top: 50px;
+    font-size: 60px;
+    text-align: center;
+  }
+  
+  .error__description {
+    margin-bottom: 20px;
+  }
+  
+  .error__link {
+    margin-top: 80px;
+    text-decoration: none;
+    color:  rgb(133, 133, 173, 1);
+    cursor: pointer;
+  }
+  
+  .error__link:hover {
+    color: white;
+  }

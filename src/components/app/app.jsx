@@ -1,46 +1,122 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
+import React, { useCallback } from "react";
 import style from "./app.module.css";
 import AppHeader from "../app-header/app-header";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
+import HomePage from "../../pages/home";
+import LoginPage from "../../pages/login";
+import RegisterPage from "../../pages/register";
+import ForgotPasswordPage from "../../pages/forgot-password";
+import ResetPasswordPage from "../../pages/reset-password";
+import ProtectedRoute from "../protected-route/protected-route";
+import ProfilePage from "../../pages/profile";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchUserData,
+  setReadyState,
+} from "../../services/actions/authorization";
+import { getTokens } from "../../utils/persistant-token";
+import NotFoundPage from "../../pages/not-found";
+import IngredientPage from "../../pages/ingredient";
+import { getIngredients } from "../../services/actions/burger-ingredients";
 import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
-import OrderDetails from "../order-details/order-details";
-import { openModal, closeModal } from "../../services/actions/modal";
 
 const App = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
-  const [orderDetails, setOrderDetails] = useState({ isOpened: false });
-  const [ingredientDetails, setIngredientDetails] = useState({
-    isOpened: false,
-    ingredient: null,
-  });
+  const isReady = useSelector((state) => state.authorization.isReady);
 
-  const openOrderDetails = () => {
-    setOrderDetails({ ...orderDetails, isOpened: true });
-  };
+  const navigate = useNavigate();
+  const handlerCloseModal = useCallback(() => {
+    navigate(-1);
+  }, [navigate]);
 
-  const handleItemClick = (ingredient) => {
-    setIngredientDetails({ isOpened: true, ingredient: ingredient });
-  };
+  const wasOnForgotPassword =
+    localStorage.getItem("forgotPasswordVisited") === "true";
 
-  const closeAllModals = () => {
-    setOrderDetails({ ...orderDetails, isOpened: false });
-    setIngredientDetails({ ...ingredientDetails, isOpened: false });
-  };
-
+  React.useEffect(() => {
+    dispatch(getIngredients());
+    dispatch(fetchUserData());
+  }, []);
+  if (!isReady) {
+    return <div>Идёт загрузка...</div>;
+  }
   return (
     <>
       <AppHeader />
-      <DndProvider backend={HTML5Backend}>
-        <main className={style.content}>
-          <BurgerIngredients onItemClick={handleItemClick} />
-          <BurgerConstructor openOrder={openOrderDetails} />
-        </main>
-      </DndProvider>
+      <main className={style.content}>
+        <Routes location={location.state?.backgroundLocation || location}>
+          <Route path="/ingredient/:id" element={<IngredientPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/login"
+            element={
+              <ProtectedRoute anonymous={true}>
+                <LoginPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <ProtectedRoute anonymous={true}>
+                <RegisterPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <ProtectedRoute anonymous={true}>
+                <ForgotPasswordPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/reset-password"
+            element={
+              wasOnForgotPassword ? (
+                <ProtectedRoute anonymous={true}>
+                  <ResetPasswordPage />
+                </ProtectedRoute>
+              ) : (
+                <Navigate to="/forgot-password" />
+              )
+            }
+          />
+          <Route
+            path="/profile/*"
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="orders" element={<NotFoundPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+
+        {location.state?.backgroundLocation && (
+          <Routes>
+            <Route
+              path="/ingredient/:id"
+              element={
+                <Modal onClose={handlerCloseModal} title="Ингредиент">
+                  <IngredientPage />
+                </Modal>
+              }
+            />
+          </Routes>
+        )}
+      </main>
     </>
   );
 };

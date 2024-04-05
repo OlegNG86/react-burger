@@ -1,37 +1,39 @@
 .card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 272px;
-    position: relative;
-    transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 272px;
+  position: relative;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: inherit;
 }
 
 .card:hover {
-    cursor: pointer;
-    opacity: 0.8;
+  cursor: pointer;
+  opacity: 0.8;
 }
 
 .card__price {
-    display: flex;
-    align-items: center;
-    font-family: 'Iceland';
-    font-weight: 400;
-    font-size: 28px;
-    line-height: 24px;
-    align-items: center;
-    margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  font-family: "Iceland";
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 24px;
+  align-items: center;
+  margin-bottom: 4px;
 }
 
 .card__name {
-    text-align: center;
-    max-width: 250px;
+  text-align: center;
+  max-width: 250px;
 }
 
 .card__image {
-    margin-bottom: 4px;
+  margin-bottom: 4px;
 }
 
 .p {
-    margin-right: 8px;
+  margin-right: 8px;
 }

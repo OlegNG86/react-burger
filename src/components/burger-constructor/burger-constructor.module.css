@@ -1,59 +1,59 @@
 .section {
-    max-width: 600px;
-    margin-left: 22px;
-    margin-top: 100px;
+  max-width: 600px;
+  margin-left: 22px;
+  margin-top: 100px;
 }
 
 .orderButton {
-    display: flex;
-    align-items: center;
-    float: right;
-  }
+  display: flex;
+  align-items: center;
+  float: right;
+}
 
 .borders {
-    margin-left: 16px;
-    margin-top: 8px;
-    margin-bottom: 8px;
+  margin-left: 16px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .scrollableContainer {
-    overflow-y: auto; /* Добавляет вертикальную прокрутку, если содержимое выходит за пределы контейнера */
-    max-height: 470px; /* Максимальная высота контейнера, при которой появляется полоса прокрутки */
+  overflow-y: auto; /* Добавляет вертикальную прокрутку, если содержимое выходит за пределы контейнера */
+  max-height: 470px; /* Максимальная высота контейнера, при которой появляется полоса прокрутки */
 }
 
 .item {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 /* Стилизация вертикального скроллбара */
 .scrollableContainer::-webkit-scrollbar {
-    width: 8px; /* Ширина скроллбара */
+  width: 8px; /* Ширина скроллбара */
 }
 
 .scrollableContainer::-webkit-scrollbar-thumb {
-    background-color: rgba(133, 133, 173, 1); /* Цвет ползунка скроллбара */
+  background-color: rgba(133, 133, 173, 1); /* Цвет ползунка скроллбара */
 }
 
 .scrollableContainer::-webkit-scrollbar-track {
-    round-color: rgba(47, 47, 55, 1); /* Цвет фона скроллбара */
+  round-color: rgba(47, 47, 55, 1); /* Цвет фона скроллбара */
 }
 
 .div {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .text {
-    font-family: Iceland;
-    font-size: 48px;
-    font-weight: 400;
-    line-height: 36px;
-    letter-spacing: 0em;
-    text-align: right;
-    margin-right: 8px;
+  font-family: Iceland;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: right;
+  margin-right: 8px;
 }
 
 .icon {
-    margin-right: 40px;
-  }
+  margin-right: 40px;
+}

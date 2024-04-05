@@ -1,4 +1,5 @@
 import { request } from "../../utils/connector";
+import { getTokens } from "../../utils/persistant-token";
 
 export const SET_ORDER_ID = "SET_ORDER_ID";
 export const SET_ERROR = "SET_ERROR";
@@ -24,8 +25,11 @@ export const getOrderId = (ingredients) => async (dispatch) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": getTokens().accessToken,
       },
-      body: JSON.stringify({ ingredients: ingredients }),
+      body: JSON.stringify({
+        ingredients: ingredients,
+      }),
     });
 
     dispatch(setOrderId(response.order.number));
