@@ -1,10 +1,10 @@
 import { setTokens, getTokens } from "./persistant-token";
 
 // 1 раз объявляем базовый урл
-export const BASE_URL = "https://norma.nomoreparties.space/api/";
+export const BASE_URL: string = "https://norma.nomoreparties.space/api/";
 
 // создаем функцию проверки ответа на `ok`
-const checkResponse = (res) => {
+const checkResponse = (res: Response): Promise<any> => {
   if (res.ok) {
     return res.json();
   }
@@ -13,7 +13,7 @@ const checkResponse = (res) => {
 };
 
 // создаем функцию проверки на `success`
-const checkSuccess = (res) => {
+const checkSuccess = (res: any): Promise<any> => {
   if (res && res.success) {
     return res;
   }
@@ -23,14 +23,14 @@ const checkSuccess = (res) => {
 
 // создаем универсальную фукнцию запроса с проверкой ответа и `success`
 // В вызов приходит `endpoint`(часть урла, которая идет после базового) и опции
-export const request = (endpoint, options) => {
+export const request = (endpoint: string, options: any): Promise<any> => {
   // а также в ней базовый урл сразу прописывается, чтобы не дублировать в каждом запросе
   return fetch(`${BASE_URL}${endpoint}`, options)
     .then(checkResponse)
     .then(checkSuccess);
 };
 
-export const refreshToken = async () => {
+export const refreshToken = async (): Promise<any> => {
   try {
     const response = await fetch(`${BASE_URL}auth/token`, {
       method: "POST",
@@ -47,17 +47,17 @@ export const refreshToken = async () => {
     }
     setTokens({ accessToken: refreshData.accessToken, refreshToken: refreshData.refreshToken });
     return refreshData;
-  } catch (err) {
+  } catch (err: any) {
     return Promise.reject(err);
   }
 };
 
-export const fetchWithRefresh = async (endpoint, options) => {
+export const fetchWithRefresh = async (endpoint: string, options: any): Promise<any> => {
   try {
     const fullUrl = `${BASE_URL}${endpoint}`;
     const response = await fetch(fullUrl, options);
     return await checkResponse(response);
-  } catch (err) {
+  } catch (err: any) {
     try {
       if (err.message === "jwt expired") {
         const refreshData = await refreshToken(); //обновляем токен
@@ -68,7 +68,7 @@ export const fetchWithRefresh = async (endpoint, options) => {
       } else {
         return Promise.reject(err);
       }
-    } catch (refreshErr) {
+    } catch (refreshErr: any) {
       return Promise.reject(refreshErr);
     }
   }
