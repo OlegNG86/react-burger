@@ -1,17 +1,13 @@
-import React, {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
 import {useDrag} from "react-dnd";
 import {
 	Counter,
 	CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./ingredient-card.module.css";
-import PropTypes from "prop-types";
-import {ingredientType} from "../../utils/types";
-import {openModal, closeModal} from "../../services/actions/modal";
+import {IIngredient} from "../../utils/types";
 import {Link, useLocation} from "react-router-dom";
 
-function IngredientCard({ingredient, count}) {
+function IngredientCard({ingredient, count}: {ingredient: IIngredient, count: number}) {
 	const location = useLocation();
 	
 	const [, dragRef] = useDrag({
@@ -45,10 +41,5 @@ function IngredientCard({ingredient, count}) {
 		</>
 	);
 }
-
-IngredientCard.propTypes = {
-	ingredient: ingredientType.isRequired,
-	count: PropTypes.number.isRequired,
-};
 
 export default IngredientCard;

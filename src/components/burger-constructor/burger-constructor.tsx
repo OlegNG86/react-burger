@@ -1,19 +1,17 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 import {
   ConstructorElement,
   CurrencyIcon,
   Button,
-  DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { ingredientType } from "../../utils/types";
+import { IIngredient } from "../../utils/types";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import {
   addBun,
   addIngredient,
-  deleteIngredient,
 } from "../../services/actions/burger-constructor";
 import { getOrderId, resetOrderId } from "../../services/actions/order-details";
 import { openModal, closeModal } from "../../services/actions/modal";
@@ -21,16 +19,14 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import SortableIngredient from "../sortable-ingredient/sortable-ingredient";
 import { resetConstructor } from "../../services/actions/burger-constructor";
-import ProtectedRoute from "../protected-route/protected-route";
-import { Navigate } from "react-router";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state) => state.authorization.auth);
-  const { bun, topping } = useSelector((store) => store.burgerConstructor);
-  const { isModalOpen } = useSelector((store) => store.modal);
-  const { orderId, error } = useSelector((store) => store.order);
-  const [orderPath, setOrderPath] = useState(null);
+  const isAuthenticated = useSelector((state: any) => state.authorization.auth);
+  const { bun, topping } = useSelector((store: any) => store.burgerConstructor);
+  const { isModalOpen } = useSelector((store: any) => store.modal);
+  const { orderId } = useSelector((store: any) => store.order);
+  const [, setOrderPath] = useState(null);
   const [isWaiting, setIsWaiting] = useState(false);
 
   const calcTotalPrice = useMemo(() => {
@@ -41,13 +37,13 @@ function BurgerConstructor() {
     }
 
     if (topping && topping.length > 0) {
-      totalPrice += topping.reduce((acc, curr) => acc + curr.price, 0);
+      totalPrice += topping.reduce((acc: any, curr: any) => acc + curr.price, 0);
     }
 
     return totalPrice;
   }, [bun, topping]);
 
-  function handleDrop(item) {
+  function handleDrop(item: IIngredient) {
     if (item.type === "bun") {
       dispatch(addBun(item));
     } else {
@@ -58,20 +54,20 @@ function BurgerConstructor() {
   const [, dropTarget] = useDrop({
     accept: "ingredient",
     drop(item) {
+      //@ts-ignore
       handleDrop(item);
     },
   });
 
-  const deleteElement = (uniqueId) => {
-    dispatch(deleteIngredient(uniqueId));
-  };
 
   const handleSubmit = () => {
     if (!isAuthenticated) {
+      //@ts-ignore
       setOrderPath(true)
     } else {
       setIsWaiting(true);
       const ingredientsId = [bun, ...topping, bun].map((item) => item._id);
+      //@ts-ignore
       dispatch(getOrderId(ingredientsId));
       dispatch(resetConstructor());
       dispatch(openModal());
@@ -85,21 +81,21 @@ function BurgerConstructor() {
     dispatch(resetOrderId());
   }
 
-  switch (orderPath) {
-    case null: {
-      break;
-    }
-    case true: {
-      return (
-        <ProtectedRoute />
-      );
-    }
-    default: {
-      return (
-        <Navigate to={orderPath} />
-      )
-    }
-  }
+  // switch (orderPath) {
+  //   case null: {
+  //     break;
+  //   }
+  //   case true: {
+  //     return (
+  //       <ProtectedRoute children={undefined} />
+  //     );
+  //   }
+  //   default: {
+  //     return (
+  //       <Navigate to={orderPath} />
+  //     )
+  //   }
+  // }
 
   return (
     <section className={styles.section}>
@@ -113,7 +109,7 @@ function BurgerConstructor() {
             thumbnail={bun.image}
           />
         ) : (
-          <ConstructorElement type="top" text="Нет булки" />
+          <ConstructorElement type="top" text="Нет булки" thumbnail={""} price={0} />
         )}
       </div>
       <div className={styles.scrollableContainer}>
@@ -137,7 +133,7 @@ function BurgerConstructor() {
             thumbnail={bun.image}
           />
         ) : (
-          <ConstructorElement type="bottom" text="Нет булки" />
+          <ConstructorElement type="bottom" text="Нет булки" thumbnail={""} price={0} />
         )}
       </div>
       <div className={styles.orderButton}>
@@ -165,7 +161,3 @@ function BurgerConstructor() {
 }
 
 export default BurgerConstructor;
-
-BurgerConstructor.propTypes = {
-  openOrder: PropTypes.func.isRequired,
-};

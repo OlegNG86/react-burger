@@ -2,8 +2,8 @@ import React from "react";
 import { Route, Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-export default function ProtectedRoute({ children, anonymous = false }) {
-  const isLoggedIn = useSelector((store) => store.authorization.auth);
+export default function ProtectedRoute({ children, anonymous = false } : {children: any, anonymous?: boolean}) {
+  const isLoggedIn = useSelector((store: any) => store.authorization.auth);
 
   const location = useLocation();
   const from = location.state?.from || '/';

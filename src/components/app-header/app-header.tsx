@@ -10,7 +10,7 @@ import styles from "./app-header.module.css";
 import { useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 
-function Button({ to, icon: Icon, text, isActive }) {
+function Button({ to, icon: Icon, text, isActive }: { to: string, icon: any, text: string, isActive: boolean }) {
   return (
     <NavLink to={to}>
       {isActive ? (
@@ -43,14 +43,15 @@ function Button({ to, icon: Icon, text, isActive }) {
 }
 
 Button.propTypes = {
+  to: PropTypes.string.isRequired,
   icon: PropTypes.func.isRequired,
-  color: PropTypes.string,
-  children: PropTypes.node,
+  text: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
 };
 
 function AppHeader() {
-  const isAuthenticated = useSelector((state) => state.authorization.auth);
-  const name = useSelector((state) => state.authorization.profile.name);
+  const isAuthenticated = useSelector((state: any) => state.authorization.auth);
+  const name = useSelector((state: any) => state.authorization.profile.name);
   const nameField = isAuthenticated ? name : "Личный кабинет";
 
   const location = useLocation();

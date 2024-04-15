@@ -1,7 +1,7 @@
 import styles from "./ingredient-details.module.css";
-import { ingredientType } from "../../utils/types";
+import { IIngredient } from "../../utils/types";
 
-function IngredientDetails({ ingredientData }) {
+function IngredientDetails({ ingredientData }: {ingredientData: IIngredient}) {
   const { image_large, name, calories, carbohydrates, fat, proteins } =
     ingredientData;
 
@@ -64,9 +64,5 @@ function IngredientDetails({ ingredientData }) {
     </div>
   );
 }
-
-IngredientDetails.propTypes = {
-  ingredientData: ingredientType,
-};
 
 export default IngredientDetails;

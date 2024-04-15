@@ -5,20 +5,19 @@ import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients.module.css";
 import GroupCards from "../group-cards/group-cards";
-import { ingredientType } from "../../utils/types";
+import { IIngredient } from "../../utils/types";
 import { useNavigate } from "react-router-dom";
 
-function filterData(data, type) {
-  return data.filter((item) => item.type === type);
+function filterData(data: IIngredient[], type: string) {
+  return data.filter((item: IIngredient) => item.type === type);
 }
 
-const BurgerIngredients = ({ onItemClick }) => {
+const BurgerIngredients = () => {
   const [bunRef, inViewBun] = useInView({ threshold: 0 });
   const [mainRef, inViewMain] = useInView({ threshold: 0 });
   const [sauceRef, inViewSauce] = useInView({ threshold: 0 });
-  const navigate = useNavigate();
 
-  const setCurrent = useCallback(() => {
+  const setCurrent = useCallback<() => string | unknown>(() => {
     if (inViewBun) {
       return "bun";
     } else if (inViewSauce) {
@@ -30,10 +29,9 @@ const BurgerIngredients = ({ onItemClick }) => {
 
   const current = useMemo(() => setCurrent(), [setCurrent]);
 
-  const dispatch = useDispatch();
-  const ingredients = useSelector((state) => state.ingredients.data);
-  const loading = useSelector((state) => state.loading);
-  const error = useSelector((state) => state.error);
+  const ingredients = useSelector((state: any) => state.ingredients.data) as IIngredient[];
+  const loading = useSelector((state: any) => state.loading);
+  const error = useSelector((state: any) => state.error);
 
   if (loading) {
     return <div>Загрузка данных...</div>;
@@ -52,21 +50,21 @@ const BurgerIngredients = ({ onItemClick }) => {
         <Tab
           value="bun"
           active={current === "bun"}
-          onClick={() => setCurrent("bun")}
+          onClick={() => setCurrent()}
         >
           Булки
         </Tab>
         <Tab
           value="sauce"
           active={current === "sauce"}
-          onClick={() => setCurrent("sauce")}
+          onClick={() => setCurrent()}
         >
           Соусы
         </Tab>
         <Tab
           value="main"
           active={current === "main"}
-          onClick={() => setCurrent("main")}
+          onClick={() => setCurrent()}
         >
           Начинки
         </Tab>
@@ -76,19 +74,16 @@ const BurgerIngredients = ({ onItemClick }) => {
           ref={bunRef}
           data={filterData(ingredients, "bun")}
           groupName="Булки"
-          count={filteredSelectedItems.length}
         />
         <GroupCards
           ref={sauceRef}
           data={filterData(ingredients, "sauce")}
           groupName="Соусы"
-          count={filteredSelectedItems.length}
         />
         <GroupCards
           ref={mainRef}
           data={filterData(ingredients, "main")}
           groupName="Начинки"
-          count={filteredSelectedItems.length}
         />
       </div>
     </section>

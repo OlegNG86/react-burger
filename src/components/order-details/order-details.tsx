@@ -7,7 +7,7 @@ import { setOrderId, setError } from "../../services/actions/order-details";
 
 function OrderDetails() {
   const dispatch = useDispatch();
-  const { orderId, error } = useSelector((store) => store.order);
+  const { orderId, error } = useSelector((store: any) => store.order);
 
   return (
     <div className={styles.order}>

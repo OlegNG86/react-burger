@@ -3,12 +3,12 @@ import IngredientCard from "../ingredient-card/ingredient-card";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { ingredientType } from "../../utils/types";
+import { IIngredient } from "../../utils/types";
 
 const GroupCards = React.forwardRef(
-  ({ data, groupName, onItemClick, count }, ref) => {
+  ({ data, groupName }: { data: IIngredient[], groupName: string}, ref: any) => {
 
-    const { bun, topping } = useSelector((store) => store.burgerConstructor);
+    const { bun, topping } = useSelector((store: any) => store.burgerConstructor);
     const constructorIngredients = [bun, ...topping, bun];
     return (
       <div ref={ref}>
@@ -31,10 +31,5 @@ const GroupCards = React.forwardRef(
     );
   }
 );
-
-GroupCards.propTypes = {
-  data: PropTypes.arrayOf(ingredientType),
-  groupName: PropTypes.string.isRequired,
-};
 
 export default GroupCards;

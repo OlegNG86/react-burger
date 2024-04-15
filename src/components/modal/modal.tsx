@@ -8,9 +8,9 @@ import {
   CloseIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-const Modal = ({ title, onClose, children }) => {
+const Modal = ({ title, onClose, children }: {title?: string, onClose: any, children: any}) => {
   React.useEffect(() => {
-    const handleEscKeydown = (e) => {
+    const handleEscKeydown = (e: any) => {
       if (e.key === "Escape") {
         onClose();
       }
@@ -37,21 +37,16 @@ const Modal = ({ title, onClose, children }) => {
           htmlType="button"
           className={styles.closeButton}
         >
-          <CloseIcon />
+          <CloseIcon type={"primary"} />
         </Button>
 
         {children}
       </div>
       <ModalOverlay onClick={onClose} />
     </>,
+    //@ts-ignore
     document.getElementById("modals")
   );
-};
-
-Modal.propTypes = {
-  title: PropTypes.string,
-  onClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
 };
 
 export default Modal;

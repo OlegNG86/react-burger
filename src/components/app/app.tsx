@@ -1,5 +1,4 @@
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   useNavigate,
@@ -19,9 +18,7 @@ import ProfilePage from "../../pages/profile";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchUserData,
-  setReadyState,
 } from "../../services/actions/authorization";
-import { getTokens } from "../../utils/persistant-token";
 import NotFoundPage from "../../pages/not-found";
 import IngredientPage from "../../pages/ingredient";
 import { getIngredients } from "../../services/actions/burger-ingredients";
@@ -29,16 +26,16 @@ import Modal from "../modal/modal";
 
 const App = () => {
   const location = useLocation();
-  const dispatch = useDispatch();
-  const isReady = useSelector((state) => state.authorization.isReady);
+  const dispatch: any = useDispatch();
+  const isReady: boolean = useSelector((state: any) => state.authorization.isReady);
 
   const navigate = useNavigate();
   const handlerCloseModal = useCallback(() => {
     navigate(-1);
   }, [navigate]);
 
-  const wasOnForgotPassword =
-    localStorage.getItem("forgotPasswordVisited") === "true";
+  const wasOnForgotPassword: string | null =
+    localStorage.getItem("forgotPasswordVisited") || null;
 
   React.useEffect(() => {
     dispatch(getIngredients());
@@ -51,7 +48,7 @@ const App = () => {
     <>
       <AppHeader />
       <main className={style.content}>
-        <Routes location={location.state?.backgroundLocation || location}>
+        <Routes location={(location?.state?.backgroundLocation || location) as any}>
           <Route path="/ingredient/:id" element={<IngredientPage />} />
           <Route path="/" element={<HomePage />} />
           <Route
@@ -104,7 +101,7 @@ const App = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
 
-        {location.state?.backgroundLocation && (
+        {location?.state?.backgroundLocation && (
           <Routes>
             <Route
               path="/ingredient/:id"
