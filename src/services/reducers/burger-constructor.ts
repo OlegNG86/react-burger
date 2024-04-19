@@ -1,10 +1,11 @@
+import { IIngredient, IIngredientWithUID } from "../../utils/types.js";
 import {
   ADD_BUN,
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
   CHANGE_INDEXES,
   RESET_CONSTRUCTOR
-} from "../actions/burger-constructor";
+} from "../actions/burger-constructor.js";
 
 const initialState = {
   bun: {},
@@ -12,7 +13,7 @@ const initialState = {
   totalPrice: 0,
 };
 
-const burgerConstructorReducer = (state = initialState, action) => {
+const burgerConstructorReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case ADD_BUN:
       return {
@@ -28,7 +29,7 @@ const burgerConstructorReducer = (state = initialState, action) => {
       return {
         ...state,
         topping: state.topping.filter(
-          (item) => item.uniqueId !== action.uniqueId
+          (item: IIngredientWithUID) => item.uniqueId !== action.uniqueId
         ),
       };
     case CHANGE_INDEXES: {

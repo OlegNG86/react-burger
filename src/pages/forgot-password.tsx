@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import styles from "./forgot-password.module.css";
+import { customUseAppDispatch } from "../hooks/redux";
 import {
   Button,
   EmailInput,
@@ -10,22 +10,20 @@ import {
 import { resetPasswordRequest } from "../services/actions/authorization";
 
 export function ForgotPasswordPage() {
-  const dispatch = useDispatch();
+  const dispatch = customUseAppDispatch();
   const navigate = useNavigate();
-  const [valueEmailInput, setValueEmailInput] = React.useState(
+  const [valueEmailInput, setValueEmailInput] = React.useState<string>(
     "pykhalov.oleg@gmail.com"
   );
-  const resetPasswordSuccess = useSelector(
-    (state) => state.authorization.resetPasswordSuccess
-  );
 
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValueEmailInput(e.target.value);
   };
 
-  const handlerSubmit = async (event) => {
+
+  const handlerSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await dispatch(resetPasswordRequest(valueEmailInput));
+    dispatch(resetPasswordRequest(valueEmailInput));
     localStorage.setItem("forgotPasswordVisited", "true");
     navigate("/reset-password")
   };
@@ -42,7 +40,6 @@ export function ForgotPasswordPage() {
           />
 
             <Button
-              onSubmit={handlerSubmit}
               htmlType="submit"
               type="primary"
               size="medium"

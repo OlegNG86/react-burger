@@ -1,6 +1,6 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, { ChangeEvent, FormEvent } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import styles from "./login.module.css";
 import {
   Button,
@@ -11,8 +11,6 @@ import { tryAuthorization } from "../services/actions/authorization";
 
 export function LoginPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isAuthenticated = useSelector((state) => state.authorization.auth);
 
   const [valueEmailInput, setValueEmailInput] = React.useState(
     "pykhalov.oleg@gmail.com"
@@ -20,16 +18,17 @@ export function LoginPage() {
   const [valuePasswordInput, setValuePasswordInput] =
     React.useState("password");
 
-  const handlerSubmit = async (event) => {
-    event.preventDefault();
+  const handlerSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    //@ts-ignore
     dispatch(tryAuthorization(valueEmailInput, valuePasswordInput));
   };
 
-  const onChangeEmailInput = (e) => {
+  const onChangeEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
     setValueEmailInput(e.target.value);
   };
 
-  const onChangePasswordInput = (e) => {
+  const onChangePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
     setValuePasswordInput(e.target.value);
   };
   return (

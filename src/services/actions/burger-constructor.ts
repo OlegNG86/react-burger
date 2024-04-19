@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { IIngredient } from "../../utils/types";
 
 export const ADD_BUN = "ADD_BUN";
 export const ADD_INGREDIENT = "ADD_INGREDIENT";
@@ -6,7 +7,7 @@ export const DELETE_INGREDIENT = "DELETE_INGREDIENT";
 export const CHANGE_INDEXES = "CHANGE_INDEXES";
 export const RESET_CONSTRUCTOR = "RESET_CONSTRUCTOR";
 
-export const changeIndexes = (from, to) => {
+export const changeIndexes = (from: number, to: number) => {
   return {
     type: CHANGE_INDEXES,
     from,
@@ -14,12 +15,12 @@ export const changeIndexes = (from, to) => {
   };
 };
 
-export const addBun = (bun) => ({
+export const addBun = (bun: IIngredient) => ({
   type: ADD_BUN,
   bun,
 });
 
-export const addIngredient = (item) => {
+export const addIngredient = (item: IIngredient) => {
   return {
     type: ADD_INGREDIENT,
     payload: {
@@ -29,11 +30,11 @@ export const addIngredient = (item) => {
   };
 };
 
-export const resetConstructor = (bun) => ({
+export const resetConstructor = () => ({
   type: RESET_CONSTRUCTOR,
 });
 
-export const deleteIngredient = (uniqueId) => ({
+export const deleteIngredient = (uniqueId: string) => ({
   type: DELETE_INGREDIENT,
   uniqueId,
 });

@@ -3,8 +3,8 @@ import { ChangeEvent, useState } from 'react';
 export function useForm(inputValues = {}) {
   const [values, setValues] = useState(inputValues);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = event.target;
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
     setValues({ ...values, [name]: value });
   };
 

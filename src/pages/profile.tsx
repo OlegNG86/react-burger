@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { FormEvent, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserData, updateUserData } from "../services/actions/user";
 import { useForm } from "../hooks/useForm";
+import { TForm } from "../utils/types";
 import {
   Button,
   EmailInput,
@@ -15,19 +16,23 @@ import { clearTokens } from "../utils/persistant-token";
 function ProfilePage() {
   const location = useLocation();
   const dispatch = useDispatch();
-  const userData = useSelector((state) => state.user.userData);
-  const isLoading = useSelector((state) => state.user.isLoading);
-  const error = useSelector((state) => state.user.error);
+  const userData = useSelector((state: any) => state.user.userData);
+  const isLoading = useSelector((state: any) => state.user.isLoading);
+  const error = useSelector((state: any) => state.user.error);
 
   useEffect(() => {
+    //@ts-ignore
     dispatch(getUserData());
   }, [dispatch]);
 
   // Использование useForm для управления состоянием формы
-  const { values, handleChange, setValues } = useForm(userData || {});
+  // const { values, handleChange, setValues } = useForm(userData || {});
+  const {setValues, handleChange, ...all} = useForm(userData || {});
+  const values = all.values as TForm;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    //@ts-ignore
     dispatch(updateUserData(values));
   };
   const handleCancel = () => {
@@ -86,8 +91,7 @@ function ProfilePage() {
               onChange={handleChange}
               value={values.name || ""}
               name={"name"}
-              disabled={isLoading}
-            />
+              disabled={isLoading} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}            />
             <EmailInput
               onChange={handleChange}
               value={values.email || ""}

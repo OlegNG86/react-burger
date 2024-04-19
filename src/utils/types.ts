@@ -33,3 +33,10 @@ export interface IIngredient {
 export interface IIngredientWithUID extends IIngredient {
   uniqueId: string;
 }
+
+export type TForm = {
+  name?: string;
+  password?: string;
+  email?: string;
+  token?: string | null;
+};

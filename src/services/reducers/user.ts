@@ -13,7 +13,7 @@ import {
     error: null,
   };
   
-  const userReducer = (state = initialState, action) => {
+  const userReducer = (state = initialState, action: {type: string, payload: {}}) => {
     switch (action.type) {
       case GET_USER_DATA_REQUEST:
       case UPDATE_USER_DATA_REQUEST:

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./register.module.css";
@@ -13,20 +13,25 @@ function ResetPasswordPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [valueInput, setValueInput] = React.useState("");
-  const inputRef = React.useRef(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0);
+    setTimeout(() => {
+      if (inputRef.current !== null) {
+        inputRef.current.focus();
+      }
+    }, 0);
     alert("Icon Click Callback");
   };
   const changePasswordSuccess = useSelector(
-    (state) => state.authorization.changePasswordSuccess
+    (state: any) => state.authorization.changePasswordSuccess
   );
   const [valuePasswordInput, setValuePasswordInput] = React.useState("");
-  const onChangePasswordInput = (e) => {
+  const onChangePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
     setValuePasswordInput(e.target.value);
   };
-  const handlerSubmit = async (event) => {
-    event.preventDefault();
+  const handlerSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // @ts-ignore
     await dispatch(changePasswordRequest(valuePasswordInput, valueInput));
     navigate("/");
 
@@ -54,11 +59,9 @@ function ResetPasswordPage() {
             onIconClick={onIconClick}
             errorText={"Ошибка"}
             size={"default"}
-            extraClass="ml-1"
-          />
+            extraClass="ml-1" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          />
 
           <Button
-            onSubmit={handlerSubmit}
             htmlType="submit"
             type="primary"
             size="medium"

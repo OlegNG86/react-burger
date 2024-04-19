@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { ChangeEvent, FormEvent } from "react";
+import { Link } from "react-router-dom";
 import styles from "./register.module.css";
 import {
   Button,
@@ -8,31 +8,34 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { tryRegistration } from "../services/actions/authorization";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function RegisterPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isAuthenticated = useSelector((state) => state.authorization.auth);
   
   const [valueInput, setValueInput] = React.useState("Oleg");
-  const inputRef = React.useRef(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0);
+    setTimeout(() => {
+      if (inputRef.current !== null) {
+        inputRef.current.focus();
+      }
+    }, 0);
     alert("Icon Click Callback");
   };
   const [valueEmailInput, setValueEmailInput] =
     React.useState("pykhalov.oleg@gmail.com");
-  const onChange = (e) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValueEmailInput(e.target.value);
   };
   const [valuePasswordInput, setValuePasswordInput] =
     React.useState("password");
-  const onChangePasswordInput = (e) => {
+  const onChangePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
     setValuePasswordInput(e.target.value);
   };
-  const handlerSubmit = async (event) => {
-    event.preventDefault();
+  const handlerSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // @ts-ignore
     dispatch(tryRegistration(valueEmailInput, valuePasswordInput, valueInput));
   };
   return (
@@ -52,8 +55,7 @@ function RegisterPage() {
             onIconClick={onIconClick}
             errorText={"Ошибка"}
             size={"default"}
-            extraClass="ml-1"
-          />
+            extraClass="ml-1" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          />
           <EmailInput
             onChange={onChange}
             value={valueEmailInput}

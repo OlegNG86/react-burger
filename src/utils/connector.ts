@@ -3,8 +3,12 @@ import { setTokens, getTokens } from "./persistant-token";
 // 1 раз объявляем базовый урл
 export const BASE_URL: string = "https://norma.nomoreparties.space/api/";
 
+export type TResponseDataAPI<T extends Record<string, any>={}> = {
+  success: boolean,
+} & T
+
 // создаем функцию проверки ответа на `ok`
-const checkResponse = (res: Response): Promise<any> => {
+const checkResponse = <T extends TResponseDataAPI>(res: Response): Promise<T> => {
   if (res.ok) {
     return res.json();
   }
@@ -12,10 +16,11 @@ const checkResponse = (res: Response): Promise<any> => {
   return Promise.reject(`Ошибка ${res.status}`);
 };
 
+
 // создаем функцию проверки на `success`
-const checkSuccess = (res: any): Promise<any> => {
+const checkSuccess = <T extends TResponseDataAPI>(res: T): Promise<T> => {
   if (res && res.success) {
-    return res;
+    return Promise.resolve(res);
   }
   // не забываем выкидывать ошибку, чтобы она попала в `catch`
   return Promise.reject(`Ответ не success: ${res}`);
@@ -23,32 +28,33 @@ const checkSuccess = (res: any): Promise<any> => {
 
 // создаем универсальную фукнцию запроса с проверкой ответа и `success`
 // В вызов приходит `endpoint`(часть урла, которая идет после базового) и опции
-export const request = (endpoint: string, options: any): Promise<any> => {
+export const request = <T>(endpoint: string, options?: RequestInit): Promise<T> => {
   // а также в ней базовый урл сразу прописывается, чтобы не дублировать в каждом запросе
   return fetch(`${BASE_URL}${endpoint}`, options)
-    .then(checkResponse)
-    .then(checkSuccess);
+  .then((response) => response.json())
+  .then(checkSuccess)
 };
 
-export const refreshToken = async (): Promise<any> => {
+export const refreshToken = async (): Promise<any> =>  {
   try {
-    const response = await fetch(`${BASE_URL}auth/token`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/token`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
       body: JSON.stringify({
-        token: getTokens().refreshToken,
+        token: getTokens()?.refreshToken,
       }),
+      headers: {
+        "Content-Type": "application / json; charset = utf-8",
+      },
     });
-    const refreshData = await checkResponse(response);
+    const refreshData = await checkResponse<{success: boolean, error: string, accessToken: string, refreshToken: string}>(response);
     if (!refreshData.success) {
-      return Promise.reject(refreshData);
+      throw new Error(refreshData.error);
     }
-    setTokens({ accessToken: refreshData.accessToken, refreshToken: refreshData.refreshToken });
+    setTokens({ accessToken: refreshData?.accessToken, refreshToken: refreshData?.refreshToken });
     return refreshData;
-  } catch (err: any) {
-    return Promise.reject(err);
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 };
 

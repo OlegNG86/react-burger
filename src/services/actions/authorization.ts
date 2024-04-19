@@ -1,6 +1,7 @@
-import { request } from "../../utils/connector";
+import { TResponseDataAPI, request } from "../../utils/connector";
 import { setTokens, getTokens } from "../../utils/persistant-token";
 import { fetchWithRefresh } from "../../utils/connector";
+import { TForm } from "../../utils/types";
 
 export const SET_USER_DATA = "SET_USER_DATA";
 export const FETCH_USER_DATA = "FETCH_USER_DATA";
@@ -10,7 +11,7 @@ export const CHANGE_PASSWORD_SUCCESS = "CHANGE_PASSWORD_SUCCESS";
 export const CHANGE_PASSWORD_FAILURE = "CHANGE_PASSWORD_FAILURE";
 export const SET_READY_STATE = "SET_READY_STATE";
 
-export const setUserData = (userData) => ({
+export const setUserData = (userData: any) => ({
   type: SET_USER_DATA,
   payload: userData,
 });
@@ -19,7 +20,7 @@ export const setReadyState = () => ({
   type: SET_READY_STATE,
 });
 
-export const fetchUserData = () => async (dispatch) => {
+export const fetchUserData = () => async (dispatch: any) => {
   try {
     const accessToken = getTokens().accessToken;
     if (accessToken) {
@@ -55,9 +56,9 @@ export const changePasswordFailure = () => ({
   type: CHANGE_PASSWORD_FAILURE,
 });
 
-export const tryAuthorization = (email, password) => async (dispatch) => {
+export const tryAuthorization = (email: string, password: string) => async (dispatch: any) => {
   try {
-    const response = await request("auth/login", {
+    const response = await request<{accessToken: string, refreshToken: string, user: TForm}>("auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,9 +81,9 @@ export const tryAuthorization = (email, password) => async (dispatch) => {
   }
 };
 
-export const tryRegistration = (email, password, name) => async (dispatch) => {
+export const tryRegistration = (email: string, password: string, name: string) => async (dispatch: any) => {
   try {
-    const response = await request("auth/register", {
+    const response = await request<{accessToken: string, refreshToken: string, user: TForm}>("auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -106,9 +107,9 @@ export const tryRegistration = (email, password, name) => async (dispatch) => {
   }
 };
 
-export const resetPasswordRequest = (email) => async (dispatch) => {
+export const resetPasswordRequest = (email: string) => async (dispatch: any) => {
   try {
-    const response = await request("password-reset", {
+    const response = await request<TResponseDataAPI>("password-reset", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -129,9 +130,9 @@ export const resetPasswordRequest = (email) => async (dispatch) => {
   }
 };
 
-export const changePasswordRequest = (password, token) => async (dispatch) => {
+export const changePasswordRequest = (password: string, token: string) => async (dispatch: any) => {
   try {
-    const response = await request("password-reset/reset", {
+    const response = await request<TResponseDataAPI>("password-reset/reset", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

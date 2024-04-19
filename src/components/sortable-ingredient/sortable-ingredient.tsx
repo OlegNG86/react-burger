@@ -14,7 +14,7 @@ import {
 
 function SortableIngredient({ cardData, index }: {cardData: IIngredientWithUID, index: number}) {
   const dispatch = useDispatch();
-  const deleteElement = (uniqueId: string | number) => {
+  const deleteElement = (uniqueId: string) => {
     dispatch(deleteIngredient(uniqueId));
   };
   const moveItem = (from: number, to: number) => {

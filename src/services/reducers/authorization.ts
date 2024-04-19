@@ -1,3 +1,4 @@
+import { TForm } from "../../utils/types";
 import {
   SET_USER_DATA,
   RESET_PASSWORD_SUCCESS,
@@ -18,7 +19,7 @@ const initialState = {
   changePasswordSuccess: false,
 };
 
-const authorizationReducer = (state = initialState, action) => {
+const authorizationReducer = (state = initialState, action: {type: string, payload: TForm}) => {
   switch (action.type) {
     case SET_USER_DATA:
       return {

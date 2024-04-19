@@ -1,5 +1,7 @@
 import { fetchWithRefresh } from "../../utils/connector";
 import { getTokens } from "../../utils/persistant-token";
+import { convertErrorResponseToString } from "../../utils/common";
+import { TForm } from "../../utils/types";
 
 export const GET_USER_DATA_REQUEST = "GET_USER_DATA_REQUEST";
 export const GET_USER_DATA_SUCCESS = "GET_USER_DATA_SUCCESS";
@@ -9,7 +11,7 @@ export const UPDATE_USER_DATA_REQUEST = "UPDATE_USER_DATA_REQUEST";
 export const UPDATE_USER_DATA_SUCCESS = "UPDATE_USER_DATA_SUCCESS";
 export const UPDATE_USER_DATA_FAILURE = "UPDATE_USER_DATA_FAILURE";
 
-export const getUserData = () => async (dispatch) => {
+export const getUserData = () => async (dispatch: any) => {
   try {
     dispatch({ type: GET_USER_DATA_REQUEST });
     const accessToken = getTokens().accessToken;
@@ -27,15 +29,15 @@ export const getUserData = () => async (dispatch) => {
       payload: response.user,
     });
     }
-  } catch (error) {
+  } catch (error: any) {
     dispatch({
       type: GET_USER_DATA_FAILURE,
-      payload: error.message,
+      payload: error?.message,
     });
   }
 };
 
-export const updateUserData = (userData) => async (dispatch) => {
+export const updateUserData = (userData: TForm) => async (dispatch: any) => {
   try {
     const accessToken = getTokens().accessToken;
     if (accessToken) {
@@ -58,7 +60,7 @@ export const updateUserData = (userData) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: UPDATE_USER_DATA_FAILURE,
-      payload: error.message,
+      payload: convertErrorResponseToString(error),
     });
   }
 };
