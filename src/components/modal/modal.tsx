@@ -10,7 +10,7 @@ import {
 
 const Modal = ({ title, onClose, children }: {title?: string, onClose: any, children: any}) => {
   React.useEffect(() => {
-    const handleEscKeydown = (e: any) => {
+    const handleEscKeydown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();
       }
