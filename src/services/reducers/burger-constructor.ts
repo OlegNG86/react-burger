@@ -1,11 +1,11 @@
-import { IIngredient, IIngredientWithUID } from "../../utils/types.js";
+import { IIngredient, IIngredientWithUID } from "../../utils/types";
 import {
   ADD_BUN,
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
   CHANGE_INDEXES,
   RESET_CONSTRUCTOR
-} from "../actions/burger-constructor.js";
+} from "../actions/burger-constructor";
 
 const initialState = {
   bun: {},
