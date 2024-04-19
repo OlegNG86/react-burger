@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import styles from "./forgot-password.module.css";
-import { customUseAppDispatch } from "../hooks/redux";
+import { useAppDispatch } from "../hooks/redux";
 import {
   Button,
   EmailInput,
@@ -10,7 +10,7 @@ import {
 import { resetPasswordRequest } from "../services/actions/authorization";
 
 export function ForgotPasswordPage() {
-  const dispatch = customUseAppDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [valueEmailInput, setValueEmailInput] = React.useState<string>(
     "pykhalov.oleg@gmail.com"
