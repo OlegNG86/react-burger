@@ -44,8 +44,7 @@ const Modal = ({ title, onClose, children }: {title?: string, onClose: any, chil
       </div>
       <ModalOverlay onClick={onClose} />
     </>,
-    //@ts-ignore
-    document.getElementById("modals")
+    document.getElementById("modals")!
   );
 };
 
