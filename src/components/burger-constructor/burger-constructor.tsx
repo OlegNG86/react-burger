@@ -7,7 +7,6 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { IIngredient } from "../../utils/types";
-import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import {
   addBun,
@@ -19,13 +18,14 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import SortableIngredient from "../sortable-ingredient/sortable-ingredient";
 import { resetConstructor } from "../../services/actions/burger-constructor";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
 function BurgerConstructor() {
-  const dispatch = useDispatch();
-  const isAuthenticated = useSelector((state: any) => state.authorization.auth);
-  const { bun, topping } = useSelector((store: any) => store.burgerConstructor);
-  const { isModalOpen } = useSelector((store: any) => store.modal);
-  const { orderId } = useSelector((store: any) => store.order);
+  const dispatch = useAppDispatch();
+  const isAuthenticated = useAppSelector((state) => state.authorization.auth);
+  const { bun, topping } = useAppSelector((store: any) => store.burgerConstructor);
+  const { isModalOpen } = useAppSelector((store) => store.modal);
+  const { orderId } = useAppSelector((store) => store.order);
   const [, setOrderPath] = useState(null);
   const [isWaiting, setIsWaiting] = useState(false);
 

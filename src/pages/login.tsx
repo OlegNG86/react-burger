@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import styles from "./login.module.css";
 import {
   Button,
@@ -8,9 +7,10 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { tryAuthorization } from "../services/actions/authorization";
+import { useAppDispatch } from "../hooks/redux";
 
 export function LoginPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [valueEmailInput, setValueEmailInput] = React.useState(
     "pykhalov.oleg@gmail.com"

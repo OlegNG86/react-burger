@@ -1,9 +1,8 @@
-import React, { useRef, useState } from "react";
+import { useRef } from "react";
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 import styles from "./sortable-ingredient.module.css";
 import { IIngredientWithUID } from "../../utils/types";
@@ -11,9 +10,10 @@ import {
   deleteIngredient,
   changeIndexes,
 } from "../../services/actions/burger-constructor";
+import { useAppDispatch } from "../../hooks/redux";
 
 function SortableIngredient({ cardData, index }: {cardData: IIngredientWithUID, index: number}) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const deleteElement = (uniqueId: string) => {
     dispatch(deleteIngredient(uniqueId));
   };

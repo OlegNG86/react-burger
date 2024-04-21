@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -7,6 +6,7 @@ import styles from "./burger-ingredients.module.css";
 import GroupCards from "../group-cards/group-cards";
 import { IIngredient } from "../../utils/types";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../hooks/redux";
 
 function filterData(data: IIngredient[], type: string) {
   return data.filter((item: IIngredient) => item.type === type);
@@ -29,9 +29,9 @@ const BurgerIngredients = () => {
 
   const current = useMemo(() => setCurrent(), [setCurrent]);
 
-  const ingredients = useSelector((state: any) => state.ingredients.data) as IIngredient[];
-  const loading = useSelector((state: any) => state.loading);
-  const error = useSelector((state: any) => state.error);
+  const ingredients = useAppSelector((state) => state.ingredients.data) as IIngredient[];
+  const loading = useAppSelector((state: any) => state.loading);
+  const error = useAppSelector((state: any) => state.error);
 
   if (loading) {
     return <div>Загрузка данных...</div>;

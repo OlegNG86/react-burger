@@ -1,5 +1,4 @@
 import React, { FormEvent, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { getUserData, updateUserData } from "../services/actions/user";
 import { useForm } from "../hooks/useForm";
 import { TForm } from "../utils/types";
@@ -12,13 +11,14 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import styles from "./profile.module.css";
 import { clearTokens } from "../utils/persistant-token";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
 function ProfilePage() {
   const location = useLocation();
-  const dispatch = useDispatch();
-  const userData = useSelector((state: any) => state.user.userData);
-  const isLoading = useSelector((state: any) => state.user.isLoading);
-  const error = useSelector((state: any) => state.user.error);
+  const dispatch = useAppDispatch();
+  const userData = useAppSelector((state) => state.user.userData);
+  const isLoading = useAppSelector((state) => state.user.isLoading);
+  const error = useAppSelector((state: any) => state.user.error);
 
   useEffect(() => {
     //@ts-ignore

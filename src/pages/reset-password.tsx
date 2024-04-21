@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import styles from "./register.module.css";
 import {
   Button,
@@ -8,9 +7,10 @@ import {
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { changePasswordRequest } from "../services/actions/authorization";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
 function ResetPasswordPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [valueInput, setValueInput] = React.useState("");
   const inputRef = React.useRef<HTMLInputElement>(null);
@@ -22,7 +22,7 @@ function ResetPasswordPage() {
     }, 0);
     alert("Icon Click Callback");
   };
-  const changePasswordSuccess = useSelector(
+  const changePasswordSuccess = useAppSelector(
     (state: any) => state.authorization.changePasswordSuccess
   );
   const [valuePasswordInput, setValuePasswordInput] = React.useState("");

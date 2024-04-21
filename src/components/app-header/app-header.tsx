@@ -7,8 +7,8 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./app-header.module.css";
-import { useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
+import { useAppSelector } from "../../hooks/redux";
 
 function Button({ to, icon: Icon, text, isActive }: { to: string, icon: any, text: string, isActive: boolean }) {
   return (
@@ -50,8 +50,8 @@ Button.propTypes = {
 };
 
 function AppHeader() {
-  const isAuthenticated = useSelector((state: any) => state.authorization.auth);
-  const name = useSelector((state: any) => state.authorization.profile.name);
+  const isAuthenticated = useAppSelector((state) => state.authorization.auth);
+  const name = useAppSelector((state: any) => state.authorization.profile.name);
   const nameField = isAuthenticated ? name : "Личный кабинет";
 
   const location = useLocation();

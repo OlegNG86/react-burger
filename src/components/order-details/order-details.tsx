@@ -1,13 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
 import styles from "./order-details.module.css";
 import iconDone from "../../images/icon-done.png";
-import { useDispatch, useSelector } from "react-redux";
-import { setOrderId, setError } from "../../services/actions/order-details";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
 function OrderDetails() {
-  const dispatch = useDispatch();
-  const { orderId, error } = useSelector((store: any) => store.order);
+  const dispatch = useAppDispatch();
+  const { orderId, error } = useAppSelector((store: any) => store.order);
 
   return (
     <div className={styles.order}>

@@ -15,7 +15,6 @@ import ForgotPasswordPage from "../../pages/forgot-password";
 import ResetPasswordPage from "../../pages/reset-password";
 import ProtectedRoute from "../protected-route/protected-route";
 import ProfilePage from "../../pages/profile";
-import { useDispatch, useSelector } from "react-redux";
 import {
   fetchUserData,
 } from "../../services/actions/authorization";
@@ -23,11 +22,12 @@ import NotFoundPage from "../../pages/not-found";
 import IngredientPage from "../../pages/ingredient";
 import { getIngredients } from "../../services/actions/burger-ingredients";
 import Modal from "../modal/modal";
+import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 
 const App = () => {
   const location = useLocation();
-  const dispatch: any = useDispatch();
-  const isReady: boolean = useSelector((state: any) => state.authorization.isReady);
+  const dispatch = useAppDispatch();
+  const isReady = useAppSelector((state) => state.authorization.isReady);
 
   const navigate = useNavigate();
   const handlerCloseModal = useCallback(() => {

@@ -1,14 +1,13 @@
 import styles from "./group-cards.module.css";
 import IngredientCard from "../ingredient-card/ingredient-card";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import PropTypes from "prop-types";
 import { IIngredient } from "../../utils/types";
+import { useAppSelector } from "../../hooks/redux";
 
 const GroupCards = React.forwardRef(
   ({ data, groupName }: { data: IIngredient[], groupName: string}, ref: any) => {
 
-    const { bun, topping } = useSelector((store: any) => store.burgerConstructor);
+    const { bun, topping } = useAppSelector((store: any) => store.burgerConstructor);
     const constructorIngredients = [bun, ...topping, bun];
     return (
       <div ref={ref}>

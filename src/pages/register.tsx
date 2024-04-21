@@ -8,10 +8,10 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { tryRegistration } from "../services/actions/authorization";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../hooks/redux";
 
 function RegisterPage() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   
   const [valueInput, setValueInput] = React.useState("Oleg");
   const inputRef = React.useRef<HTMLInputElement>(null);
