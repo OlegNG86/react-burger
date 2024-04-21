@@ -11,7 +11,10 @@ const initialState = {
   error: null,
 };
 
-const burgerIngredientsReducer = (state = initialState, action: {type: string, payload: any, ingredients: IIngredientWithUID[]}) => {
+const burgerIngredientsReducer = (
+  state = initialState,
+  action: { type: string; payload: any; ingredients: IIngredientWithUID[] }
+) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST:
       return { ...state, loading: true, error: null };

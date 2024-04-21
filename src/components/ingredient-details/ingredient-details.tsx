@@ -1,7 +1,11 @@
 import styles from "./ingredient-details.module.css";
 import { IIngredient } from "../../utils/types";
 
-function IngredientDetails({ ingredientData }: {ingredientData: IIngredient}) {
+function IngredientDetails({
+  ingredientData,
+}: {
+  ingredientData: IIngredient;
+}) {
   const { image_large, name, calories, carbohydrates, fat, proteins } =
     ingredientData;
 

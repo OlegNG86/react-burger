@@ -4,7 +4,10 @@ const initialModalState = {
   isModalOpen: false,
 };
 
-export const modalReducer = (state = initialModalState, action: {type: string}) => {
+export const modalReducer = (
+  state = initialModalState,
+  action: { type: string }
+) => {
   switch (action.type) {
     case OPEN_MODAL: {
       return {

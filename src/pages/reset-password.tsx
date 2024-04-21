@@ -34,7 +34,6 @@ function ResetPasswordPage() {
     // @ts-ignore
     await dispatch(changePasswordRequest(valuePasswordInput, valueInput));
     navigate("/");
-
   };
   return (
     <div className={styles.wrapper}>
@@ -59,7 +58,10 @@ function ResetPasswordPage() {
             onIconClick={onIconClick}
             errorText={"Ошибка"}
             size={"default"}
-            extraClass="ml-1" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          />
+            extraClass="ml-1"
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          />
 
           <Button
             htmlType="submit"

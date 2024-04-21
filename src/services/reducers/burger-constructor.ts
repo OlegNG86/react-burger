@@ -4,7 +4,7 @@ import {
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
   CHANGE_INDEXES,
-  RESET_CONSTRUCTOR
+  RESET_CONSTRUCTOR,
 } from "../actions/burger-constructor";
 
 const initialState = {
@@ -33,23 +33,23 @@ const burgerConstructorReducer = (state = initialState, action: any) => {
         ),
       };
     case CHANGE_INDEXES: {
-      const newTopping = [ ...state.topping ]
+      const newTopping = [...state.topping];
       const swapItems = {
         from: newTopping[action.from],
         to: newTopping[action.to],
-       }
-       newTopping[action.from] = swapItems.to;
-       newTopping[action.to] = swapItems.from;
+      };
+      newTopping[action.from] = swapItems.to;
+      newTopping[action.to] = swapItems.from;
       return {
         ...state,
-        topping: newTopping
+        topping: newTopping,
       };
     }
     case RESET_CONSTRUCTOR:
       return {
         ...state,
         bun: {},
-        topping: []
+        topping: [],
       };
     default:
       return state;

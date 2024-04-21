@@ -11,6 +11,15 @@ export const getTokens = () => {
 export const clearTokens = () => {
   localStorage.removeItem(LOCAL_STORAGE_KEY);
 };
-export const setTokens = ({ accessToken, refreshToken }: {accessToken: string, refreshToken: string }) => {
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify({ accessToken, refreshToken }));
+export const setTokens = ({
+  accessToken,
+  refreshToken,
+}: {
+  accessToken: string;
+  refreshToken: string;
+}) => {
+  localStorage.setItem(
+    LOCAL_STORAGE_KEY,
+    JSON.stringify({ accessToken, refreshToken })
+  );
 };

@@ -27,7 +27,7 @@ function ProfilePage() {
 
   // Использование useForm для управления состоянием формы
   // const { values, handleChange, setValues } = useForm(userData || {});
-  const {setValues, handleChange, ...all} = useForm(userData || {});
+  const { setValues, handleChange, ...all } = useForm(userData || {});
   const values = all.values as TForm;
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -57,7 +57,9 @@ function ProfilePage() {
               <li>
                 <Link
                   to="/profile"
-                  className={`${styles.link} ${location.pathname === "/profile" && styles.active}`}
+                  className={`${styles.link} ${
+                    location.pathname === "/profile" && styles.active
+                  }`}
                 >
                   <h2>Профиль</h2>
                 </Link>
@@ -65,7 +67,9 @@ function ProfilePage() {
               <li>
                 <Link
                   to="/profile/orders"
-                  className={`${styles.link} ${location.pathname === "/profile/orders" && styles.active}`}
+                  className={`${styles.link} ${
+                    location.pathname === "/profile/orders" && styles.active
+                  }`}
                 >
                   <h2>История заказов</h2>
                 </Link>
@@ -91,7 +95,10 @@ function ProfilePage() {
               onChange={handleChange}
               value={values.name || ""}
               name={"name"}
-              disabled={isLoading} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}            />
+              disabled={isLoading}
+              onPointerEnterCapture={undefined}
+              onPointerLeaveCapture={undefined}
+            />
             <EmailInput
               onChange={handleChange}
               value={values.email || ""}

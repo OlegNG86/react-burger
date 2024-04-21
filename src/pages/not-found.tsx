@@ -9,9 +9,12 @@ function NotFoundPage() {
         404 - Страница не найдена
       </h2>
       <p className={`text text_type_main-medium ${styles.error__description}`}>
-        Извините, такой страницы не существует.  
+        Извините, такой страницы не существует.
       </p>
-      <Link to="/" className={`text text_type_main-default ${styles.error__link}`}>
+      <Link
+        to="/"
+        className={`text text_type_main-default ${styles.error__link}`}
+      >
         На домашнюю страницу
       </Link>
     </div>

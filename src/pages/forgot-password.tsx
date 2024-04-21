@@ -20,12 +20,11 @@ export function ForgotPasswordPage() {
     setValueEmailInput(e.target.value);
   };
 
-
   const handlerSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(resetPasswordRequest(valueEmailInput));
     localStorage.setItem("forgotPasswordVisited", "true");
-    navigate("/reset-password")
+    navigate("/reset-password");
   };
   return (
     <div className={styles.wrapper}>
@@ -39,14 +38,14 @@ export function ForgotPasswordPage() {
             isIcon={false}
           />
 
-            <Button
-              htmlType="submit"
-              type="primary"
-              size="medium"
-              extraClass="ml-2"
-            >
-              Восстановить
-            </Button>
+          <Button
+            htmlType="submit"
+            type="primary"
+            size="medium"
+            extraClass="ml-2"
+          >
+            Восстановить
+          </Button>
 
           <div className={styles.enter}>
             Вспомнили пароль?

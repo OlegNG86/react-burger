@@ -29,7 +29,9 @@ const BurgerIngredients = () => {
 
   const current = useMemo(() => setCurrent(), [setCurrent]);
 
-  const ingredients = useAppSelector((state) => state.ingredients.data) as IIngredient[];
+  const ingredients = useAppSelector(
+    (state) => state.ingredients.data
+  ) as IIngredient[];
   const loading = useAppSelector((state: any) => state.loading);
   const error = useAppSelector((state: any) => state.error);
 

@@ -15,9 +15,7 @@ import ForgotPasswordPage from "../../pages/forgot-password";
 import ResetPasswordPage from "../../pages/reset-password";
 import ProtectedRoute from "../protected-route/protected-route";
 import ProfilePage from "../../pages/profile";
-import {
-  fetchUserData,
-} from "../../services/actions/authorization";
+import { fetchUserData } from "../../services/actions/authorization";
 import NotFoundPage from "../../pages/not-found";
 import IngredientPage from "../../pages/ingredient";
 import { getIngredients } from "../../services/actions/burger-ingredients";
@@ -48,7 +46,9 @@ const App = () => {
     <>
       <AppHeader />
       <main className={style.content}>
-        <Routes location={(location?.state?.backgroundLocation || location) as any}>
+        <Routes
+          location={(location?.state?.backgroundLocation || location) as any}
+        >
           <Route path="/ingredient/:id" element={<IngredientPage />} />
           <Route path="/" element={<HomePage />} />
           <Route

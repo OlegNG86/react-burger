@@ -19,7 +19,10 @@ const initialState = {
   changePasswordSuccess: false,
 };
 
-const authorizationReducer = (state = initialState, action: {type: string, payload: TForm}) => {
+const authorizationReducer = (
+  state = initialState,
+  action: { type: string; payload: TForm }
+) => {
   switch (action.type) {
     case SET_USER_DATA:
       return {

@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from "@reduxjs/toolkit";
 import burgerIngredientsReducer from "./burger-ingredients";
 import burgerConstructorReducer from "./burger-constructor";
 import { modalReducer } from "./modal";
@@ -16,10 +16,9 @@ export const rootReducer = combineReducers({
   user: userReducer,
 });
 
-
 export const store = configureStore({
-  reducer: rootReducer
-})
+  reducer: rootReducer,
+});
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

@@ -5,9 +5,13 @@ import { IIngredient } from "../../utils/types";
 import { useAppSelector } from "../../hooks/redux";
 
 const GroupCards = React.forwardRef(
-  ({ data, groupName }: { data: IIngredient[], groupName: string}, ref: any) => {
-
-    const { bun, topping } = useAppSelector((store: any) => store.burgerConstructor);
+  (
+    { data, groupName }: { data: IIngredient[]; groupName: string },
+    ref: any
+  ) => {
+    const { bun, topping } = useAppSelector(
+      (store: any) => store.burgerConstructor
+    );
     const constructorIngredients = [bun, ...topping, bun];
     return (
       <div ref={ref}>

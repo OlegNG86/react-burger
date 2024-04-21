@@ -10,7 +10,17 @@ import styles from "./app-header.module.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../hooks/redux";
 
-function Button({ to, icon: Icon, text, isActive }: { to: string, icon: any, text: string, isActive: boolean }) {
+function Button({
+  to,
+  icon: Icon,
+  text,
+  isActive,
+}: {
+  to: string;
+  icon: any;
+  text: string;
+  isActive: boolean;
+}) {
   return (
     <NavLink to={to}>
       {isActive ? (
@@ -41,13 +51,6 @@ function Button({ to, icon: Icon, text, isActive }: { to: string, icon: any, tex
     </NavLink>
   );
 }
-
-Button.propTypes = {
-  to: PropTypes.string.isRequired,
-  icon: PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired,
-  isActive: PropTypes.bool.isRequired,
-};
 
 function AppHeader() {
   const isAuthenticated = useAppSelector((state) => state.authorization.auth);

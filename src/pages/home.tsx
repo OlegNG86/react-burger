@@ -8,11 +8,13 @@ import { IIngredient } from "../utils/types";
 
 const HomePage = () => {
   const [orderDetails, setOrderDetails] = useState({ isOpened: false });
-  const [ingredientDetails, setIngredientDetails] = useState<{isOpened: boolean, ingredient: IIngredient | null}>({
+  const [ingredientDetails, setIngredientDetails] = useState<{
+    isOpened: boolean;
+    ingredient: IIngredient | null;
+  }>({
     isOpened: false,
     ingredient: null,
   });
-
 
   const handleItemClick = (ingredient: IIngredient) => {
     setIngredientDetails({ isOpened: true, ingredient: ingredient });

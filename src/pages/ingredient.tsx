@@ -5,7 +5,9 @@ import { useAppSelector } from "../hooks/redux";
 
 const IngredientPage = () => {
   const { id } = useParams();
-  const ingredients = useAppSelector((state) => state.ingredients.data) as IIngredient[];
+  const ingredients = useAppSelector(
+    (state) => state.ingredients.data
+  ) as IIngredient[];
   const ingredient = ingredients.find((item) => item._id === id);
 
   return (

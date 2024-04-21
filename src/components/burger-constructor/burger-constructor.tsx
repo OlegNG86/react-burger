@@ -23,7 +23,9 @@ import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 function BurgerConstructor() {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector((state) => state.authorization.auth);
-  const { bun, topping } = useAppSelector((store: any) => store.burgerConstructor);
+  const { bun, topping } = useAppSelector(
+    (store: any) => store.burgerConstructor
+  );
   const { isModalOpen } = useAppSelector((store) => store.modal);
   const { orderId } = useAppSelector((store) => store.order);
   const [, setOrderPath] = useState(null);
@@ -37,7 +39,10 @@ function BurgerConstructor() {
     }
 
     if (topping && topping.length > 0) {
-      totalPrice += topping.reduce((acc: any, curr: any) => acc + curr.price, 0);
+      totalPrice += topping.reduce(
+        (acc: any, curr: any) => acc + curr.price,
+        0
+      );
     }
 
     return totalPrice;
@@ -59,11 +64,10 @@ function BurgerConstructor() {
     },
   });
 
-
   const handleSubmit = () => {
     if (!isAuthenticated) {
       //@ts-ignore
-      setOrderPath(true)
+      setOrderPath(true);
     } else {
       setIsWaiting(true);
       const ingredientsId = [bun, ...topping, bun].map((item) => item._id);
@@ -109,7 +113,12 @@ function BurgerConstructor() {
             thumbnail={bun.image}
           />
         ) : (
-          <ConstructorElement type="top" text="Нет булки" thumbnail={""} price={0} />
+          <ConstructorElement
+            type="top"
+            text="Нет булки"
+            thumbnail={""}
+            price={0}
+          />
         )}
       </div>
       <div className={styles.scrollableContainer}>
@@ -133,7 +142,12 @@ function BurgerConstructor() {
             thumbnail={bun.image}
           />
         ) : (
-          <ConstructorElement type="bottom" text="Нет булки" thumbnail={""} price={0} />
+          <ConstructorElement
+            type="bottom"
+            text="Нет булки"
+            thumbnail={""}
+            price={0}
+          />
         )}
       </div>
       <div className={styles.orderButton}>
@@ -148,7 +162,7 @@ function BurgerConstructor() {
           onClick={handleSubmit}
           disabled={!bun || !bun.name || isWaiting}
         >
-          {isWaiting? "Загрузка..." : "Оформить заказ"}
+          {isWaiting ? "Загрузка..." : "Оформить заказ"}
         </Button>
         {isModalOpen && orderId && (
           <Modal onClose={handleCloseModal}>

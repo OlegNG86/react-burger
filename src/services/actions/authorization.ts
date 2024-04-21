@@ -28,7 +28,7 @@ export const fetchUserData = () => async (dispatch: any) => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "authorization": accessToken,
+          authorization: accessToken,
         },
       });
       dispatch(setUserData(response.user));
@@ -56,100 +56,118 @@ export const changePasswordFailure = () => ({
   type: CHANGE_PASSWORD_FAILURE,
 });
 
-export const tryAuthorization = (email: string, password: string) => async (dispatch: any) => {
-  try {
-    const response = await request<{accessToken: string, refreshToken: string, user: TForm}>("auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
-    setTokens({accessToken: response.accessToken, refreshToken: response.refreshToken})
-    dispatch(setUserData(response.user));
-  } catch (err) {
-    console.log(err);
-    dispatch(
-      setUserData({
-        email: "",
-        name: "",
-      })
-    );
-  }
-};
+export const tryAuthorization =
+  (email: string, password: string) => async (dispatch: any) => {
+    try {
+      const response = await request<{
+        accessToken: string;
+        refreshToken: string;
+        user: TForm;
+      }>("auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
+      setTokens({
+        accessToken: response.accessToken,
+        refreshToken: response.refreshToken,
+      });
+      dispatch(setUserData(response.user));
+    } catch (err) {
+      console.log(err);
+      dispatch(
+        setUserData({
+          email: "",
+          name: "",
+        })
+      );
+    }
+  };
 
-export const tryRegistration = (email: string, password: string, name: string) => async (dispatch: any) => {
-  try {
-    const response = await request<{accessToken: string, refreshToken: string, user: TForm}>("auth/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        name: name,
-      }),
-    });
-    setTokens({accessToken: response.accessToken, refreshToken: response.refreshToken})
-    dispatch(setUserData(response.user));
-  } catch (err) {
-    console.log(err);
-    dispatch(
-      setUserData({
-        email: "",
-        name: "",
-      })
-    );
-  }
-};
+export const tryRegistration =
+  (email: string, password: string, name: string) => async (dispatch: any) => {
+    try {
+      const response = await request<{
+        accessToken: string;
+        refreshToken: string;
+        user: TForm;
+      }>("auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          name: name,
+        }),
+      });
+      setTokens({
+        accessToken: response.accessToken,
+        refreshToken: response.refreshToken,
+      });
+      dispatch(setUserData(response.user));
+    } catch (err) {
+      console.log(err);
+      dispatch(
+        setUserData({
+          email: "",
+          name: "",
+        })
+      );
+    }
+  };
 
-export const resetPasswordRequest = (email: string) => async (dispatch: any) => {
-  try {
-    const response = await request<TResponseDataAPI>("password-reset", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-      }),
-    });
+export const resetPasswordRequest =
+  (email: string) => async (dispatch: any) => {
+    try {
+      const response = await request<TResponseDataAPI>("password-reset", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+        }),
+      });
 
-    if (response.success) {
-      dispatch(resetPasswordSuccess());
-    } else {
+      if (response.success) {
+        dispatch(resetPasswordSuccess());
+      } else {
+        dispatch(resetPasswordFailure());
+      }
+    } catch (err) {
+      console.log(err);
       dispatch(resetPasswordFailure());
     }
-  } catch (err) {
-    console.log(err);
-    dispatch(resetPasswordFailure());
-  }
-};
+  };
 
-export const changePasswordRequest = (password: string, token: string) => async (dispatch: any) => {
-  try {
-    const response = await request<TResponseDataAPI>("password-reset/reset", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        password: password,
-        token: token,
-      }),
-    });
+export const changePasswordRequest =
+  (password: string, token: string) => async (dispatch: any) => {
+    try {
+      const response = await request<TResponseDataAPI>("password-reset/reset", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password: password,
+          token: token,
+        }),
+      });
 
-    if (response.success) {
-      dispatch(changePasswordSuccess());
-    } else {
+      if (response.success) {
+        dispatch(changePasswordSuccess());
+      } else {
+        dispatch(changePasswordFailure());
+      }
+    } catch (err) {
+      console.log(err);
       dispatch(changePasswordFailure());
     }
-  } catch (err) {
-    console.log(err);
-    dispatch(changePasswordFailure());
-  }
-};
+  };

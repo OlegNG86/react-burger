@@ -9,7 +9,10 @@ const initialState = {
   error: null,
 };
 
-const orderReducer = (state = initialState, action: {type: string, payload: {}}) => {
+const orderReducer = (
+  state = initialState,
+  action: { type: string; payload: {} }
+) => {
   switch (action.type) {
     case SET_ORDER_ID:
       return {

@@ -12,7 +12,13 @@ import {
 } from "../../services/actions/burger-constructor";
 import { useAppDispatch } from "../../hooks/redux";
 
-function SortableIngredient({ cardData, index }: {cardData: IIngredientWithUID, index: number}) {
+function SortableIngredient({
+  cardData,
+  index,
+}: {
+  cardData: IIngredientWithUID;
+  index: number;
+}) {
   const dispatch = useAppDispatch();
   const deleteElement = (uniqueId: string) => {
     dispatch(deleteIngredient(uniqueId));

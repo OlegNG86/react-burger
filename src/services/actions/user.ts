@@ -16,18 +16,18 @@ export const getUserData = () => async (dispatch: any) => {
     dispatch({ type: GET_USER_DATA_REQUEST });
     const accessToken = getTokens().accessToken;
     if (accessToken) {
-    const response = await fetchWithRefresh("auth/user", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "authorization": accessToken,
-      },
-    });
+      const response = await fetchWithRefresh("auth/user", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: accessToken,
+        },
+      });
 
-    dispatch({
-      type: GET_USER_DATA_SUCCESS,
-      payload: response.user,
-    });
+      dispatch({
+        type: GET_USER_DATA_SUCCESS,
+        payload: response.user,
+      });
     }
   } catch (error: any) {
     dispatch({
@@ -41,21 +41,21 @@ export const updateUserData = (userData: TForm) => async (dispatch: any) => {
   try {
     const accessToken = getTokens().accessToken;
     if (accessToken) {
-    dispatch({ type: UPDATE_USER_DATA_REQUEST });
+      dispatch({ type: UPDATE_USER_DATA_REQUEST });
 
-    const response = await fetchWithRefresh("auth/user", {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        "authorization": accessToken,
-      },
-      body: JSON.stringify(userData),
-    });
+      const response = await fetchWithRefresh("auth/user", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: accessToken,
+        },
+        body: JSON.stringify(userData),
+      });
 
-    dispatch({
-      type: UPDATE_USER_DATA_SUCCESS,
-      payload: response.user,
-    });
+      dispatch({
+        type: UPDATE_USER_DATA_SUCCESS,
+        payload: response.user,
+      });
     }
   } catch (error) {
     dispatch({

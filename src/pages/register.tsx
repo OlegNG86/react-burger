@@ -12,7 +12,7 @@ import { useAppDispatch } from "../hooks/redux";
 
 function RegisterPage() {
   const dispatch = useAppDispatch();
-  
+
   const [valueInput, setValueInput] = React.useState("Oleg");
   const inputRef = React.useRef<HTMLInputElement>(null);
   const onIconClick = () => {
@@ -23,8 +23,9 @@ function RegisterPage() {
     }, 0);
     alert("Icon Click Callback");
   };
-  const [valueEmailInput, setValueEmailInput] =
-    React.useState("pykhalov.oleg@gmail.com");
+  const [valueEmailInput, setValueEmailInput] = React.useState(
+    "pykhalov.oleg@gmail.com"
+  );
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValueEmailInput(e.target.value);
   };
@@ -55,7 +56,10 @@ function RegisterPage() {
             onIconClick={onIconClick}
             errorText={"Ошибка"}
             size={"default"}
-            extraClass="ml-1" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}          />
+            extraClass="ml-1"
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
+          />
           <EmailInput
             onChange={onChange}
             value={valueEmailInput}
@@ -69,14 +73,14 @@ function RegisterPage() {
             extraClass="mb-2"
           />
 
-            <Button
-              htmlType="submit"
-              type="primary"
-              size="medium"
-              extraClass="ml-2"
-            >
-              Зарегистрироваться
-            </Button>
+          <Button
+            htmlType="submit"
+            type="primary"
+            size="medium"
+            extraClass="ml-2"
+          >
+            Зарегистрироваться
+          </Button>
 
           <div className={styles.enter}>
             Уже зарегистрированы?

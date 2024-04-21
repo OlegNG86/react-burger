@@ -3,19 +3,20 @@ import { setTokens, getTokens } from "./persistant-token";
 // 1 раз объявляем базовый урл
 export const BASE_URL: string = "https://norma.nomoreparties.space/api/";
 
-export type TResponseDataAPI<T extends Record<string, any>={}> = {
-  success: boolean,
-} & T
+export type TResponseDataAPI<T extends Record<string, any> = {}> = {
+  success: boolean;
+} & T;
 
 // создаем функцию проверки ответа на `ok`
-const checkResponse = <T extends TResponseDataAPI>(res: Response): Promise<T> => {
+const checkResponse = <T extends TResponseDataAPI>(
+  res: Response
+): Promise<T> => {
   if (res.ok) {
     return res.json();
   }
   // не забываем выкидывать ошибку, чтобы она попала в `catch`
   return Promise.reject(`Ошибка ${res.status}`);
 };
-
 
 // создаем функцию проверки на `success`
 const checkSuccess = <T extends TResponseDataAPI>(res: T): Promise<T> => {
@@ -28,29 +29,43 @@ const checkSuccess = <T extends TResponseDataAPI>(res: T): Promise<T> => {
 
 // создаем универсальную фукнцию запроса с проверкой ответа и `success`
 // В вызов приходит `endpoint`(часть урла, которая идет после базового) и опции
-export const request = <T>(endpoint: string, options?: RequestInit): Promise<T> => {
+export const request = <T>(
+  endpoint: string,
+  options?: RequestInit
+): Promise<T> => {
   // а также в ней базовый урл сразу прописывается, чтобы не дублировать в каждом запросе
   return fetch(`${BASE_URL}${endpoint}`, options)
-  .then((response) => response.json())
-  .then(checkSuccess)
+    .then((response) => response.json())
+    .then(checkSuccess);
 };
 
-export const refreshToken = async (): Promise<any> =>  {
+export const refreshToken = async (): Promise<any> => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/token`, {
-      method: "POST",
-      body: JSON.stringify({
-        token: getTokens()?.refreshToken,
-      }),
-      headers: {
-        "Content-Type": "application / json; charset = utf-8",
-      },
-    });
-    const refreshData = await checkResponse<{success: boolean, error: string, accessToken: string, refreshToken: string}>(response);
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/auth/token`,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          token: getTokens()?.refreshToken,
+        }),
+        headers: {
+          "Content-Type": "application / json; charset = utf-8",
+        },
+      }
+    );
+    const refreshData = await checkResponse<{
+      success: boolean;
+      error: string;
+      accessToken: string;
+      refreshToken: string;
+    }>(response);
     if (!refreshData.success) {
       throw new Error(refreshData.error);
     }
-    setTokens({ accessToken: refreshData?.accessToken, refreshToken: refreshData?.refreshToken });
+    setTokens({
+      accessToken: refreshData?.accessToken,
+      refreshToken: refreshData?.refreshToken,
+    });
     return refreshData;
   } catch (error) {
     console.log(error);
@@ -58,7 +73,10 @@ export const refreshToken = async (): Promise<any> =>  {
   }
 };
 
-export const fetchWithRefresh = async (endpoint: string, options: any): Promise<any> => {
+export const fetchWithRefresh = async (
+  endpoint: string,
+  options: any
+): Promise<any> => {
   try {
     const fullUrl = `${BASE_URL}${endpoint}`;
     const response = await fetch(fullUrl, options);
