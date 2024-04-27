@@ -3,13 +3,13 @@ import { setTokens, getTokens } from "../../utils/persistant-token";
 import { fetchWithRefresh } from "../../utils/connector";
 import { TForm } from "../../utils/types";
 
-export const SET_USER_DATA = "SET_USER_DATA";
-export const FETCH_USER_DATA = "FETCH_USER_DATA";
-export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
-export const RESET_PASSWORD_FAILURE = "RESET_PASSWORD_FAILURE";
-export const CHANGE_PASSWORD_SUCCESS = "CHANGE_PASSWORD_SUCCESS";
-export const CHANGE_PASSWORD_FAILURE = "CHANGE_PASSWORD_FAILURE";
-export const SET_READY_STATE = "SET_READY_STATE";
+export const SET_USER_DATA: "SET_USER_DATA" = "SET_USER_DATA";
+export const FETCH_USER_DATA: "FETCH_USER_DATA" = "FETCH_USER_DATA";
+export const RESET_PASSWORD_SUCCESS: "RESET_PASSWORD_SUCCESS" = "RESET_PASSWORD_SUCCESS";
+export const RESET_PASSWORD_FAILURE: "RESET_PASSWORD_FAILURE" = "RESET_PASSWORD_FAILURE";
+export const CHANGE_PASSWORD_SUCCESS: "CHANGE_PASSWORD_SUCCESS" = "CHANGE_PASSWORD_SUCCESS";
+export const CHANGE_PASSWORD_FAILURE: "CHANGE_PASSWORD_FAILURE" = "CHANGE_PASSWORD_FAILURE";
+export const SET_READY_STATE: "SET_READY_STATE" = "SET_READY_STATE";
 
 export const setUserData = (userData: any) => ({
   type: SET_USER_DATA,

@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
 import { IIngredient } from "../../utils/types";
 
-export const ADD_BUN = "ADD_BUN";
-export const ADD_INGREDIENT = "ADD_INGREDIENT";
-export const DELETE_INGREDIENT = "DELETE_INGREDIENT";
-export const CHANGE_INDEXES = "CHANGE_INDEXES";
-export const RESET_CONSTRUCTOR = "RESET_CONSTRUCTOR";
+export const ADD_BUN: "ADD_BUN" = "ADD_BUN";
+export const ADD_INGREDIENT: "ADD_INGREDIENT" = "ADD_INGREDIENT";
+export const DELETE_INGREDIENT: "DELETE_INGREDIENT" = "DELETE_INGREDIENT";
+export const CHANGE_INDEXES: "CHANGE_INDEXES" = "CHANGE_INDEXES";
+export const RESET_CONSTRUCTOR: "RESET_CONSTRUCTOR" = "RESET_CONSTRUCTOR";
 
 export const changeIndexes = (from: number, to: number) => {
   return {

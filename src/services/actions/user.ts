@@ -3,13 +3,13 @@ import { getTokens } from "../../utils/persistant-token";
 import { convertErrorResponseToString } from "../../utils/common";
 import { TForm } from "../../utils/types";
 
-export const GET_USER_DATA_REQUEST = "GET_USER_DATA_REQUEST";
-export const GET_USER_DATA_SUCCESS = "GET_USER_DATA_SUCCESS";
-export const GET_USER_DATA_FAILURE = "GET_USER_DATA_FAILURE";
+export const GET_USER_DATA_REQUEST: "GET_USER_DATA_REQUEST" = "GET_USER_DATA_REQUEST";
+export const GET_USER_DATA_SUCCESS: "GET_USER_DATA_SUCCESS" = "GET_USER_DATA_SUCCESS";
+export const GET_USER_DATA_FAILURE: "GET_USER_DATA_FAILURE" = "GET_USER_DATA_FAILURE";
 
-export const UPDATE_USER_DATA_REQUEST = "UPDATE_USER_DATA_REQUEST";
-export const UPDATE_USER_DATA_SUCCESS = "UPDATE_USER_DATA_SUCCESS";
-export const UPDATE_USER_DATA_FAILURE = "UPDATE_USER_DATA_FAILURE";
+export const UPDATE_USER_DATA_REQUEST: "UPDATE_USER_DATA_REQUEST" = "UPDATE_USER_DATA_REQUEST";
+export const UPDATE_USER_DATA_SUCCESS: "UPDATE_USER_DATA_SUCCESS" = "UPDATE_USER_DATA_SUCCESS";
+export const UPDATE_USER_DATA_FAILURE: "UPDATE_USER_DATA_FAILURE" = "UPDATE_USER_DATA_FAILURE";
 
 export const getUserData = () => async (dispatch: any) => {
   try {
