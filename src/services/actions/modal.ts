@@ -9,6 +9,10 @@ export interface ICloseModalAction {
   (): { type: typeof CLOSE_MODAL };
 }
 
+export type TModalActions =
+  | IOpenModalAction
+  | ICloseModalAction;
+
 export const openModal: IOpenModalAction = () => {
   return {
     type: OPEN_MODAL,
