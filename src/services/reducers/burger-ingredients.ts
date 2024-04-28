@@ -5,7 +5,13 @@ import {
   GET_INGREDIENTS_FAILED,
 } from "../actions/burger-ingredients";
 
-const initialState = {
+type TBurgerIngredientsState = {
+  data: IIngredientWithUID[];
+  loading: boolean;
+  error: any;
+}
+
+const initialState: TBurgerIngredientsState = {
   data: [],
   loading: false,
   error: null,

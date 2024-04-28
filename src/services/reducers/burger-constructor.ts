@@ -1,4 +1,4 @@
-import { IIngredient, IIngredientWithUID } from "../../utils/types";
+import { IIngredientWithUID } from "../../utils/types";
 import {
   ADD_BUN,
   ADD_INGREDIENT,
@@ -7,7 +7,13 @@ import {
   RESET_CONSTRUCTOR,
 } from "../actions/burger-constructor";
 
-const initialState = {
+type TBurgerConstructorState = {
+  bun: IIngredientWithUID | {};
+  topping: IIngredientWithUID[];
+  totalPrice: number;
+}
+
+const initialState: TBurgerConstructorState = {
   bun: {},
   topping: [],
   totalPrice: 0,

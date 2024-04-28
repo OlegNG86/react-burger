@@ -8,7 +8,18 @@ import {
   SET_READY_STATE,
 } from "../actions/authorization";
 
-const initialState = {
+type TAuthorizationState = {
+  auth: boolean;
+  isReady: boolean;
+  profile: {
+    email: string;
+    name: string;
+  };
+  resetPasswordSuccess: boolean;
+  changePasswordSuccess: boolean;
+}
+
+const initialState: TAuthorizationState = {
   auth: false,
   isReady: false,
   profile: {

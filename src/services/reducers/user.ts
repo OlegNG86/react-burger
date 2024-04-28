@@ -7,7 +7,13 @@ import {
   UPDATE_USER_DATA_FAILURE,
 } from "../actions/user";
 
-const initialState = {
+type TUserState = {
+  userData: any;
+  isLoading: boolean;
+  error: any;
+}
+
+const initialState: TUserState = {
   userData: null,
   isLoading: false,
   error: null,

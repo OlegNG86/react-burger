@@ -4,7 +4,12 @@ import {
   RESET_ORDER_ID,
 } from "../actions/order-details";
 
-const initialState = {
+type TOrderDetailsState = {
+  orderId: any;
+  error: any;
+}
+
+const initialState: TOrderDetailsState = {
   orderId: null,
   error: null,
 };
