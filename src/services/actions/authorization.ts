@@ -2,13 +2,18 @@ import { TResponseDataAPI, request } from "../../utils/connector";
 import { setTokens, getTokens } from "../../utils/persistant-token";
 import { fetchWithRefresh } from "../../utils/connector";
 import { TForm } from "../../utils/types";
+import { AppDispatch } from "../reducers";
 
 export const SET_USER_DATA: "SET_USER_DATA" = "SET_USER_DATA";
 export const FETCH_USER_DATA: "FETCH_USER_DATA" = "FETCH_USER_DATA";
-export const RESET_PASSWORD_SUCCESS: "RESET_PASSWORD_SUCCESS" = "RESET_PASSWORD_SUCCESS";
-export const RESET_PASSWORD_FAILURE: "RESET_PASSWORD_FAILURE" = "RESET_PASSWORD_FAILURE";
-export const CHANGE_PASSWORD_SUCCESS: "CHANGE_PASSWORD_SUCCESS" = "CHANGE_PASSWORD_SUCCESS";
-export const CHANGE_PASSWORD_FAILURE: "CHANGE_PASSWORD_FAILURE" = "CHANGE_PASSWORD_FAILURE";
+export const RESET_PASSWORD_SUCCESS: "RESET_PASSWORD_SUCCESS" =
+  "RESET_PASSWORD_SUCCESS";
+export const RESET_PASSWORD_FAILURE: "RESET_PASSWORD_FAILURE" =
+  "RESET_PASSWORD_FAILURE";
+export const CHANGE_PASSWORD_SUCCESS: "CHANGE_PASSWORD_SUCCESS" =
+  "CHANGE_PASSWORD_SUCCESS";
+export const CHANGE_PASSWORD_FAILURE: "CHANGE_PASSWORD_FAILURE" =
+  "CHANGE_PASSWORD_FAILURE";
 export const SET_READY_STATE: "SET_READY_STATE" = "SET_READY_STATE";
 
 export interface ISetUserDataAction {
@@ -39,19 +44,21 @@ export interface IChangePasswordFailureAction {
 }
 
 export interface ITryAuthorizationAction {
-  (email: string, password: string): (dispatch: any) => Promise<void>;
+  (email: string, password: string): (dispatch: AppDispatch) => Promise<void>;
 }
 
 export interface ITryRegistration {
-  (email: string, password: string, name: string): (dispatch: any) => Promise<void>;
+  (email: string, password: string, name: string): (
+    dispatch: AppDispatch
+  ) => Promise<void>;
 }
 
 export interface IResetPasswordRequest {
-  (email: string): (dispatch: any) => Promise<void>;
+  (email: string): (dispatch: AppDispatch) => Promise<void>;
 }
 
 export interface IChangePasswordRequest {
-  (password: string, token: string): (dispatch: any) => Promise<void>;
+  (password: string, token: string): (dispatch: AppDispatch) => Promise<void>;
 }
 
 export type TAuthorizationActions =

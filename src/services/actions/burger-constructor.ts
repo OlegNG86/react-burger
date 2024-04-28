@@ -8,7 +8,11 @@ export const CHANGE_INDEXES: "CHANGE_INDEXES" = "CHANGE_INDEXES";
 export const RESET_CONSTRUCTOR: "RESET_CONSTRUCTOR" = "RESET_CONSTRUCTOR";
 
 export interface IChangeIndexesAction {
-  (from: number, to: number): { type: typeof CHANGE_INDEXES; from: number; to: number; };
+  (from: number, to: number): {
+    type: typeof CHANGE_INDEXES;
+    from: number;
+    to: number;
+  };
 }
 
 export interface IAddBunAction {
@@ -24,7 +28,7 @@ export interface IResetConstructorAction {
 }
 
 export interface IDeleteIngredientAction {
-  (uniqueId: string): { type: typeof DELETE_INGREDIENT; uniqueId: string; };
+  (uniqueId: string): { type: typeof DELETE_INGREDIENT; uniqueId: string };
 }
 
 export type TBurgerConstructorActions =
