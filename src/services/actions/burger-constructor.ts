@@ -7,7 +7,34 @@ export const DELETE_INGREDIENT: "DELETE_INGREDIENT" = "DELETE_INGREDIENT";
 export const CHANGE_INDEXES: "CHANGE_INDEXES" = "CHANGE_INDEXES";
 export const RESET_CONSTRUCTOR: "RESET_CONSTRUCTOR" = "RESET_CONSTRUCTOR";
 
-export const changeIndexes = (from: number, to: number) => {
+export interface IChangeIndexesAction {
+  (from: number, to: number): { type: typeof CHANGE_INDEXES; from: number; to: number; };
+}
+
+export interface IAddBunAction {
+  (bun: IIngredient): { type: typeof ADD_BUN; bun: IIngredient };
+}
+
+export interface IAddIngredientAction {
+  (item: IIngredient): { type: typeof ADD_INGREDIENT; payload: any };
+}
+
+export interface IResetConstructorAction {
+  (): { type: typeof RESET_CONSTRUCTOR };
+}
+
+export interface IDeleteIngredientAction {
+  (uniqueId: string): { type: typeof DELETE_INGREDIENT; uniqueId: string; };
+}
+
+export type TBurgerConstructorActions =
+  | IChangeIndexesAction
+  | IAddBunAction
+  | IAddIngredientAction
+  | IResetConstructorAction
+  | IDeleteIngredientAction;
+
+export const changeIndexes: IChangeIndexesAction = (from, to) => {
   return {
     type: CHANGE_INDEXES,
     from,
@@ -15,12 +42,12 @@ export const changeIndexes = (from: number, to: number) => {
   };
 };
 
-export const addBun = (bun: IIngredient) => ({
+export const addBun: IAddBunAction = (bun) => ({
   type: ADD_BUN,
   bun,
 });
 
-export const addIngredient = (item: IIngredient) => {
+export const addIngredient: IAddIngredientAction = (item) => {
   return {
     type: ADD_INGREDIENT,
     payload: {
@@ -30,11 +57,11 @@ export const addIngredient = (item: IIngredient) => {
   };
 };
 
-export const resetConstructor = () => ({
+export const resetConstructor: IResetConstructorAction = () => ({
   type: RESET_CONSTRUCTOR,
 });
 
-export const deleteIngredient = (uniqueId: string) => ({
+export const deleteIngredient: IDeleteIngredientAction = (uniqueId) => ({
   type: DELETE_INGREDIENT,
   uniqueId,
 });
