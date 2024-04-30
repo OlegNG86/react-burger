@@ -15,7 +15,7 @@ import ForgotPasswordPage from "../../pages/forgot-password";
 import ResetPasswordPage from "../../pages/reset-password";
 import ProtectedRoute from "../protected-route/protected-route";
 import ProfilePage from "../../pages/profile";
-import { fetchUserData } from "../../services/actions/authorization";
+import { fetchUserData } from "../../utils/common";
 import NotFoundPage from "../../pages/not-found";
 import IngredientPage from "../../pages/ingredient";
 import { getIngredients } from "../../services/actions/burger-ingredients";

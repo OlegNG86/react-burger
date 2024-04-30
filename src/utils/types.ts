@@ -38,3 +38,8 @@ export type TForm = {
   email?: string;
   token?: string | null;
 };
+
+export type TProfileAuthorizationState = {
+  email: string;
+  name: string;
+}

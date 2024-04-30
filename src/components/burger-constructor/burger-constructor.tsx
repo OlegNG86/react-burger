@@ -19,6 +19,7 @@ import OrderDetails from "../order-details/order-details";
 import SortableIngredient from "../sortable-ingredient/sortable-ingredient";
 import { resetConstructor } from "../../services/actions/burger-constructor";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { useNavigate } from "react-router-dom";
 
 function BurgerConstructor() {
   const dispatch = useAppDispatch();
@@ -30,6 +31,8 @@ function BurgerConstructor() {
   const { orderId } = useAppSelector((store) => store.order);
   const [, setOrderPath] = useState(null);
   const [isWaiting, setIsWaiting] = useState(false);
+
+  const navigate = useNavigate()
 
   const calcTotalPrice = useMemo(() => {
     let totalPrice = 0;
@@ -67,7 +70,7 @@ function BurgerConstructor() {
   const handleSubmit = () => {
     if (!isAuthenticated) {
       //@ts-ignore
-      setOrderPath(true);
+      navigate("/login");
     } else {
       setIsWaiting(true);
       const ingredientsId = [bun, ...topping, bun].map((item) => item._id);
