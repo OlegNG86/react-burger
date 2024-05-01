@@ -20,5 +20,6 @@ export const store = configureStore({
   reducer: rootReducer,
 });
 
-export type RootState = ReturnType<typeof store.getState>;
+// export type RootState = ReturnType<typeof store.getState>; изначальная типизация стора
+export type RootState = ReturnType<typeof rootReducer>; //вариант от наставника
 export type AppDispatch = typeof store.dispatch;

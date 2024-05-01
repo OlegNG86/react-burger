@@ -38,7 +38,7 @@ const App = () => {
   React.useEffect(() => {
     dispatch(getIngredients());
     dispatch(fetchUserData());
-  }, []);
+  }, [dispatch]);
   if (!isReady) {
     return <div>Идёт загрузка...</div>;
   }

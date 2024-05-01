@@ -10,8 +10,8 @@ export interface ICloseModalAction {
 }
 
 export type TModalActions =
-  | IOpenModalAction
-  | ICloseModalAction;
+  | ReturnType<IOpenModalAction>
+  | ReturnType<ICloseModalAction>;
 
 export const openModal: IOpenModalAction = () => {
   return {

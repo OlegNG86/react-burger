@@ -13,7 +13,24 @@ export interface IGetIngredientsAction {
   (): (dispatch: AppDispatch) => Promise<void>;
 }
 
-export type TBurgerIngredientsActions = IGetIngredientsAction;
+export interface IGetIngredientsRequestAction {
+  readonly type: typeof GET_INGREDIENTS_REQUEST;
+}
+
+export interface IGetIngredientsSuccessAction {
+  readonly type: typeof GET_INGREDIENTS_SUCCESS;
+  ingredients: IIngredient[]
+}
+
+export interface IGetIngredientsFailedAction {
+  readonly type: typeof GET_INGREDIENTS_FAILED;
+  payload: any
+}
+
+export type TBurgerIngredientsActions =
+  | IGetIngredientsRequestAction
+  | IGetIngredientsSuccessAction
+  | IGetIngredientsFailedAction;
 
 export const getIngredients: IGetIngredientsAction = () => async (dispatch) => {
   dispatch({

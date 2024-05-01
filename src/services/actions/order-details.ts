@@ -24,10 +24,9 @@ export interface IGetOrderIdAction {
 }
 
 export type TOrderDetailsActions =
-  | ISetOrderIdAction
-  | ISetErrorAction
-  | IResetOrderIdAction
-  | IGetOrderIdAction;
+  | ReturnType<ISetOrderIdAction>
+  | ReturnType<ISetErrorAction>
+  | ReturnType<IResetOrderIdAction>;
 
 export const setOrderId: ISetOrderIdAction = (orderId) => ({
   type: SET_ORDER_ID,

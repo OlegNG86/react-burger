@@ -1,7 +1,7 @@
 import { fetchWithRefresh } from "../../utils/connector";
 import { getTokens } from "../../utils/persistant-token";
 import { convertErrorResponseToString } from "../../utils/common";
-import { TForm } from "../../utils/types";
+import { TForm, TProfileAuthorizationState } from "../../utils/types";
 import { AppDispatch } from "../reducers";
 
 export const GET_USER_DATA_REQUEST: "GET_USER_DATA_REQUEST" = "GET_USER_DATA_REQUEST";
@@ -20,9 +20,41 @@ export interface IUpdateUserDataAction {
   (userData: TForm): (dispatch: AppDispatch) => Promise<void>;
 }
 
+export interface IGetUserDataRequestAction {
+  readonly type: typeof GET_USER_DATA_REQUEST;  
+}
+
+export interface IGetUserDataSuccessAction {
+  readonly type: typeof GET_USER_DATA_SUCCESS;  
+  payload: TProfileAuthorizationState;
+}
+
+export interface IGetUserDataFailureAction {
+  readonly type: typeof GET_USER_DATA_FAILURE;  
+  payload: string;
+}
+
+export interface IUpdateUserDataRequestAction {
+  readonly type: typeof UPDATE_USER_DATA_REQUEST;  
+}
+
+export interface IUpdateUserDataSuccessAction {
+  readonly type: typeof UPDATE_USER_DATA_SUCCESS;  
+  payload: TProfileAuthorizationState;
+}
+
+export interface IUpdateUserDataFailureAction {
+  readonly type: typeof UPDATE_USER_DATA_FAILURE;  
+  payload: string;
+}
+
 export type TUserActions =
-  | IGetUserDataAction
-  | IUpdateUserDataAction;
+  | IGetUserDataRequestAction
+  | IGetUserDataSuccessAction
+  | IGetUserDataFailureAction
+  | IUpdateUserDataRequestAction
+  | IUpdateUserDataSuccessAction
+  | IUpdateUserDataFailureAction;
 
 export const getUserData: IGetUserDataAction = () => async (dispatch) => {
   try {
@@ -42,10 +74,10 @@ export const getUserData: IGetUserDataAction = () => async (dispatch) => {
         payload: response.user,
       });
     }
-  } catch (error: any) {
+  } catch (error) {
     dispatch({
       type: GET_USER_DATA_FAILURE,
-      payload: error?.message,
+      payload: convertErrorResponseToString(error),
     });
   }
 };

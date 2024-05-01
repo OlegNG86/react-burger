@@ -1,6 +1,6 @@
 import { TResponseDataAPI, request } from "../../utils/connector";
 import { setTokens } from "../../utils/persistant-token";
-import { TForm, TProfileAuthorizationState } from "../../utils/types";
+import { TProfileAuthorizationState } from "../../utils/types";
 import { AppDispatch } from "../reducers";
 
 export const SET_USER_DATA: "SET_USER_DATA" = "SET_USER_DATA";

@@ -2,6 +2,7 @@ import {
   SET_ORDER_ID,
   SET_ERROR,
   RESET_ORDER_ID,
+  TOrderDetailsActions,
 } from "../actions/order-details";
 
 type TOrderDetailsState = {
@@ -16,8 +17,8 @@ const initialState: TOrderDetailsState = {
 
 const orderReducer = (
   state = initialState,
-  action: { type: string; payload: {} }
-) => {
+  action: TOrderDetailsActions
+): TOrderDetailsState => {
   switch (action.type) {
     case SET_ORDER_ID:
       return {

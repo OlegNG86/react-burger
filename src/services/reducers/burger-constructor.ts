@@ -5,6 +5,7 @@ import {
   DELETE_INGREDIENT,
   CHANGE_INDEXES,
   RESET_CONSTRUCTOR,
+  TBurgerConstructorActions
 } from "../actions/burger-constructor";
 
 type TBurgerConstructorState = {
@@ -19,7 +20,7 @@ const initialState: TBurgerConstructorState = {
   totalPrice: 0,
 };
 
-const burgerConstructorReducer = (state = initialState, action: any) => {
+const burgerConstructorReducer = (state = initialState, action: TBurgerConstructorActions): TBurgerConstructorState => {
   switch (action.type) {
     case ADD_BUN:
       return {

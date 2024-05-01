@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 import {
   ConstructorElement,
@@ -29,7 +28,6 @@ function BurgerConstructor() {
   );
   const { isModalOpen } = useAppSelector((store) => store.modal);
   const { orderId } = useAppSelector((store) => store.order);
-  const [, setOrderPath] = useState(null);
   const [isWaiting, setIsWaiting] = useState(false);
 
   const navigate = useNavigate()
