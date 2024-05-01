@@ -10,16 +10,21 @@ import { rootReducer } from "./services/reducers";
 import { BrowserRouter } from "react-router-dom";
 
 const composeEnhancers =
-  typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
-    : compose;
+  window instanceof Object &&
+  typeof window === "object" &&
+  "__REDUX_SOME" in window &&
+  typeof window.__REDUX_SOME === "function"
+    ? window.__REDUX_SOME({})
+    : compose();
 
 // Создаем расширитель хранилища с использованием middleware
 const enhancer = composeEnhancers(applyMiddleware(thunk));
 
 const store = createStore(rootReducer, enhancer);
 
-const root = ReactDOM.createRoot(document.querySelector("#root"));
+const container = document.getElementById("root");
+if (!container) throw new Error("React container-element not found");
+const root = ReactDOM.createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
