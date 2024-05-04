@@ -14,6 +14,8 @@ import { TBurgerIngredientsActions } from "../actions/burger-ingredients";
 import { TModalActions } from "../actions/modal";
 import { TOrderDetailsActions } from "../actions/order-details";
 import { TUserActions } from "../actions/user";
+import { socketMiddleware } from "../middleware/socket-middleware";
+import { feedWsActions } from "../actions/feed";
 
 export const rootReducer = combineReducers({
   ingredients: burgerIngredientsReducer,
@@ -26,6 +28,7 @@ export const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(socketMiddleware(feedWsActions)),
 });
 
 // export type RootState = ReturnType<typeof store.getState>; изначальная типизация стора
@@ -33,7 +36,7 @@ export type RootState = ReturnType<typeof rootReducer>; //вариант от н
 
 
 // Типизация всех экшенов приложения
-type TApplicationActions =
+export type TApplicationActions =
   | TAuthorizationActions
   | TBurgerConstructorActions
   | TBurgerIngredientsActions
