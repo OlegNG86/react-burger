@@ -21,6 +21,8 @@ import IngredientPage from "../../pages/ingredient";
 import { getIngredients } from "../../services/actions/burger-ingredients";
 import Modal from "../modal/modal";
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
+import FeedPage from "../../pages/feed";
+import OrdersPage from "../../pages/orders";
 
 const App = () => {
   const location = useLocation();
@@ -50,6 +52,7 @@ const App = () => {
           location={(location?.state?.backgroundLocation || location) as any}
         >
           <Route path="/ingredient/:id" element={<IngredientPage />} />
+          <Route path="/feed" element={<FeedPage />} />
           <Route path="/" element={<HomePage />} />
           <Route
             path="/login"
@@ -88,16 +91,21 @@ const App = () => {
             }
           />
           <Route
-            path="/profile/*"
+            path="/profile"
             element={
               <ProtectedRoute>
                 <ProfilePage />
               </ProtectedRoute>
             }
-          >
-            <Route path="orders" element={<NotFoundPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Route>
+          />
+          <Route
+            path="/profile/orders"
+            element={
+              <ProtectedRoute>
+                <OrdersPage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
 

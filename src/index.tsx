@@ -8,19 +8,7 @@ import { thunk } from "redux-thunk";
 import { Provider } from "react-redux";
 import { rootReducer } from "./services/reducers";
 import { BrowserRouter } from "react-router-dom";
-
-const composeEnhancers =
-  window instanceof Object &&
-  typeof window === "object" &&
-  "__REDUX_SOME" in window &&
-  typeof window.__REDUX_SOME === "function"
-    ? window.__REDUX_SOME({})
-    : compose();
-
-// Создаем расширитель хранилища с использованием middleware
-const enhancer = composeEnhancers(applyMiddleware(thunk));
-
-const store = createStore(rootReducer, enhancer);
+import { store } from "./services/reducers";
 
 const container = document.getElementById("root");
 if (!container) throw new Error("React container-element not found");

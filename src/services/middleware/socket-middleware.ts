@@ -26,6 +26,7 @@ export const socketMiddleware = (wsActions: WsActionTypes): Middleware<{}, unkno
     let socket: WebSocket | null = null;
 
     return (next) => (action) => {
+        console.log(action)
         next(action);
         if (!checkActionObject(action)) return;
 

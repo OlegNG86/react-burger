@@ -2,6 +2,7 @@ import { setTokens, getTokens } from "./persistant-token";
 
 // 1 раз объявляем базовый урл
 export const BASE_URL: string = "https://norma.nomoreparties.space/api/";
+export const WSS_URL: string = "wss://norma.nomoreparties.space/orders";
 
 export type TResponseDataAPI<T extends Record<string, any> = {}> = {
   success: boolean;
