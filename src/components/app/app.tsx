@@ -23,6 +23,7 @@ import Modal from "../modal/modal";
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import FeedPage from "../../pages/feed";
 import OrdersPage from "../../pages/orders";
+import ProfileWrapperTemplate from "../../pages/profile-wrapper-template";
 
 const App = () => {
   const location = useLocation();
@@ -48,9 +49,7 @@ const App = () => {
     <>
       <AppHeader />
       <main className={style.content}>
-        <Routes
-          location={(location?.state?.backgroundLocation || location) as any}
-        >
+        <Routes location={location?.state?.backgroundLocation || location}>
           <Route path="/ingredient/:id" element={<IngredientPage />} />
           <Route path="/feed" element={<FeedPage />} />
           <Route path="/" element={<HomePage />} />
@@ -91,21 +90,16 @@ const App = () => {
             }
           />
           <Route
-            path="/profile"
+            path="/profile/*"
             element={
               <ProtectedRoute>
-                <ProfilePage />
+                <ProfileWrapperTemplate />
               </ProtectedRoute>
             }
-          />
-          <Route
-            path="/profile/orders"
-            element={
-              <ProtectedRoute>
-                <OrdersPage />
-              </ProtectedRoute>
-            }
-          />
+          >
+            <Route index element={<ProfilePage />} />
+            <Route path="orders" element={<OrdersPage />} />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
 

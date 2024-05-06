@@ -6,8 +6,8 @@ import { modalReducer } from "./modal";
 import orderReducer from "./order-details";
 import authorizationReducer from "./authorization";
 import userReducer from "./user";
-import { ThunkAction, thunk } from 'redux-thunk';
-import { Action, ActionCreator } from 'redux';
+import { ThunkAction, thunk } from "redux-thunk";
+import { Action, ActionCreator } from "redux";
 import { TAuthorizationActions } from "../actions/authorization";
 import { TBurgerConstructorActions } from "../actions/burger-constructor";
 import { TBurgerIngredientsActions } from "../actions/burger-ingredients";
@@ -17,8 +17,9 @@ import { TUserActions } from "../actions/user";
 import { socketMiddleware } from "../middleware/socket-middleware";
 import { TFeedActions, feedWsActions } from "../actions/feed";
 import { feedReducer } from "./feed";
-import thunkMiddleware from 'redux-thunk'
+import thunkMiddleware from "redux-thunk";
 import { ordersReducer } from "./orders";
+import { ordersWsActions } from "../actions/orders";
 
 export const rootReducer = combineReducers({
   ingredients: burgerIngredientsReducer,
@@ -33,7 +34,11 @@ export const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(socketMiddleware(feedWsActions)),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(
+      socketMiddleware(feedWsActions),
+      socketMiddleware(ordersWsActions)
+    ),
   devTools: true,
 });
 
@@ -41,7 +46,6 @@ export const store = configureStore({
 
 // export type RootState = ReturnType<typeof store.getState>; // изначальная типизация стора
 export type RootState = ReturnType<typeof rootReducer>; // вариант от наставника
-
 
 // Типизация всех экшенов приложения
 export type TApplicationActions =
@@ -51,17 +55,27 @@ export type TApplicationActions =
   | TModalActions
   | TOrderDetailsActions
   | TUserActions
-  | TFeedActions
-  ;
+  | TFeedActions;
 
-  // Типизация thunk'ов в нашем приложении
+// Типизация thunk'ов в нашем приложении
 export type AppThunk<TReturn = void> = ActionCreator<
-ThunkAction<TReturn, Action, RootState, TApplicationActions>
->; 
+  ThunkAction<TReturn, Action, RootState, TApplicationActions>
+>;
 
 // Типизация метода dispatch для проверки на валидность отправляемого экшена
 export type AppDispatch = typeof store.dispatch;
 
-function applyMiddleware(thunk: any): Partial<{ ingredients: never; burgerConstructor: never; modal: never; order: never; authorization: never; user: never; }> | undefined {
+function applyMiddleware(
+  thunk: any
+):
+  | Partial<{
+      ingredients: never;
+      burgerConstructor: never;
+      modal: never;
+      order: never;
+      authorization: never;
+      user: never;
+    }>
+  | undefined {
   throw new Error("Function not implemented.");
 }
