@@ -14,13 +14,12 @@ import { Link, useLocation } from "react-router-dom";
 import { clearTokens } from "../utils/persistant-token";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
-
 function ProfileWrapperTemplate() {
-    const location = useLocation();
-    const handleLogout = () => {
-        clearTokens();
-        window.location.href = "/login"; // простой способ перенаправления
-      };
+  const location = useLocation();
+  const handleLogout = () => {
+    clearTokens();
+    window.location.href = "/login"; // простой способ перенаправления
+  };
   return (
     <>
       <div className={styles.wrapper}>
@@ -53,13 +52,25 @@ function ProfileWrapperTemplate() {
                     <h2>Выход</h2>
                   </button>
                 </li>
-
+                {location.pathname === "/profile" ? (
+                  <li className={styles.link}>
+                    <h5 className={styles.textWrapper}>
+                      В этом разделе вы можете изменить свои персональные данные
+                    </h5>
+                  </li>
+                ) : (
+                  <li className={styles.link}>
+                    <h5 className={styles.textWrapper}>
+                      В этом разделе вы можете просмотреть свою историю заказов
+                    </h5>
+                  </li>
+                )}
               </ul>
             </nav>
           </section>
+          <Outlet />
         </menu>
       </div>
-      <Outlet />
     </>
   );
 }

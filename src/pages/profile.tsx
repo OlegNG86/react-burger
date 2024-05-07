@@ -43,9 +43,7 @@ function ProfilePage() {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <li className={styles.link}>
-        <h5>В этом разделе вы можете изменить свои персональные данные</h5>
-      </li>
+      
       <section className={styles.profile_fields}>
         <Input
           type={"text"}
@@ -86,7 +84,7 @@ function ProfilePage() {
             </Button>
           </div>
         )}
-        {error && <div className={styles.error}>{error}</div>}
+        {error && <div className={styles.error}>{error}</div>} 
       </section>
     </form>
   );

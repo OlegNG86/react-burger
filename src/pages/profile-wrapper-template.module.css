@@ -1,3 +1,4 @@
+
 .menu {
   margin-block-start: 60px;
   display: grid;
@@ -38,11 +39,7 @@
   gap: 24px;
 }
 
-.link:last-child {
-  margin-block-end: 80px;
-  cursor: pointer;
-}
-
 .active {
   color: white;
 }
+

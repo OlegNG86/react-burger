@@ -53,3 +53,11 @@ export type TOrder = {
   updatedAt: string;
   number: number;
 };
+
+export type TOrderCard = {
+  number: string;
+  foodName: string;
+  icons: { src: string; alt: string; width: string }[];
+  date: string;
+  total: number;
+};

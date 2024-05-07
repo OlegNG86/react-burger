@@ -1,4 +1,4 @@
-import { combineReducers, createStore } from "redux";
+import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import burgerIngredientsReducer from "./burger-ingredients";
 import burgerConstructorReducer from "./burger-constructor";
@@ -6,7 +6,7 @@ import { modalReducer } from "./modal";
 import orderReducer from "./order-details";
 import authorizationReducer from "./authorization";
 import userReducer from "./user";
-import { ThunkAction, thunk } from "redux-thunk";
+import { ThunkAction } from "redux-thunk";
 import { Action, ActionCreator } from "redux";
 import { TAuthorizationActions } from "../actions/authorization";
 import { TBurgerConstructorActions } from "../actions/burger-constructor";
@@ -17,7 +17,6 @@ import { TUserActions } from "../actions/user";
 import { socketMiddleware } from "../middleware/socket-middleware";
 import { TFeedActions, feedWsActions } from "../actions/feed";
 import { feedReducer } from "./feed";
-import thunkMiddleware from "redux-thunk";
 import { ordersReducer } from "./orders";
 import { ordersWsActions } from "../actions/orders";
 
