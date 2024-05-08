@@ -1,4 +1,4 @@
-import { setTokens, getTokens } from "./persistant-token";
+import { setTokens, getTokens, clearTokens } from "./persistant-token";
 
 // 1 раз объявляем базовый урл
 export const BASE_URL: string = "https://norma.nomoreparties.space/api/";
@@ -66,7 +66,11 @@ export const refreshToken = async (): Promise<any> => {
       accessToken: string;
       refreshToken: string;
     }>(response);
+    console.log("REFRESH_DATA", refreshData);
     if (!refreshData.success) {
+      if (refreshData.error === "jwt expired") {
+        clearTokens();
+      }
       throw new Error(refreshData.error);
     }
     setTokens({
