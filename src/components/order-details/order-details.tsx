@@ -1,10 +1,9 @@
 import styles from "./order-details.module.css";
 import iconDone from "../../images/icon-done.png";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { useAppSelector } from "../../hooks/redux";
 
 function OrderDetails() {
-  const dispatch = useAppDispatch();
-  const { orderId, error } = useAppSelector((store: any) => store.order);
+  const { orderId } = useAppSelector((store) => store.order);
 
   return (
     <div className={styles.order}>

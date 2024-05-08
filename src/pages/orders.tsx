@@ -24,7 +24,7 @@ const OrdersPage: React.FC = () => {
     return () => {
       dispatch({ type: ORDERS_CONNECTION_CLOSE });
     };
-  }, [dispatch]);
+  }, [dispatch, myOrdersURL]);
 
   const ingredients = useAppSelector((state) => state.ingredients.data);
   const orders = useAppSelector((state) => state.orders.orders);

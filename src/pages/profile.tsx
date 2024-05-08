@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect } from "react";
+import { FormEvent, useEffect } from "react";
 import { getUserData, updateUserData } from "../services/actions/user";
 import { useForm } from "../hooks/useForm";
 import { TForm } from "../utils/types";
@@ -8,9 +8,7 @@ import {
   PasswordInput,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, useLocation } from "react-router-dom";
 import styles from "./profile.module.css";
-import { clearTokens } from "../utils/persistant-token";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
 function ProfilePage() {
@@ -52,8 +50,8 @@ function ProfilePage() {
           value={values.name || ""}
           name={"name"}
           disabled={isLoading}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
+          onPointerEnterCapture
+          onPointerLeaveCapture
         />
         <EmailInput
           onChange={handleChange}

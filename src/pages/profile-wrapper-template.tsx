@@ -1,18 +1,7 @@
 import { Outlet } from "react-router";
 import styles from "./profile-wrapper-template.module.css";
-import React, { FormEvent, useEffect } from "react";
-import { getUserData, updateUserData } from "../services/actions/user";
-import { useForm } from "../hooks/useForm";
-import { TForm } from "../utils/types";
-import {
-  Button,
-  EmailInput,
-  PasswordInput,
-  Input,
-} from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useLocation } from "react-router-dom";
 import { clearTokens } from "../utils/persistant-token";
-import { useAppDispatch, useAppSelector } from "../hooks/redux";
 
 function ProfileWrapperTemplate() {
   const location = useLocation();

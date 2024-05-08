@@ -22,7 +22,7 @@ const FeedPage = () => {
     return () => {
       dispatch({ type: FEED_CONNECTION_CLOSE });
     };
-  }, [dispatch]);
+  }, [dispatch, allOrdersURL]);
 
   const feed = useAppSelector((state) => state.feed);
   const ingredients = useAppSelector((state) => state.ingredients.data);

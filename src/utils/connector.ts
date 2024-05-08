@@ -103,7 +103,7 @@ export const fetchWithRefresh = async (
       } else {
         return Promise.reject(err);
       }
-    } catch (refreshErr: any) {
+    } catch (refreshErr) {
       return Promise.reject(refreshErr);
     }
   }
