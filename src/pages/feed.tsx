@@ -6,12 +6,8 @@ import {
 } from "../services/actions/feed";
 import { WSS_URL } from "../utils/connector";
 import styles from "./feed.module.css";
-import { IIngredient } from "../utils/types";
-import {
-  ConstructorElement,
-  CurrencyIcon,
-  Button,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { IIngredient, TOrder } from "../utils/types";
+import OrderCard from "./order-card";
 
 const FeedPage = () => {
   const dispatch = useAppDispatch();
@@ -29,209 +25,95 @@ const FeedPage = () => {
   }, [dispatch]);
 
   const feed = useAppSelector((state) => state.feed);
+  const ingredients = useAppSelector((state) => state.ingredients.data);
 
-  // const feedIngredients = feed.orders.map((feed) => {
-  // const ingredient = ingredients.find((ing) => ing._id === feed._id);
-  // if (ingredient) {
-  //     return ingredient.name;
-  // } else {
-  //     return "Unknown ingredient";
-  // }
-  // });
+  const getIngredientData = (_id: string): IIngredient | undefined => {
+    return ingredients.find((ingredient) => ingredient._id === _id);
+  };
 
-  // const firstOrder = feed.orders[0].ingredients;
+  const updatedOrders = feed.orders.map((order: TOrder) => {
+    const ingredientsData: IIngredient[] = order.ingredients
+      .map((ingredientId) => getIngredientData(ingredientId))
+      .filter(Boolean) as IIngredient[];
+
+    const total = ingredientsData.reduce(
+      (acc, ingredient) => acc + ingredient.price,
+      0
+    );
+
+    return {
+      number: order.number.toString(),
+      foodName: order.name,
+      icons: ingredientsData.map((ingredient) => ({
+        src: ingredient.image_large,
+        alt: ingredient.name,
+        width: "112",
+        height: "56",
+      })),
+      date: new Date(order.createdAt).toLocaleString(),
+      total: total,
+      status: order.status,
+    };
+  });
+
+  const doneOrders = updatedOrders.filter((order) => order.status === "done");
+  const inProgressOrders = updatedOrders.filter(
+    (order) => order.status !== "done"
+  );
 
   return (
     <main className={styles.container}>
-      <h1 className={`${styles.titleContainer} text text_type_main-large mt-10 mb-5`}>
+      <h1
+        className={`${styles.titleContainer} text text_type_main-large mt-10 mb-5`}
+      >
         Лента заказов
       </h1>
       <section className={styles.sectionContainerTable}>
         <ul className={styles.orderLists}>
-          <li className={styles.listsItem}>
-            <div className={styles.coverItem}>
-              <p className={styles.numberOrder}>#034535</p>
-              <p className={styles.foodName}>Death Star Starship Main бургер</p>
-              <p className={styles.iconsFood}>
-                <div className={styles.coverIconsItem}>
-                <img
-                  className={styles.iconsItem}
-                  src="https://code.s3.yandex.net/react/code/bun-02-large.png"
-                  width="112 56"
-                ></img>
-                </div>
-                <div className={styles.coverIconsItem}>
-                <img
-                  className={styles.iconsItem}
-                  src="https://code.s3.yandex.net/react/code/bun-02-large.png"
-                  width="112 56"
-                ></img>
-                </div>
-                <div className={styles.coverIconsItem}>
-                <img
-                  className={styles.iconsItem}
-                  src="https://code.s3.yandex.net/react/code/bun-02-large.png"
-                  width="112 56"
-                ></img>
-                </div>
-              </p>
-              <p className={styles.dateOrder}>Сегодня, 16:20</p>
-              <p className={styles.totalItem}>
-                480
-                <div className={styles.icon}>
-                  {" "}
-                  <CurrencyIcon type="primary" />
-                </div>
-              </p>
-            </div>
-          </li>
-          <li className={styles.listsItem}>
-            <div className={styles.coverItem}>
-              <p className={styles.numberOrder}>#034535</p>
-              <p className={styles.foodName}>
-                BLack Hole Singularity острый бургер
-              </p>
-              <p className={styles.iconsFood}>
-                <div className={styles.coverIconsItem}>
-                <img
-                  className={styles.iconsItem}
-                  src="https://code.s3.yandex.net/react/code/bun-02-large.png"
-                  width="112 56"
-                ></img>
-                </div>
-                <div className={styles.coverIconsItem}>
-                <img
-                  className={styles.iconsItem}
-                  src="https://code.s3.yandex.net/react/code/bun-02-large.png"
-                  width="112 56"
-                ></img>
-                </div>
-                <div className={styles.coverIconsItem}>
-                <img
-                  className={styles.iconsItem}
-                  src="https://code.s3.yandex.net/react/code/bun-02-large.png"
-                  width="112 56"
-                ></img>
-                </div>
-              </p>
-              <p className={styles.dateOrder}>Сегодня, 16:20</p>
-              <p className={styles.totalItem}>
-                480
-                <div className={styles.icon}>
-                  {" "}
-                  <CurrencyIcon type="primary" />
-                </div>
-              </p>
-            </div>
-          </li>
-          <li className={styles.listsItem}>
-            <div className={styles.coverItem}>
-              <p className={styles.numberOrder}>#034534</p>
-              <p className={styles.foodName}>Interstellar бургер</p>
-              <p className={styles.iconsFood}>
-                <div className={styles.coverIconsItem}>
-                <img
-                  className={styles.iconsItem}
-                  src="https://code.s3.yandex.net/react/code/bun-02-large.png"
-                  width="112 56"
-                ></img>
-                </div>
-                <div className={styles.coverIconsItem}>
-                <img
-                  className={styles.iconsItem}
-                  src="https://code.s3.yandex.net/react/code/bun-02-large.png"
-                  width="112 56"
-                ></img>
-                </div>
-                <div className={styles.coverIconsItem}>
-                <img
-                  className={styles.iconsItem}
-                  src="https://code.s3.yandex.net/react/code/bun-02-large.png"
-                  width="112 56"
-                ></img>
-                </div>
-              </p>
-              <p className={styles.dateOrder}>Сегодня, 13:20</p>
-              <p className={styles.totalItem}>
-                560
-                <div className={styles.icon}>
-                  {" "}
-                  <CurrencyIcon type="primary" />
-                </div>
-              </p>
-            </div>
-            <li className={styles.listsItem}>
-            <div className={styles.coverItem}>
-              <p className={styles.numberOrder}>#034535</p>
-              <p className={styles.foodName}>Death Star Starship Main бургер</p>
-              <p className={styles.iconsFood}>
-                <div className={styles.coverIconsItem}>
-                <img
-                  className={styles.iconsItem}
-                  src="https://code.s3.yandex.net/react/code/bun-02-large.png"
-                  width="112 56"
-                ></img>
-                </div>
-                <div className={styles.coverIconsItem}>
-                <img
-                  className={styles.iconsItem}
-                  src="https://code.s3.yandex.net/react/code/bun-02-large.png"
-                  width="112 56"
-                ></img>
-                </div>
-                <div className={styles.coverIconsItem}>
-                <img
-                  className={styles.iconsItem}
-                  src="https://code.s3.yandex.net/react/code/bun-02-large.png"
-                  width="112 56"
-                ></img>
-                </div>
-              </p>
-              <p className={styles.dateOrder}>Сегодня, 16:20</p>
-              <p className={styles.totalItem}>
-                480
-                <div className={styles.icon}>
-                  {" "}
-                  <CurrencyIcon type="primary" />
-                </div>
-              </p>
-            </div>
-          </li>
-          </li>
+          {updatedOrders.map((order, index) => (
+            <OrderCard
+              key={index}
+              number={order.number}
+              foodName={order.foodName}
+              icons={order.icons}
+              date={order.date}
+              total={order.total}
+            />
+          ))}
         </ul>
         <ul className={styles.totalLists}>
+        <li className={styles.totalListItems}>
+          <ul className={styles.totalList}>
+            <li className={styles.numbersOrderList}>
+              <h3 className={styles.titleTotalList}>Готовы:</h3>
+              {doneOrders.map((order, index) => (
+                <p className={styles.numbersOrderItem} key={index}>
+                  {order.number}
+                </p>
+              ))}
+            </li>
+            <li className={styles.numbersOrderList}>
+              <h3 className={styles.titleTotalList}>В работе</h3>
+              {inProgressOrders.map((order, index) => (
+                <p className={styles.numbersOrderItem} key={index}>
+                  {order.number}
+                </p>
+              ))}
+            </li>
+          </ul>
+        </li>
           <li className={styles.totalListItems}>
-            <ul className={styles.totalList}>
-              <li className={styles.numbersOrderList}>
-                <h3 className={styles.titleTotalList}>Готовы:</h3>
-                <p className={styles.numbersOrderItem}>034533</p>
-                <p className={styles.numbersOrderItem}>034533</p>
-                <p className={styles.numbersOrderItem}>034533</p>
-              </li>
-              <li className={styles.numbersOrderList}>
-                <h3 className={styles.titleTotalList}>В работе</h3>
-                <p className={styles.numbersOrderItem}>034533</p>
-                <p className={styles.numbersOrderItem}>034533</p>
-                <p className={styles.numbersOrderItem}>034533</p>
-              </li>
-            </ul>
+            <h3 className={styles.titleTotalfood}>
+              Выполнено за всё время:
+              <span className={styles.totalFoodSum}>{feed.total}</span>
+            </h3>
           </li>
-        <li className={styles.totalListItems}>
-          <h3 className={styles.titleTotalfood}>
-            Выполнено за всё время:
-            <span className={styles.totalFoodSum}>{feed.total}</span> 
-          </h3>
-        </li>
-        <li className={styles.totalListItems}>
-          <h3 className={styles.titleTotalfood}>
-            Выполнено за сегодня:
-            <span className={styles.totalFoodSum}> {feed.totalToday}</span>
-          </h3>
-        </li>
-        <div className={styles.main}>
-          <div className={styles.columnOrders}></div>
-          <div className={styles.columnInfo}></div>
-        </div>
+          <li className={styles.totalListItems}>
+            <h3 className={styles.titleTotalfood}>
+              Выполнено за сегодня:
+              <span className={styles.totalFoodSum}>{feed.totalToday}</span>
+            </h3>
+          </li>
         </ul>
       </section>
     </main>
