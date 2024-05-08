@@ -34,9 +34,7 @@ export interface IOrdersConnectionClosedAction {
 
 export interface IOrdersConnectionErrorAction {
     readonly type: typeof ORDERS_CONNECTION_ERROR;
-    payload: {
-        error: any;
-    };
+    payload: string | null;
 }
 
 export interface IOrdersGetMessageAction {

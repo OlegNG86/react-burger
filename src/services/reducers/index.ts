@@ -64,17 +64,4 @@ export type AppThunk<TReturn = void> = ActionCreator<
 // Типизация метода dispatch для проверки на валидность отправляемого экшена
 export type AppDispatch = typeof store.dispatch;
 
-function applyMiddleware(
-  thunk: any
-):
-  | Partial<{
-      ingredients: never;
-      burgerConstructor: never;
-      modal: never;
-      order: never;
-      authorization: never;
-      user: never;
-    }>
-  | undefined {
-  throw new Error("Function not implemented.");
-}
+

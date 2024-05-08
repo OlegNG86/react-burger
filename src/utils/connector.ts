@@ -8,6 +8,12 @@ export type TResponseDataAPI<T extends Record<string, any> = {}> = {
   success: boolean;
 } & T;
 
+export interface IOptionsSendApiRequest {
+  method: string,
+  headers: Record<string, any>,
+  body?: string
+}
+
 // создаем функцию проверки ответа на `ok`
 const checkResponse = <T extends TResponseDataAPI>(
   res: Response
@@ -76,15 +82,15 @@ export const refreshToken = async (): Promise<any> => {
 
 export const fetchWithRefresh = async (
   endpoint: string,
-  options: any
+  options: IOptionsSendApiRequest
 ): Promise<any> => {
   try {
     const fullUrl = `${BASE_URL}${endpoint}`;
     const response = await fetch(fullUrl, options);
     return await checkResponse(response);
-  } catch (err: any) {
+  } catch (err: unknown) {
     try {
-      if (err.message === "jwt expired") {
+      if (err instanceof Error && err.message === "jwt expired") {
         const refreshData = await refreshToken(); //обновляем токен
         options.headers.authorization = refreshData.accessToken;
         const fullUrl = `${BASE_URL}${endpoint}`; // Define fullUrl again

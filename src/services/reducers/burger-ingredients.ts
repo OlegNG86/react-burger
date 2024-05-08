@@ -9,7 +9,7 @@ import {
 type TBurgerIngredientsState = {
   data: IIngredient[];
   loading: boolean;
-  error: any;
+  error: string | null;
 }
 
 const initialState: TBurgerIngredientsState = {

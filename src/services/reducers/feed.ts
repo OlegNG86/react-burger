@@ -12,7 +12,7 @@ type TFeedState = {
     total: number,
     totalToday: number,
     isOpen: boolean,
-    error: any,
+    error: string | null,
   }
 
 const initialState: TFeedState = {

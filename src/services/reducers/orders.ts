@@ -12,7 +12,7 @@ type TOrdersState = {
     total: number,
     totalToday: number,
     isOpen: boolean,
-    error: any,
+    error: string | null,
   }
 
 const initialState: TOrdersState = {

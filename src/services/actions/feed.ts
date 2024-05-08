@@ -34,9 +34,7 @@ export interface IFeedConnectionClosedAction {
 
 export interface IFeedConnectionErrorAction {
     readonly type: typeof FEED_CONNECTION_ERROR;
-    payload: {
-        error: any;
-    };
+    payload: string;
 }
 
 export interface IFeedGetMessageAction {

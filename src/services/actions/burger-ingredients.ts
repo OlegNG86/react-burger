@@ -1,6 +1,7 @@
 import { TResponseDataAPI, request } from "../../utils/connector";
 import { IIngredient } from "../../utils/types";
 import { AppDispatch } from "../reducers";
+import { convertErrorResponseToString } from "../../utils/common";
 
 export const GET_INGREDIENTS_REQUEST: "GET_INGREDIENTS_REQUEST" =
   "GET_INGREDIENTS_REQUEST";
@@ -24,7 +25,7 @@ export interface IGetIngredientsSuccessAction {
 
 export interface IGetIngredientsFailedAction {
   readonly type: typeof GET_INGREDIENTS_FAILED;
-  payload: any
+  payload: string;
 }
 
 export type TBurgerIngredientsActions =
@@ -44,10 +45,10 @@ export const getIngredients: IGetIngredientsAction = () => async (dispatch) => {
         ingredients: response?.data,
       });
     })
-    .catch((err: any) => {
+    .catch((err) => {
       dispatch({
         type: GET_INGREDIENTS_FAILED,
-        payload: err,
+        payload: convertErrorResponseToString(err),
       });
     });
 };

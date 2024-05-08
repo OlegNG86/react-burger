@@ -1,4 +1,5 @@
 import { Middleware, UnknownAction } from "redux";
+import { convertErrorResponseToString } from "../../utils/common";
 
 type WsActionTypes = {
   wsInit: string;
@@ -57,8 +58,8 @@ export const socketMiddleware = (
           dispatch({ type: onOpen, payload: event });
         };
 
-        socket.onerror = (event: Event) => {
-          dispatch({ type: onError, payload: event });
+        socket.onerror = (event) => {
+          dispatch({ type: onError, payload: convertErrorResponseToString(event) });
         };
 
         socket.onmessage = (event: MessageEvent) => {

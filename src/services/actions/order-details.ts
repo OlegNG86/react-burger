@@ -2,6 +2,7 @@ import { TResponseDataAPI, request } from "../../utils/connector";
 import { getTokens } from "../../utils/persistant-token";
 import { IIngredient } from "../../utils/types";
 import { AppDispatch } from "../reducers";
+import { convertErrorResponseToString } from "../../utils/common";
 
 export const SET_ORDER_ID: "SET_ORDER_ID" = "SET_ORDER_ID";
 export const SET_ERROR: "SET_ERROR" = "SET_ERROR";
@@ -60,9 +61,9 @@ export const getOrderId: IGetOrderIdAction =
 
       dispatch(setOrderId(response.order.number));
       dispatch(setError(null));
-    } catch (err: any) {
+    } catch (err) {
       dispatch(
-        setError(err?.message || err?.toString() || "Неизвестная ошибка !!")
+        setError(convertErrorResponseToString(err))
       );
     }
   };

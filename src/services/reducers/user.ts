@@ -12,7 +12,7 @@ import {
 type TUserState = {
   userData: TProfileAuthorizationState | null;
   isLoading: boolean;
-  error: any;
+  error: string | null;
 }
 
 const initialState: TUserState = {

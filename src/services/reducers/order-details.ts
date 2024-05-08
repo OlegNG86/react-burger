@@ -6,8 +6,8 @@ import {
 } from "../actions/order-details";
 
 type TOrderDetailsState = {
-  orderId: any;
-  error: any;
+  orderId: number | null;
+  error: string | null;
 }
 
 const initialState: TOrderDetailsState = {

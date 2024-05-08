@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { IIngredient } from "../../utils/types";
+import { IIngredient, IIngredientWithUID } from "../../utils/types";
 
 export const ADD_BUN: "ADD_BUN" = "ADD_BUN";
 export const ADD_INGREDIENT: "ADD_INGREDIENT" = "ADD_INGREDIENT";
@@ -16,7 +16,7 @@ export interface IAddBunAction {
 }
 
 export interface IAddIngredientAction {
-  (item: IIngredient): { type: typeof ADD_INGREDIENT; payload: any };
+  (item: IIngredient): { type: typeof ADD_INGREDIENT; payload: IIngredientWithUID };
 }
 
 export interface IResetConstructorAction {
