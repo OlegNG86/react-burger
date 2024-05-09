@@ -1,17 +1,9 @@
 .sectionContainerHistory {
     min-height: 100%;
     gap: 60px;
-    width: 680x;
+    width: 680px;
     height: 852px;
-  
-  }
-  .orderLists {
-    overflow: scroll;
-    min-width: 100%;
-    height: 100%;
-    margin: 0 auto;
-    padding: 0px;
-    margin-block-start: 24px;
+
   }
   
   ul {
@@ -24,12 +16,17 @@
     list-style: none;
     margin: 0 auto;
   }
+  .listsItem {
+    width: 600px;
+  }
   .coverItem {
     background-color: rgba(28, 28, 33, 1);
     border-radius: 40px;
-    width: 584px;
+    width: 590px;
+    width: 100%;
     height: 219px;
-    margin: 16px;
+    margin: 0 auto;
+    margin-block-start: 16px;
     padding: 24px;
     display: flex;
     flex-direction: column;
@@ -37,18 +34,32 @@
   }
   
   .titleContainer {
-    padding-left: 35px;
+    margin: 0px;
+  }
+  .numberOrder {
+    font-family: "Iceland";
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 24px;
+    margin: 0;
+
   }
   .foodName {
+    font-family: "JetBrains";
     font-weight: 700;
     font-size: 24px;
     line-height: 30px;
+    height: 60px;
+    width: 536px;
   }
+
   .iconsFood {
     margin: 0;
+    margin-block-start: 24px;
     display: flex;
     flex-direction: row;
     padding-left: 24px;
+    width: 304px;
   }
   
   .iconsItem {
@@ -66,17 +77,36 @@
     display: flex;
     align-self: start;
   }
-  .dateOrder {
-    align-self: end;
+  .dateOrderList {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: "JetBrains";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    height: 100%;
+    margin-inline-start: -48px;
+
+  }
+  .dateOrder { 
+    margin: 0;
+    margin-inline-end: -24px;
     color: grey;
     font-size: 16px;
+    width: 116px;
   }
+
   .totalItem {
     display: flex;
     flex-wrap: nowrap;
     gap: 10px;
-    margin-block-start: 100px;
-    align-self: end;
+    font-family: "Iceland";
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 24px;
+    gap: 8px;
   }
   .textWrapper {
     margin-inline-start: -320px;

@@ -38,14 +38,21 @@ const OrdersPage: React.FC = () => {
       .map((ingredientId) => getIngredientData(ingredientId))
       .filter(Boolean) as IIngredient[];
 
-    const total = ingredientsData.reduce((acc, ingredient) => acc + ingredient.price, 0);
+    const total = ingredientsData.reduce(
+      (acc, ingredient) => acc + ingredient.price,
+      0
+    );
 
     return {
       number: `${order.number}`, // исправлено на _id
       foodName: order.name, // исправлено на name
-      icons: ingredientsData.map((ingredient) => ({ src: ingredient.image_large, alt: ingredient.name, width: '112 56' })),
+      icons: ingredientsData.map((ingredient) => ({
+        src: ingredient.image_large,
+        alt: ingredient.name,
+        width: "112 56",
+      })),
       date: new Date(order.createdAt).toLocaleString(),
-      total: total
+      total: total,
     };
   });
 
@@ -54,7 +61,14 @@ const OrdersPage: React.FC = () => {
       <section className={styles.sectionContainerHistory}>
         <ul className={styles.orderLists}>
           {updatedOrders.map((order, index) => (
-            <OrderCard key={index} number={order.number} foodName={order.foodName} icons={order.icons} date={order.date} total={order.total} />
+            <OrderCard
+              key={index}
+              number={order.number}
+              foodName={order.foodName}
+              icons={order.icons}
+              date={order.date}
+              total={order.total}
+            />
           ))}
         </ul>
       </section>

@@ -20,6 +20,7 @@ const OrderCard: React.FC<TOrderCard> = ({ number, foodName, icons, date, total 
           </div>
         ))}
       </p>
+      <div className={styles.dateOrderList}>
       <p className={styles.dateOrder}>{date}</p>
       <p className={styles.totalItem}>
         {total}
@@ -28,6 +29,7 @@ const OrderCard: React.FC<TOrderCard> = ({ number, foodName, icons, date, total 
           <CurrencyIcon type="primary" />
         </div>
       </p>
+      </div>
     </div>
   </li>
 );

@@ -1,8 +1,9 @@
 .orderLists {
   overflow: scroll;
-  width: 680x;
+  width: 608px;
+  width: 110%;
   height: 852px;
-  margin: 0 auto;
+  margin: 0;
   padding: 0px;
 }
 
@@ -16,13 +17,14 @@ ul {
   list-style: none;
   margin: 0 auto;
 }
+
 .coverItem {
+ box-sizing: border-box;
   background-color: rgba(28, 28, 33, 1);
   border-radius: 40px;
   width: 584px;
-  height: 219px;
+  height: 214px;
   margin: 16px;
-  padding: 24px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -58,10 +60,13 @@ ul {
   display: flex;
   align-self: start;
 }
+
 .dateOrder {
+    margin-inline-start: -160px;
   align-self: end;
   color: grey;
   font-size: 16px;
+  font-family: "JetBrains";
 }
 .totalItem {
   display: flex;
@@ -71,8 +76,12 @@ ul {
   align-self: end;
 }
 .totalLists {
+    margin: 0 auto;
+    height: 626px;
+    width: 580px;
     margin-inline-start: 60px;
 }
+
 .totalList {
   display: flex;
   gap: 0px 56px;
@@ -81,16 +90,29 @@ ul {
 .titleTotalList {
   padding-block-end: 24px;
 }
+.numbersOrderList{
+    width: 150px;
+    white-space: wrap;
+    overflow: hidden;
+}
 .numbersOrderItem {
-  margin-block-start: 8px;
+ margin: 0 auto;
+ padding-block-start: 8px;
+ color: rgba(0, 204, 204, 1);
+ font-family: "Iceland";
+ font-size: 28px;
 }
 .totalListItems {
-  margin-block-start: 60px;
   display: flex;
+  height: 206px;
+  width: 150px;
 }
 .titleTotalfood {
   display: flex;
   flex-direction: column;
+  white-space: nowrap;
+  font-family: "JetBrains";
+  font-size: 24px;
 }
 .totalFoodSum {
   font-size: 144px;

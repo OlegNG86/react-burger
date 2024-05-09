@@ -24,6 +24,7 @@ import { useAppSelector, useAppDispatch } from "../../hooks/redux";
 import FeedPage from "../../pages/feed";
 import OrdersPage from "../../pages/orders";
 import ProfileWrapperTemplate from "../../pages/profile-wrapper-template";
+import OrderPage from "../../pages/order";
 
 const App = () => {
   const location = useLocation();
@@ -52,6 +53,7 @@ const App = () => {
         <Routes location={location?.state?.backgroundLocation || location}>
           <Route path="/ingredient/:id" element={<IngredientPage />} />
           <Route path="/feed" element={<FeedPage />} />
+          <Route path="/feedid" element={<OrderPage />} />
           <Route path="/" element={<HomePage />} />
           <Route
             path="/login"
@@ -110,6 +112,14 @@ const App = () => {
               element={
                 <Modal onClose={handlerCloseModal} title="Ингредиент">
                   <IngredientPage />
+                </Modal>
+              }
+            />
+            <Route
+              path="/feed/:number"
+              element={
+                <Modal onClose={handlerCloseModal} title="Заказ">
+                  <OrderPage />
                 </Modal>
               }
             />

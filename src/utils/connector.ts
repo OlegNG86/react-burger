@@ -1,7 +1,7 @@
 import { setTokens, getTokens, clearTokens } from "./persistant-token";
 
 // 1 раз объявляем базовый урл
-export const BASE_URL: string = "https://norma.nomoreparties.space/api/";
+export const BASE_URL: string = "https://norma.nomoreparties.space/api";
 export const WSS_URL: string = "wss://norma.nomoreparties.space/orders";
 
 export type TResponseDataAPI<T extends Record<string, any> = {}> = {
@@ -41,7 +41,7 @@ export const request = <T>(
   options?: RequestInit
 ): Promise<T> => {
   // а также в ней базовый урл сразу прописывается, чтобы не дублировать в каждом запросе
-  return fetch(`${BASE_URL}${endpoint}`, options)
+  return fetch(`${BASE_URL}/${endpoint}`, options)
     .then((response) => response.json())
     .then(checkSuccess);
 };
@@ -89,7 +89,7 @@ export const fetchWithRefresh = async (
   options: IOptionsSendApiRequest
 ): Promise<any> => {
   try {
-    const fullUrl = `${BASE_URL}${endpoint}`;
+    const fullUrl = `${BASE_URL}/${endpoint}`;
     const response = await fetch(fullUrl, options);
     return await checkResponse(response);
   } catch (err: unknown) {
@@ -97,8 +97,33 @@ export const fetchWithRefresh = async (
       if (err instanceof Error && err.message === "jwt expired") {
         const refreshData = await refreshToken(); //обновляем токен
         options.headers.authorization = refreshData.accessToken;
-        const fullUrl = `${BASE_URL}${endpoint}`; // Define fullUrl again
+        const fullUrl = `${BASE_URL}/${endpoint}`; // Define fullUrl again
         const response = await fetch(fullUrl, options); //повторяем запрос
+        return await checkResponse(response);
+      } else {
+        return Promise.reject(err);
+      }
+    } catch (refreshErr) {
+      return Promise.reject(refreshErr);
+    }
+  }
+};
+
+export const getOrder = async (orderId: number): Promise<any> => {
+  try {
+    const response = await fetch(`${BASE_URL}/orders/${orderId}`);
+    return await checkResponse(response);
+  } catch (err: unknown) {
+    try {
+      if (err instanceof Error && err.message === "jwt expired") {
+        const refreshData = await refreshToken(); //обновляем токен
+        const options: IOptionsSendApiRequest = {
+          method: "GET",
+          headers: {
+            Authorization: refreshData.accessToken,
+          },
+        };
+        const response = await fetch(`${BASE_URL}/orders/${orderId}`, options);
         return await checkResponse(response);
       } else {
         return Promise.reject(err);
