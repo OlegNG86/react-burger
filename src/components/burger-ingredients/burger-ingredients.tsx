@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients.module.css";
 import GroupCards from "../group-cards/group-cards";
 import { IIngredient } from "../../utils/types";
-import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../hooks/redux";
 
 function filterData(data: IIngredient[], type: string) {
@@ -32,8 +31,8 @@ const BurgerIngredients = () => {
   const ingredients = useAppSelector(
     (state) => state.ingredients.data
   ) as IIngredient[];
-  const loading = useAppSelector((state: any) => state.loading);
-  const error = useAppSelector((state: any) => state.error);
+  const loading = useAppSelector((state) => state.ingredients.loading);
+  const error = useAppSelector((state) => state.ingredients.error);
 
   if (loading) {
     return <div>Загрузка данных...</div>;
@@ -43,7 +42,6 @@ const BurgerIngredients = () => {
     return <div>Произошла ошибка: {error}</div>;
   }
 
-  const filteredSelectedItems = ingredients;
 
   return (
     <section className={styles.section}>

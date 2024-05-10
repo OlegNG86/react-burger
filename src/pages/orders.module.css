@@ -13,6 +13,10 @@
   padding: 0px;
   margin-block-start: 24px;
 }
+.linkLocation {
+  text-decoration: none;
+  color: inherit;
+}
 
 ul {
   list-style: none;

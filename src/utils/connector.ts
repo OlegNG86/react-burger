@@ -66,7 +66,6 @@ export const refreshToken = async (): Promise<any> => {
       accessToken: string;
       refreshToken: string;
     }>(response);
-    console.log("REFRESH_DATA", refreshData);
     if (!refreshData.success) {
       if (refreshData.error === "jwt expired") {
         clearTokens();
@@ -112,11 +111,12 @@ export const fetchWithRefresh = async (
 export const getOrder = async (orderId: number): Promise<any> => {
   try {
     const response = await fetch(`${BASE_URL}/orders/${orderId}`);
-    return await checkResponse(response);
-  } catch (err: unknown) {
-    try {
-      if (err instanceof Error && err.message === "jwt expired") {
-        const refreshData = await refreshToken(); //обновляем токен
+    const data = await checkResponse(response);
+    return data;
+  } catch (err) {
+    if (err instanceof Error && err.message === "jwt expired") {
+      try {
+        const refreshData = await refreshToken();
         const options: IOptionsSendApiRequest = {
           method: "GET",
           headers: {
@@ -125,11 +125,23 @@ export const getOrder = async (orderId: number): Promise<any> => {
         };
         const response = await fetch(`${BASE_URL}/orders/${orderId}`, options);
         return await checkResponse(response);
-      } else {
-        return Promise.reject(err);
+      } catch (refreshErr) {
+        return Promise.reject(new Error("Error while refreshing token"));
       }
-    } catch (refreshErr) {
-      return Promise.reject(refreshErr);
+    } else {
+      return Promise.reject(err);
     }
   }
 };
+
+// export const getOrder = (orderId: number) => {
+
+//   request<TResponseDataAPI<{ order: TOrder[] }>>("orders/"+orderId)
+//     .then((response) => {
+//       console.log(response)
+//       return response
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     });
+// };

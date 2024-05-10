@@ -26,6 +26,7 @@ export interface IIngredient {
   proteins: number;
   type: "bun" | "main" | "sauce";
   _id: string;
+  count?: number;
 }
 
 export interface IIngredientWithUID extends IIngredient {
@@ -42,7 +43,7 @@ export type TForm = {
 export type TProfileAuthorizationState = {
   email: string;
   name: string;
-}
+};
 
 export type TOrder = {
   _id: string;
@@ -57,7 +58,25 @@ export type TOrder = {
 export type TOrderCard = {
   number: string;
   foodName: string;
-  icons: { src: string; alt: string; width: string }[];
+  icons: { 
+    src: string; 
+    alt: string; 
+    width: string }[];
   date: string;
   total: number;
+
 };
+
+export type TOrderDetails = {
+  number: string;
+  foodName: string;
+  date: string;
+  total: number;
+  ingredients: {
+    count: number;
+    image_large: string;
+    name: string;
+    price: number;
+    priceByCount: number;
+  }[];
+}

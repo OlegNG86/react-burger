@@ -6,10 +6,10 @@ import {
   Button,
   EmailInput,
   PasswordInput,
-  Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile.module.css";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import InputYa from "../components/fix-input/fix-input";
 
 function ProfilePage() {
   const dispatch = useAppDispatch();
@@ -43,15 +43,13 @@ function ProfilePage() {
     <form className={styles.form} onSubmit={handleSubmit}>
       
       <section className={styles.profile_fields}>
-        <Input
+        <InputYa
           type={"text"}
           placeholder={"Имя"}
           onChange={handleChange}
           value={values.name || ""}
           name={"name"}
           disabled={isLoading}
-          onPointerEnterCapture
-          onPointerLeaveCapture
         />
         <EmailInput
           onChange={handleChange}

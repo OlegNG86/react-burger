@@ -1,99 +1,89 @@
 import { useParams } from "react-router-dom";
-import IngredientDetails from "../components/ingredient-details/ingredient-details";
-import { IIngredient } from "../utils/types";
-import { useAppSelector } from "../hooks/redux";
-import { getOrder } from "../utils/connector";
-import styles from "./order.module.css";
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { getOrderObject } from "../services/actions/order-details";
+import { useEffect } from "react";
+import OrderDetailsPage from "./order-details";
 
 const OrderPage = () => {
-  // const { number } = useParams<{ number: string }>();
+  const { number } = useParams();
+  const orders = useAppSelector((state) => state.order.orderObject);
 
-  // const orders = useAppSelector((state) => state.orders.orders);
-  
+  const dispatch = useAppDispatch();
+  const ingredients = useAppSelector((state) => state.ingredients.data);
+  const orderId = Number(number);
 
-  // const orderId = Number(number); // используем parseInt для преобразования строки в число
-  // const order = orders.find((item) => item.number === orderId);
-  // const ingredients = useAppSelector((state) => state.ingredients.data);
-  
-  // if (order) {
-  //   console.log("console.log => order", order)
+  useEffect(() => {
+    dispatch(getOrderObject(orderId));
+  }, [dispatch, orderId]);
 
-  // } else {
-  //   console.log("Заказ не найден");
-  //   console.log("orderId = ", orderId);
-  //   const fetchOrders = getOrder(orderId);
-  //   console.log(fetchOrders);
-  // }
+  interface IOrderIngredient {
+    count: number;
+    image_large: string;
+    name: string;
+    price: number;
+    priceByCount: number;
+  }
 
+  const updatedOrders = orders.map((order) => {
 
-  // const getIngredientData = (_id: string): IIngredient | undefined => {
-  //   return order ? ingredients.find((ingredient) => ingredient._id === _id) : undefined};
+    const ingredientsInfo: Record<string, IOrderIngredient> = {};
 
-  //   const updatedOrder = () => {
-  //     const ingredientsData: IIngredient[] = order?.ingredients
-  //       .map((ingredientId) => getIngredientData(ingredientId))
-  //       .filter(Boolean) as IIngredient[];
-  
-  
-  //     const total = ingredientsData.reduce((acc, ingredient) => acc + ingredient!.price, 0);
-  
-  //     return {
-  //       number: `${order?.number}`, // исправлено на _id
-  //       foodName: order?.name, // исправлено на name
-  //       icons: ingredientsData.map((ingredient) => ({ src: ingredient!.image_large, alt: ingredient!.name, width: '112 56' })),
-  //       date: new Date(order?.createdAt!).toLocaleString(),
-  //       total: total
-  //     };
-  // };
+    orders.forEach((order) => {
+      order.ingredients.forEach((ingredientId) => {
+        const ingredient = ingredients.find((i) => i._id === ingredientId);
+        if (ingredient) {
+          if (ingredientsInfo[ingredientId]) {
+            ingredientsInfo[ingredientId].count++;
+            ingredientsInfo[ingredientId].priceByCount += ingredient.price;
+          } else {
+            ingredientsInfo[ingredientId] = {
+              count: 1,
+              image_large: ingredient.image_large,
+              name: ingredient.name,
+              price: ingredient.price,
+              priceByCount: ingredient.price,
+            };
+          }
+        }
+      });
+    });
+
+    let total = 0;
+
+    for (const ingredientId in ingredientsInfo) {
+      total += ingredientsInfo[ingredientId].priceByCount;
+    }
+
+    return {
+      number: `${order.number}`,
+      foodName: order.name,
+      ingredients: Object.values(ingredientsInfo).map(
+        (ingredient: IOrderIngredient) => ({
+          count: ingredient.count,
+          image_large: ingredient.image_large,
+          name: ingredient.name,
+          price: ingredient.price,
+          priceByCount: ingredient.priceByCount,
+        })
+      ),
+      date: new Date(order.createdAt).toLocaleString(),
+      total: total,
+    };
+  });
 
   return (
-    // <div>
-    //   {order ? (
-    //     // <IngredientDetails ingredientData={order} />
-    //     <div>Заказ найден</div>
-    //   ) : (
-    //     <div>Заказ не найден</div>
-    //   )}
-    // </div>
-
-      <section className={styles.cardOrder}>
-        <div className={styles.numberOrder}>#034533</div>
-        <h3 className={styles.foodName}>Black Hole Singularity острый бургер</h3>
-        <p className={styles.wordDone}>Выполнен</p>
-   
-      <ul className={styles.allIngredients}>
-        <h3 className={styles.titleIngredients}>Состав:</h3>
-        <li className={styles.IngredientsItems}>
-           <div className={styles.coverIconsItem}>
-           <img className={styles.iconsItem} src="https://code.s3.yandex.net/react/code/bun-02.png"></img>
-          </div>
-          <p className={styles.nameIngredient}>Флюоресцентная булка R2-D3</p>
-          <p className={styles.numbersQuantity}>2 x 300 <span className={styles.iconTotal}>{<CurrencyIcon type={"primary"}/>}</span></p>
-        </li>
-        <li className={styles.IngredientsItems}>
-        <div className={styles.coverIconsItem}>
-           <img className={styles.iconsItem} src="https://code.s3.yandex.net/react/code/bun-02.png"></img>
-          </div>
-          <p className={styles.nameIngredient}>Флюоресцентная булка R2-D3</p>
-          <p className={styles.numbersQuantity}>2 x 300 <span className={styles.iconTotal}>{<CurrencyIcon type={"primary"}/>}</span></p>
-        </li>
-        <li className={styles.IngredientsItems}>
-        <div className={styles.coverIconsItem}>
-           <img className={styles.iconsItem} src="https://code.s3.yandex.net/react/code/bun-02.png"></img>
-          </div>
-          <p className={styles.nameIngredient}>Флюоресцентная булка R2-D3</p>
-          <p className={styles.numbersQuantity}>2 x 300 <span className={styles.iconTotal}>{<CurrencyIcon type={"primary"}/>}</span></p>
-        </li>
-      </ul>
-      <div className={styles.dateOrderCard}>
-        <p className={styles.dateOrder}>Вчера, 13:50</p>
-        <p className={styles.totalItem}>300
-         <span className={styles.iconTotal}>{<CurrencyIcon type={"primary"}/>}</span>
-        </p> 
-      </div>
-      </section>
+    <>
+      {updatedOrders.map((order, index) => (
+        <OrderDetailsPage
+          key={index}
+          number={order.number}
+          foodName={order.foodName}
+          ingredients={order.ingredients}
+          date={order.date}
+          total={order.total}
+        />
+      ))}
+    </>
   );
 };
 

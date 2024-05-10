@@ -53,7 +53,8 @@ const App = () => {
         <Routes location={location?.state?.backgroundLocation || location}>
           <Route path="/ingredient/:id" element={<IngredientPage />} />
           <Route path="/feed" element={<FeedPage />} />
-          <Route path="/feedid" element={<OrderPage />} />
+          <Route path="/feed/:number" element={<OrderPage />} />
+          <Route path="/profile/orders/:number" element={<OrderPage />} />
           <Route path="/" element={<HomePage />} />
           <Route
             path="/login"
@@ -117,6 +118,14 @@ const App = () => {
             />
             <Route
               path="/feed/:number"
+              element={
+                <Modal onClose={handlerCloseModal} title="Заказ">
+                  <OrderPage />
+                </Modal>
+              }
+            />
+            <Route
+              path="/profile/orders/:number"
               element={
                 <Modal onClose={handlerCloseModal} title="Заказ">
                   <OrderPage />

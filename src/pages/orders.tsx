@@ -9,6 +9,7 @@ import styles from "./orders.module.css";
 import { IIngredient } from "../utils/types";
 import { getTokens } from "../utils/persistant-token";
 import OrderCard from "./order-card";
+import { Link, useLocation } from "react-router-dom";
 
 const OrdersPage: React.FC = () => {
   const accessToken = getTokens().accessToken.slice(7);
@@ -55,20 +56,26 @@ const OrdersPage: React.FC = () => {
       total: total,
     };
   });
-
+  const location = useLocation();
   return (
     <main className={styles.container}>
       <section className={styles.sectionContainerHistory}>
         <ul className={styles.orderLists}>
           {updatedOrders.map((order, index) => (
-            <OrderCard
-              key={index}
-              number={order.number}
-              foodName={order.foodName}
-              icons={order.icons}
-              date={order.date}
-              total={order.total}
-            />
+            <Link
+              to={`/profile/orders/${order.number}`}
+              state={{ ...location?.state, backgroundLocation: location }}
+              className={styles.linkLocation}
+            >
+              <OrderCard
+                key={index}
+                number={order.number}
+                foodName={order.foodName}
+                icons={order.icons}
+                date={order.date}
+                total={order.total}
+              />
+            </Link>
           ))}
         </ul>
       </section>
