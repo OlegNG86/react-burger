@@ -52,6 +52,7 @@ export const socketMiddleware = (
         onError,
         onMessage,
       } = wsActions;
+      if (!payload) return;
       if (type === wsInit) {
         socket = new WebSocket(payload);
         socket.onopen = (event: Event) => {

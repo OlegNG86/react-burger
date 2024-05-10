@@ -76,15 +76,19 @@ const FeedPage = () => {
               to={`/feed/${order.number}`}
               state={{ ...location?.state, backgroundLocation: location }}
               className={styles.linkLocation}
+              key={order.number}
             >
-              <OrderCard
-                key={index}
-                number={order.number}
-                foodName={order.foodName}
-                icons={order.icons}
-                date={order.date}
-                total={order.total}
-              />
+              <li>
+                {" "}
+                <OrderCard
+                  key={index}
+                  number={order.number}
+                  foodName={order.foodName}
+                  icons={order.icons}
+                  date={order.date}
+                  total={order.total}
+                />
+              </li>
             </Link>
           ))}
         </ul>
