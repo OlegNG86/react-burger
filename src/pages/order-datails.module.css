@@ -3,6 +3,8 @@
   height: 620px;
   margin: 0 auto;
   margin-block-start: 60px;
+  overflow: scroll;
+  min-height: 100%;
 
 }
 .numberOrder {
@@ -90,7 +92,7 @@ grid-template-columns: min-content 1fr 1fr;
   display: flex;
   justify-content: space-between;
   align-self: center;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .iconsItem {

@@ -93,21 +93,31 @@ ul {
   padding: 0px;
 }
 .titleTotalList {
-  padding-block-end: 24px;
+  height: 30px;
+  width: 100%;
 }
-.numbersOrderList{
-    width: 150px;
-    white-space: wrap;
+.numbersOrderList {
+    width: 272px;
+    height: 206px;
+    display: flex;
     overflow: hidden;
+    flex-wrap: wrap;
 }
+
 .numbersOrderItem {
- margin: 0 auto;
- padding-block-start: 8px;
- color: rgba(0, 204, 204, 1);
- font-family: "Iceland";
+display: flex;
+flex-direction: column;
+margin: 0;
+padding: 0px;
+
+color: rgba(0, 204, 204, 1);
+font-family: "Iceland";
  font-size: 28px;
+ width: 100px;
 }
+
 .totalListItems {
+  margin-block-start: 60px;
   display: flex;
   height: 206px;
   width: 150px;
