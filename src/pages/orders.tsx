@@ -63,12 +63,13 @@ const OrdersPage: React.FC = () => {
         <ul className={styles.orderLists}>
           {updatedOrders.map((order, index) => (
             <Link
+              key={order.number}
               to={`/profile/orders/${order.number}`}
               state={{ ...location?.state, backgroundLocation: location }}
               className={styles.linkLocation}
             >
               <OrderCard
-                key={index}
+                key={order.number}
                 number={order.number}
                 foodName={order.foodName}
                 icons={order.icons}
