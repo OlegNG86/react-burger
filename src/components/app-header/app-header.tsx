@@ -1,5 +1,3 @@
-import React from "react";
-import PropTypes from "prop-types";
 import {
   Logo,
   BurgerIcon,
@@ -9,6 +7,7 @@ import {
 import styles from "./app-header.module.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../hooks/redux";
+import { TIconProps } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/utils";
 
 function Button({
   to,
@@ -17,7 +16,7 @@ function Button({
   isActive,
 }: {
   to: string;
-  icon: any;
+  icon: ({type}: TIconProps) => React.ReactElement;
   text: string;
   isActive: boolean;
 }) {
@@ -54,7 +53,7 @@ function Button({
 
 function AppHeader() {
   const isAuthenticated = useAppSelector((state) => state.authorization.auth);
-  const name = useAppSelector((state: any) => state.authorization.profile.name);
+  const name = useAppSelector((state) => state.authorization.profile.name);
   const nameField = isAuthenticated ? name : "Личный кабинет";
 
   const location = useLocation();

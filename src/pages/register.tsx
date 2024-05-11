@@ -36,7 +36,6 @@ function RegisterPage() {
   };
   const handlerSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(tryRegistration(valueEmailInput, valuePasswordInput, valueInput));
   };
   return (

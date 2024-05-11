@@ -15,7 +15,7 @@ const OrderCard: React.FC<TOrderCard> = ({
         <div className={styles.coverItem}>
           <p className={styles.numberOrder}>#{number}</p>
           <p className={styles.foodName}>{foodName}</p>
-          <p className={styles.iconsFood}>
+          <div className={styles.iconsFood}>
             {icons.map((icon, index) => (
               <div key={index} className={styles.coverIconsItem}>
                 <img
@@ -23,19 +23,19 @@ const OrderCard: React.FC<TOrderCard> = ({
                   src={icon.src}
                   alt={icon.alt}
                   width={icon.width}
-                ></img>
+                />
               </div>
             ))}
-          </p>
+          </div>
           <div className={styles.dateOrderList}>
             <p className={styles.dateOrder}>{date}</p>
-            <p className={styles.totalItem}>
+            <div className={styles.totalItem}>
               {total}
               <div className={styles.icon}>
                 {" "}
                 <CurrencyIcon type="primary" />
               </div>
-            </p>
+            </div>
           </div>
         </div>
       </li>

@@ -78,17 +78,15 @@ const FeedPage = () => {
               className={styles.linkLocation}
               key={order.number}
             >
-              <li>
-                {" "}
-                <OrderCard
-                  key={index}
-                  number={order.number}
-                  foodName={order.foodName}
-                  icons={order.icons}
-                  date={order.date}
-                  total={order.total}
-                />
-              </li>
+              {" "}
+              <OrderCard
+                key={index}
+                number={order.number}
+                foodName={order.foodName}
+                icons={order.icons}
+                date={order.date}
+                total={order.total}
+              />
             </Link>
           ))}
         </ul>

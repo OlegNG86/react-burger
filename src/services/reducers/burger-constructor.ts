@@ -1,4 +1,4 @@
-import { IIngredientWithUID } from "../../utils/types";
+import { IIngredient, IIngredientWithUID } from "../../utils/types";
 import {
   ADD_BUN,
   ADD_INGREDIENT,
@@ -9,13 +9,13 @@ import {
 } from "../actions/burger-constructor";
 
 type TBurgerConstructorState = {
-  bun: IIngredientWithUID | {};
+  bun: IIngredient | null;
   topping: IIngredientWithUID[];
   totalPrice: number;
 }
 
 const initialState: TBurgerConstructorState = {
-  bun: {},
+  bun: null,
   topping: [],
   totalPrice: 0,
 };
@@ -55,7 +55,7 @@ const burgerConstructorReducer = (state = initialState, action: TBurgerConstruct
     case RESET_CONSTRUCTOR:
       return {
         ...state,
-        bun: {},
+        bun: null,
         topping: [],
       };
     default:

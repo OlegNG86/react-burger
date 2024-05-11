@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
 import styles from "./modal.module.css";
 import { ModalOverlay } from "../modal-overlay/modal-overlay";
 import {
@@ -14,8 +13,8 @@ const Modal = ({
   children,
 }: {
   title?: string;
-  onClose: any;
-  children: any;
+  onClose: () => void;
+  children: React.ReactNode;
 }) => {
   React.useEffect(() => {
     const handleEscKeydown = (e: KeyboardEvent) => {

@@ -24,7 +24,7 @@ function BurgerConstructor() {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector((state) => state.authorization.auth);
   const { bun, topping } = useAppSelector(
-    (store: any) => store.burgerConstructor
+    (store) => store.burgerConstructor
   );
   const { isModalOpen } = useAppSelector((store) => store.modal);
   const { orderId } = useAppSelector((store) => store.order);
@@ -35,13 +35,13 @@ function BurgerConstructor() {
   const calcTotalPrice = useMemo(() => {
     let totalPrice = 0;
 
-    if (bun && bun.price) {
+    if (bun && 'price' in bun && bun.price) {
       totalPrice += bun.price * 2;
     }
 
     if (topping && topping.length > 0) {
       totalPrice += topping.reduce(
-        (acc: any, curr: any) => acc + curr.price,
+        (acc, curr) => acc + curr.price,
         0
       );
     }
@@ -57,25 +57,27 @@ function BurgerConstructor() {
     }
   }
 
+
+
   const [, dropTarget] = useDrop({
     accept: "ingredient",
-    drop(item) {
-      //@ts-ignore
+    drop(item: IIngredient) {
       handleDrop(item);
     },
   });
 
   const handleSubmit = () => {
     if (!isAuthenticated) {
-      //@ts-ignore
       navigate("/login");
     } else {
-      setIsWaiting(true);
+      if (!bun) {
+        return;
+      }
       const ingredientsId = [bun, ...topping, bun].map((item) => item._id);
-      //@ts-ignore
       dispatch(getOrderId(ingredientsId));
       dispatch(resetConstructor());
       dispatch(openModal());
+      setIsWaiting(true);
     }
   };
 
@@ -85,22 +87,6 @@ function BurgerConstructor() {
     dispatch(closeModal());
     dispatch(resetOrderId());
   }
-
-  // switch (orderPath) {
-  //   case null: {
-  //     break;
-  //   }
-  //   case true: {
-  //     return (
-  //       <ProtectedRoute children={undefined} />
-  //     );
-  //   }
-  //   default: {
-  //     return (
-  //       <Navigate to={orderPath} />
-  //     )
-  //   }
-  // }
 
   return (
     <section className={styles.section}>

@@ -56,7 +56,11 @@
     font-size: 28px;
     line-height: 24px;
     display: flex; 
+    justify-content: flex-end;
     gap: 8px;
+}
+.iconTotal {
+  text-align: end;
 }
 
 .IngredientsItems {

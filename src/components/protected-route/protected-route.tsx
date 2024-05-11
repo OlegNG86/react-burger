@@ -5,10 +5,10 @@ export default function ProtectedRoute({
   children,
   anonymous = false,
 }: {
-  children: any;
+  children: JSX.Element;
   anonymous?: boolean;
-}) {
-  const isLoggedIn = useAppSelector((store: any) => store.authorization.auth);
+}): JSX.Element {
+  const isLoggedIn = useAppSelector((store) => store.authorization.auth);
 
   const location = useLocation();
   const from = location.state?.from || "/";

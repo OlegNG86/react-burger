@@ -1,6 +1,6 @@
 import React from "react";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./order-datails.module.css";
+import styles from "./order-details.module.css";
 import { TOrderDetails } from "../utils/types";
 
 const OrderDetailsPage: React.FC<TOrderDetails> = ({
@@ -19,8 +19,8 @@ const OrderDetailsPage: React.FC<TOrderDetails> = ({
       <ul className={styles.allIngredients}>
         <h3 className={styles.titleIngredients}>Состав:</h3>
         {ingredients.map((ingredient, index) => (
-          <li key={index} className={styles.IngredientsItems}>
-            <div className={styles.coverIconsItem}>
+           <li key={index} className={styles.IngredientsItems}>
+              <div className={styles.coverIconsItem}>
               <img
                 className={styles.iconsItem}
                 src={ingredient.image_large}
@@ -34,8 +34,8 @@ const OrderDetailsPage: React.FC<TOrderDetails> = ({
                 {<CurrencyIcon type={"primary"} />}
               </span>
             </p>
-          </li>
-        ))}
+         </li>
+        ))} 
       </ul>
       <div className={styles.dateOrderCard}>
         <p className={styles.dateOrder}>{date}</p>

@@ -27,7 +27,7 @@ export interface IResetOrderIdAction {
 }
 
 export interface IGetOrderIdAction {
-  (ingredients: IIngredient): (dispatch: AppDispatch) => Promise<void>;
+  (ingredients: string[]): (dispatch: AppDispatch) => Promise<void>;
 }
 
 export interface IGetOrderObjectAction {
