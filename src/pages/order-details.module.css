@@ -9,7 +9,7 @@
   font-weight: 400;
   font-size: 28px;
   line-height: 24px;
- margin-block-end: 40px;
+  margin-block-end: 40px;
 }
 
 .foodName {
@@ -23,49 +23,51 @@
   color: rgba(0, 204, 204, 1);
   font-family: "Iceland";
   font-size: 16px;
- }
- 
-.allIngredients {
- width: 640px;
- height: 366px;
-width: 100%; 
- margin: 0 auto;
- padding: 0px;
- overflow: scroll;
- margin-block-start: 60px;
-
 }
- .titleIngredients {
+
+.allIngredients {
+  width: 608px;
+  height: 306px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-block-start: 60px;
+  width: 98%;
+  min-height: 100%;
+}
+.titleIngredients {
   font-family: "JetBrains";
   font-weight: 700;
   font-size: 24px;
   line-height: 30px;
   margin-block-end: 24px;
   height: 30px;
-
 }
 .nameIngredient {
   font-family: "JetBrains";
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  width: 414px;
+  width: 300px;
+ 
 }
 .numbersQuantity {
   font-family: "Iceland";
   font-weight: 400;
   font-size: 28px;
   line-height: 24px;
-  display: flex; 
+  display: flex;
   gap: 8px;
-  justify-content: end;
+  justify-content: flex-end;
   flex-wrap: nowrap;
   width: 192px;
 }
 
 .IngredientsItems {
-display: grid;
-grid-template-columns: min-content 1fr 1fr;
+  display: grid;
+  grid-template-columns: min-content 1fr 1fr;
 }
 
 .dateOrder {
@@ -74,11 +76,7 @@ grid-template-columns: min-content 1fr 1fr;
   font-size: 16px;
   align-self: center;
 }
-.iconsItem {
-  margin: 0px -28px 0px -28px;
-  width: 112px;
-  height: 56px;
-}
+
 .coverIconsItem {
   background-color: rgba(19, 19, 22, 1);
   border: 2px solid rgba(128, 26, 178, 1);
@@ -93,7 +91,7 @@ grid-template-columns: min-content 1fr 1fr;
 .dateOrderCard {
   display: flex;
   justify-content: space-between;
- 
+
   flex-direction: row;
 }
 
@@ -108,7 +106,7 @@ grid-template-columns: min-content 1fr 1fr;
   font-weight: 400;
   font-size: 28px;
   line-height: 24px;
-  display: flex; 
+  display: flex;
   gap: 8px;
   align-self: end;
 }

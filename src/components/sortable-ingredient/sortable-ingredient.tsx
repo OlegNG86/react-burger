@@ -5,7 +5,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag, useDrop } from "react-dnd";
 import styles from "./sortable-ingredient.module.css";
-import { IIngredient, IIngredientWithUID } from "../../utils/types";
+import { IIngredientWithUID } from "../../utils/types";
 import {
   deleteIngredient,
   changeIndexes,

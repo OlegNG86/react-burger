@@ -1,5 +1,6 @@
 .orderLists {
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
   width: 608px;
   width: 110%;
   height: 852px;

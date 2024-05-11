@@ -7,7 +7,7 @@ import {
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { changePasswordRequest } from "../services/actions/authorization";
-import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { useAppDispatch } from "../hooks/redux";
 
 function ResetPasswordPage() {
   const dispatch = useAppDispatch();

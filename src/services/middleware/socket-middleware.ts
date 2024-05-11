@@ -63,7 +63,7 @@ export const socketMiddleware = (
           dispatch({ type: onError, payload: convertErrorResponseToString(event) });
         };
 
-        socket.onmessage = (event: MessageEvent) => {
+        socket.onmessage = (event) => {
           const { data } = event;
           const parsedData = JSON.parse(data);
           dispatch({
@@ -75,7 +75,7 @@ export const socketMiddleware = (
           });
         };
 
-        socket.onclose = (event: Event) => {
+        socket.onclose = (event) => {
           dispatch({ type: onClose, payload: event });
         };
       }
