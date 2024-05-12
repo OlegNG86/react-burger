@@ -20,7 +20,6 @@ export function LoginPage() {
 
   const handlerSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //@ts-ignore
     dispatch(tryAuthorization(valueEmailInput, valuePasswordInput));
   };
 

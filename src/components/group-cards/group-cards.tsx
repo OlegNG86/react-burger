@@ -4,15 +4,12 @@ import React from "react";
 import { IIngredient } from "../../utils/types";
 import { useAppSelector } from "../../hooks/redux";
 
-const GroupCards = React.forwardRef(
-  (
-    { data, groupName }: { data: IIngredient[]; groupName: string },
-    ref: any
-  ) => {
-    const { bun, topping } = useAppSelector(
-      (store: any) => store.burgerConstructor
-    );
-    const constructorIngredients = [bun, ...topping, bun];
+type Props = { data: IIngredient[]; groupName: string };
+const GroupCards = React.forwardRef<HTMLDivElement, Props>(
+  ({ data, groupName }, ref) => {
+    const { bun, topping } = useAppSelector((store) => store.burgerConstructor);
+    const constructorIngredients = bun ? [bun, ...topping, bun] : topping;
+
     return (
       <div ref={ref}>
         <h3 className={`text text_type_main-medium`}>{groupName}</h3>

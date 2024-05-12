@@ -7,7 +7,7 @@ import {
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { changePasswordRequest } from "../services/actions/authorization";
-import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { useAppDispatch } from "../hooks/redux";
 
 function ResetPasswordPage() {
   const dispatch = useAppDispatch();
@@ -22,16 +22,12 @@ function ResetPasswordPage() {
     }, 0);
     alert("Icon Click Callback");
   };
-  const changePasswordSuccess = useAppSelector(
-    (state: any) => state.authorization.changePasswordSuccess
-  );
   const [valuePasswordInput, setValuePasswordInput] = React.useState("");
   const onChangePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
     setValuePasswordInput(e.target.value);
   };
   const handlerSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     await dispatch(changePasswordRequest(valuePasswordInput, valueInput));
     navigate("/");
   };

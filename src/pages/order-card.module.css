@@ -1,0 +1,134 @@
+.sectionContainerHistory {
+    min-height: 100%;
+    gap: 60px;
+    width: 680px;
+    height: 852px;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  .sectionContainerTable {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    list-style: none;
+    margin: 0 auto;
+  }
+  .listsItem {
+    width: 600px;
+  }
+  .coverItem {
+    background-color: rgba(28, 28, 33, 1);
+    border-radius: 40px;
+    width: 590px;
+    width: 100%;
+    height: 219px;
+    margin: 0 auto;
+    margin-block-start: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  
+  .titleContainer {
+    margin: 0px;
+  }
+  .numberOrder {
+    font-family: "Iceland";
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 24px;
+    margin: 0;
+
+  }
+  .foodName {
+    font-family: "JetBrains";
+    font-weight: 700;
+    font-size: 24px;
+    font-size-adjust: auto;
+    line-height: 30px;
+    width: 100%;
+    height: 30px;
+  }
+
+  .iconsFood {
+    margin: 0;
+    margin-block-start: 24px;
+    display: flex;
+    flex-direction: row;
+    padding-left: 24px;
+    width: 304px;
+  }
+  
+  .iconsItem {
+    margin: 0px -28px 0px -28px;
+    width: 112px;
+    height: 56px;
+  }
+  .coverIconsItem {
+    margin-left: -24px;
+    background-color: rgba(19, 19, 22, 1);
+    border: 2px solid rgba(128, 26, 178, 1);
+    max-width: 56px;
+    max-height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-self: start;
+  }
+  .dateOrderList {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: "JetBrains";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    height: 100%;
+    margin-inline-start: -108px;
+
+  }
+  .dateOrder { 
+    margin: 0;
+    margin-inline-start: -40px;
+    color: grey;
+    font-size: 16px;
+    width: 116px;
+    white-space: nowrap;
+  }
+
+  .totalItem {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    font-family: "Iceland";
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 24px;
+    gap: 8px;
+  }
+  .textWrapper {
+    margin-inline-start: -320px;
+   padding-block-start: 320px;
+    width: 320px;
+    font-size: 16px;
+    font-family: "JetBrains";
+    line-height: 24px;
+    color: rgb(133, 133, 173, 1);
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .textWrapper:hover {
+    color: white;
+  }
+  .textWrapper:focus {
+    outline: none;
+    text-decoration: none;
+  }
+  .textWrapper:focus-visible {
+    color: white;
+  }
+  

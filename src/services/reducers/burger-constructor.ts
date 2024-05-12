@@ -5,15 +5,22 @@ import {
   DELETE_INGREDIENT,
   CHANGE_INDEXES,
   RESET_CONSTRUCTOR,
+  TBurgerConstructorActions
 } from "../actions/burger-constructor";
 
-const initialState = {
-  bun: {},
+type TBurgerConstructorState = {
+  bun: IIngredient | null;
+  topping: IIngredientWithUID[];
+  totalPrice: number;
+}
+
+const initialState: TBurgerConstructorState = {
+  bun: null,
   topping: [],
   totalPrice: 0,
 };
 
-const burgerConstructorReducer = (state = initialState, action: any) => {
+const burgerConstructorReducer = (state = initialState, action: TBurgerConstructorActions): TBurgerConstructorState => {
   switch (action.type) {
     case ADD_BUN:
       return {
@@ -48,7 +55,7 @@ const burgerConstructorReducer = (state = initialState, action: any) => {
     case RESET_CONSTRUCTOR:
       return {
         ...state,
-        bun: {},
+        bun: null,
         topping: [],
       };
     default:

@@ -1,3 +1,4 @@
+import { TProfileAuthorizationState } from "../../utils/types";
 import {
   GET_USER_DATA_REQUEST,
   GET_USER_DATA_SUCCESS,
@@ -5,9 +6,16 @@ import {
   UPDATE_USER_DATA_REQUEST,
   UPDATE_USER_DATA_SUCCESS,
   UPDATE_USER_DATA_FAILURE,
+  TUserActions,
 } from "../actions/user";
 
-const initialState = {
+type TUserState = {
+  userData: TProfileAuthorizationState | null;
+  isLoading: boolean;
+  error: string | null;
+}
+
+const initialState: TUserState = {
   userData: null,
   isLoading: false,
   error: null,
@@ -15,8 +23,8 @@ const initialState = {
 
 const userReducer = (
   state = initialState,
-  action: { type: string; payload: {} }
-) => {
+  action: TUserActions
+): TUserState => {
   switch (action.type) {
     case GET_USER_DATA_REQUEST:
     case UPDATE_USER_DATA_REQUEST:

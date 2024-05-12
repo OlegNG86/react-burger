@@ -1,4 +1,4 @@
-import { TForm } from "../../utils/types";
+import { TProfileAuthorizationState } from "../../utils/types";
 import {
   SET_USER_DATA,
   RESET_PASSWORD_SUCCESS,
@@ -8,7 +8,17 @@ import {
   SET_READY_STATE,
 } from "../actions/authorization";
 
-const initialState = {
+import { TAuthorizationActions } from "../actions/authorization";
+
+type TAuthorizationState = {
+  auth: boolean;
+  isReady: boolean;
+  profile: TProfileAuthorizationState;
+  resetPasswordSuccess: boolean;
+  changePasswordSuccess: boolean;
+}
+
+const initialState: TAuthorizationState = {
   auth: false,
   isReady: false,
   profile: {
@@ -21,8 +31,8 @@ const initialState = {
 
 const authorizationReducer = (
   state = initialState,
-  action: { type: string; payload: TForm }
-) => {
+  action: TAuthorizationActions
+): TAuthorizationState => {
   switch (action.type) {
     case SET_USER_DATA:
       return {

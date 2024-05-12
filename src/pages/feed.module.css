@@ -1,0 +1,139 @@
+.orderLists {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 608px;
+  width: 110%;
+  height: 852px;
+  margin: 0;
+  padding: 0px;
+}
+
+.linkLocation {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+.sectionContainerTable {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  list-style: none;
+  margin: 0 auto;
+}
+
+.coverItem {
+ box-sizing: border-box;
+  background-color: rgba(28, 28, 33, 1);
+  border-radius: 40px;
+  width: 584px;
+  height: 214px;
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.titleContainer {
+  padding-left: 35px;
+}
+.foodName {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+}
+.iconsFood {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  padding-left: 24px;
+}
+
+.iconsItem {
+  margin: 0px -28px 0px -28px;
+  width: 112px;
+  height: 56px;
+}
+.coverIconsItem {
+  margin-left: -24px;
+  background-color: rgba(19, 19, 22, 1);
+  border: 2px solid rgba(128, 26, 178, 1);
+  max-width: 56px;
+  max-height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-self: start;
+}
+
+.dateOrder {
+    margin-inline-start: -160px;
+  align-self: end;
+  color: grey;
+  font-size: 16px;
+  font-family: "JetBrains";
+}
+.totalItem {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+  margin-block-start: 100px;
+  align-self: end;
+}
+.totalLists {
+    margin: 0 auto;
+    height: 626px;
+    width: 580px;
+    margin-inline-start: 60px;
+}
+
+.totalList {
+  display: flex;
+  gap: 0px 56px;
+  padding: 0px;
+}
+.titleTotalList {
+  height: 30px;
+  width: 100%;
+}
+.numbersOrderList {
+    width: 272px;
+    height: 206px;
+    display: flex;
+    overflow: hidden;
+    flex-wrap: wrap;
+}
+
+.numbersOrderItem {
+display: flex;
+flex-direction: column;
+margin: 0;
+padding: 0px;
+
+color: rgba(0, 204, 204, 1);
+font-family: "Iceland";
+ font-size: 28px;
+ width: 100px;
+}
+
+.totalListItems {
+  margin-block-start: 60px;
+  display: flex;
+  height: 206px;
+  width: 150px;
+}
+.titleTotalfood {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  font-family: "JetBrains";
+  font-size: 24px;
+}
+.totalFoodSum {
+  font-size: 144px;
+  font-weight: 400;
+  font-family: "Iceland";
+  line-height: 120px;
+  text-shadow: 4px 1px 4px rgba(51, 51, 255, 0.5);
+}

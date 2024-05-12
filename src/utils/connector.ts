@@ -1,11 +1,18 @@
-import { setTokens, getTokens } from "./persistant-token";
+import { setTokens, getTokens, clearTokens } from "./persistant-token";
 
 // 1 раз объявляем базовый урл
-export const BASE_URL: string = "https://norma.nomoreparties.space/api/";
+export const BASE_URL: string = "https://norma.nomoreparties.space/api";
+export const WSS_URL: string = "wss://norma.nomoreparties.space/orders";
 
 export type TResponseDataAPI<T extends Record<string, any> = {}> = {
   success: boolean;
 } & T;
+
+export interface IOptionsSendApiRequest {
+  method: string,
+  headers: Record<string, any>,
+  body?: string
+}
 
 // создаем функцию проверки ответа на `ok`
 const checkResponse = <T extends TResponseDataAPI>(
@@ -34,7 +41,7 @@ export const request = <T>(
   options?: RequestInit
 ): Promise<T> => {
   // а также в ней базовый урл сразу прописывается, чтобы не дублировать в каждом запросе
-  return fetch(`${BASE_URL}${endpoint}`, options)
+  return fetch(`${BASE_URL}/${endpoint}`, options)
     .then((response) => response.json())
     .then(checkSuccess);
 };
@@ -60,6 +67,9 @@ export const refreshToken = async (): Promise<any> => {
       refreshToken: string;
     }>(response);
     if (!refreshData.success) {
+      if (refreshData.error === "jwt expired") {
+        clearTokens();
+      }
       throw new Error(refreshData.error);
     }
     setTokens({
@@ -75,25 +85,63 @@ export const refreshToken = async (): Promise<any> => {
 
 export const fetchWithRefresh = async (
   endpoint: string,
-  options: any
+  options: IOptionsSendApiRequest
 ): Promise<any> => {
   try {
-    const fullUrl = `${BASE_URL}${endpoint}`;
+    const fullUrl = `${BASE_URL}/${endpoint}`;
     const response = await fetch(fullUrl, options);
     return await checkResponse(response);
-  } catch (err: any) {
+  } catch (err: unknown) {
     try {
-      if (err.message === "jwt expired") {
+      if (err instanceof Error && err.message === "jwt expired") {
         const refreshData = await refreshToken(); //обновляем токен
         options.headers.authorization = refreshData.accessToken;
-        const fullUrl = `${BASE_URL}${endpoint}`; // Define fullUrl again
+        const fullUrl = `${BASE_URL}/${endpoint}`; // Define fullUrl again
         const response = await fetch(fullUrl, options); //повторяем запрос
         return await checkResponse(response);
       } else {
         return Promise.reject(err);
       }
-    } catch (refreshErr: any) {
+    } catch (refreshErr) {
       return Promise.reject(refreshErr);
     }
   }
 };
+
+export const getOrder = async (orderId: number): Promise<any> => {
+  try {
+    const response = await fetch(`${BASE_URL}/orders/${orderId}`);
+    const data = await checkResponse(response);
+    return data;
+  } catch (err) {
+    if (err instanceof Error && err.message === "jwt expired") {
+      try {
+        const refreshData = await refreshToken();
+        const options: IOptionsSendApiRequest = {
+          method: "GET",
+          headers: {
+            Authorization: refreshData.accessToken,
+          },
+        };
+        const response = await fetch(`${BASE_URL}/orders/${orderId}`, options);
+        return await checkResponse(response);
+      } catch (refreshErr) {
+        return Promise.reject(new Error("Error while refreshing token"));
+      }
+    } else {
+      return Promise.reject(err);
+    }
+  }
+};
+
+// export const getOrder = (orderId: number) => {
+
+//   request<TResponseDataAPI<{ order: TOrder[] }>>("orders/"+orderId)
+//     .then((response) => {
+//       console.log(response)
+//       return response
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     });
+// };

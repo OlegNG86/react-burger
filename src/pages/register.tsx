@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import styles from "./register.module.css";
 import {
   Button,
-  Input,
   EmailInput,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { tryRegistration } from "../services/actions/authorization";
 import { useAppDispatch } from "../hooks/redux";
+import InputYa from "../components/fix-input/fix-input";
 
 function RegisterPage() {
   const dispatch = useAppDispatch();
@@ -36,7 +36,6 @@ function RegisterPage() {
   };
   const handlerSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // @ts-ignore
     dispatch(tryRegistration(valueEmailInput, valuePasswordInput, valueInput));
   };
   return (
@@ -44,7 +43,7 @@ function RegisterPage() {
       <form className={styles.form} onSubmit={handlerSubmit}>
         <section className={styles.fields}>
           <h1 className={styles.heading}>Регистрация</h1>
-          <Input
+          <InputYa
             type={"text"}
             placeholder={"Имя"}
             onChange={(e) => setValueInput(e.target.value)}
@@ -57,8 +56,6 @@ function RegisterPage() {
             errorText={"Ошибка"}
             size={"default"}
             extraClass="ml-1"
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
           />
           <EmailInput
             onChange={onChange}

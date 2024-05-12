@@ -15,12 +15,16 @@ import ForgotPasswordPage from "../../pages/forgot-password";
 import ResetPasswordPage from "../../pages/reset-password";
 import ProtectedRoute from "../protected-route/protected-route";
 import ProfilePage from "../../pages/profile";
-import { fetchUserData } from "../../services/actions/authorization";
+import { fetchUserData } from "../../utils/common";
 import NotFoundPage from "../../pages/not-found";
 import IngredientPage from "../../pages/ingredient";
 import { getIngredients } from "../../services/actions/burger-ingredients";
 import Modal from "../modal/modal";
 import { useAppSelector, useAppDispatch } from "../../hooks/redux";
+import FeedPage from "../../pages/feed";
+import OrdersPage from "../../pages/orders";
+import ProfileWrapperTemplate from "../../pages/profile-wrapper-template";
+import OrderPage from "../../pages/order";
 
 const App = () => {
   const location = useLocation();
@@ -38,7 +42,7 @@ const App = () => {
   React.useEffect(() => {
     dispatch(getIngredients());
     dispatch(fetchUserData());
-  }, []);
+  }, [dispatch]);
   if (!isReady) {
     return <div>Идёт загрузка...</div>;
   }
@@ -46,10 +50,11 @@ const App = () => {
     <>
       <AppHeader />
       <main className={style.content}>
-        <Routes
-          location={(location?.state?.backgroundLocation || location) as any}
-        >
+        <Routes location={location?.state?.backgroundLocation || location}>
           <Route path="/ingredient/:id" element={<IngredientPage />} />
+          <Route path="/feed" element={<FeedPage />} />
+          <Route path="/feed/:number" element={<OrderPage />} />
+          <Route path="/profile/orders/:number" element={<OrderPage />} />
           <Route path="/" element={<HomePage />} />
           <Route
             path="/login"
@@ -91,12 +96,12 @@ const App = () => {
             path="/profile/*"
             element={
               <ProtectedRoute>
-                <ProfilePage />
+                <ProfileWrapperTemplate />
               </ProtectedRoute>
             }
           >
-            <Route path="orders" element={<NotFoundPage />} />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route index element={<ProfilePage />} />
+            <Route path="orders" element={<OrdersPage />} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
@@ -108,6 +113,22 @@ const App = () => {
               element={
                 <Modal onClose={handlerCloseModal} title="Ингредиент">
                   <IngredientPage />
+                </Modal>
+              }
+            />
+            <Route
+              path="/feed/:number"
+              element={
+                <Modal onClose={handlerCloseModal} title="Заказ">
+                  <OrderPage />
+                </Modal>
+              }
+            />
+            <Route
+              path="/profile/orders/:number"
+              element={
+                <Modal onClose={handlerCloseModal} title="Заказ">
+                  <OrderPage />
                 </Modal>
               }
             />

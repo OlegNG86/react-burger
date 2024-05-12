@@ -1,68 +1,105 @@
 import { TResponseDataAPI, request } from "../../utils/connector";
-import { setTokens, getTokens } from "../../utils/persistant-token";
-import { fetchWithRefresh } from "../../utils/connector";
-import { TForm } from "../../utils/types";
+import { setTokens } from "../../utils/persistant-token";
+import { TProfileAuthorizationState } from "../../utils/types";
+import { AppDispatch } from "../reducers";
 
-export const SET_USER_DATA = "SET_USER_DATA";
-export const FETCH_USER_DATA = "FETCH_USER_DATA";
-export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
-export const RESET_PASSWORD_FAILURE = "RESET_PASSWORD_FAILURE";
-export const CHANGE_PASSWORD_SUCCESS = "CHANGE_PASSWORD_SUCCESS";
-export const CHANGE_PASSWORD_FAILURE = "CHANGE_PASSWORD_FAILURE";
-export const SET_READY_STATE = "SET_READY_STATE";
+export const SET_USER_DATA: "SET_USER_DATA" = "SET_USER_DATA";
+export const FETCH_USER_DATA: "FETCH_USER_DATA" = "FETCH_USER_DATA";
+export const RESET_PASSWORD_SUCCESS: "RESET_PASSWORD_SUCCESS" =
+  "RESET_PASSWORD_SUCCESS";
+export const RESET_PASSWORD_FAILURE: "RESET_PASSWORD_FAILURE" =
+  "RESET_PASSWORD_FAILURE";
+export const CHANGE_PASSWORD_SUCCESS: "CHANGE_PASSWORD_SUCCESS" =
+  "CHANGE_PASSWORD_SUCCESS";
+export const CHANGE_PASSWORD_FAILURE: "CHANGE_PASSWORD_FAILURE" =
+  "CHANGE_PASSWORD_FAILURE";
+export const SET_READY_STATE: "SET_READY_STATE" = "SET_READY_STATE";
 
-export const setUserData = (userData: any) => ({
-  type: SET_USER_DATA,
-  payload: userData,
-});
+export interface ISetUserDataAction {
+  type: typeof SET_USER_DATA;
+  payload: TProfileAuthorizationState;
+}
 
-export const setReadyState = () => ({
+export interface ISetReadyStateAction {
+  readonly type: typeof SET_READY_STATE;
+}
+
+export interface IResetPasswordSuccessAction {
+  readonly type: typeof RESET_PASSWORD_SUCCESS;
+}
+
+export interface IResetPasswordFailureAction {
+  readonly type: typeof RESET_PASSWORD_FAILURE;
+}
+
+export interface IChangePasswordSuccessAction {
+  readonly type: typeof CHANGE_PASSWORD_SUCCESS;
+}
+
+export interface IChangePasswordFailureAction {
+  readonly type: typeof CHANGE_PASSWORD_FAILURE;
+}
+
+export interface ITryAuthorizationAction {
+  (email: string, password: string): (dispatch: AppDispatch) => Promise<void>;
+}
+
+export interface ITryRegistration {
+  (email: string, password: string, name: string): (
+    dispatch: AppDispatch
+  ) => Promise<void>;
+}
+
+export interface IResetPasswordRequest {
+  (email: string): (dispatch: AppDispatch) => Promise<void>;
+}
+
+export interface IChangePasswordRequest {
+  (password: string, token: string): (dispatch: AppDispatch) => Promise<void>;
+}
+
+export type TAuthorizationActions =
+  | ISetUserDataAction
+  | ISetReadyStateAction
+  | IResetPasswordSuccessAction
+  | IResetPasswordFailureAction
+  | IChangePasswordSuccessAction
+  | IChangePasswordFailureAction;
+
+export const setUserData = (userData: TProfileAuthorizationState): ISetUserDataAction => {
+  return {
+    type: SET_USER_DATA,
+    payload: userData
+  };
+};
+
+export const setReadyState = (): ISetReadyStateAction => ({
   type: SET_READY_STATE,
 });
 
-export const fetchUserData = () => async (dispatch: any) => {
-  try {
-    const accessToken = getTokens().accessToken;
-    if (accessToken) {
-      const response = await fetchWithRefresh("auth/user", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: accessToken,
-        },
-      });
-      dispatch(setUserData(response.user));
-    }
-  } catch (err) {
-    console.error(err);
-  } finally {
-    dispatch(setReadyState());
-  }
-};
-
-export const resetPasswordSuccess = () => ({
+export const resetPasswordSuccess = (): IResetPasswordSuccessAction => ({
   type: RESET_PASSWORD_SUCCESS,
 });
 
-export const resetPasswordFailure = () => ({
+export const resetPasswordFailure = (): IResetPasswordFailureAction => ({
   type: RESET_PASSWORD_FAILURE,
 });
 
-export const changePasswordSuccess = () => ({
+export const changePasswordSuccess = (): IChangePasswordSuccessAction => ({
   type: CHANGE_PASSWORD_SUCCESS,
 });
 
-export const changePasswordFailure = () => ({
+export const changePasswordFailure = (): IChangePasswordFailureAction => ({
   type: CHANGE_PASSWORD_FAILURE,
 });
 
-export const tryAuthorization =
-  (email: string, password: string) => async (dispatch: any) => {
+export const tryAuthorization: ITryAuthorizationAction =
+  (email, password) => async (dispatch) => {
     try {
       const response = await request<{
         accessToken: string;
         refreshToken: string;
-        user: TForm;
+        user: TProfileAuthorizationState;
       }>("auth/login", {
         method: "POST",
         headers: {
@@ -89,13 +126,13 @@ export const tryAuthorization =
     }
   };
 
-export const tryRegistration =
-  (email: string, password: string, name: string) => async (dispatch: any) => {
+export const tryRegistration: ITryRegistration =
+  (email, password, name) => async (dispatch) => {
     try {
       const response = await request<{
         accessToken: string;
         refreshToken: string;
-        user: TForm;
+        user: TProfileAuthorizationState;
       }>("auth/register", {
         method: "POST",
         headers: {
@@ -123,8 +160,8 @@ export const tryRegistration =
     }
   };
 
-export const resetPasswordRequest =
-  (email: string) => async (dispatch: any) => {
+export const resetPasswordRequest: IResetPasswordRequest =
+  (email) => async (dispatch) => {
     try {
       const response = await request<TResponseDataAPI>("password-reset", {
         method: "POST",
@@ -147,8 +184,8 @@ export const resetPasswordRequest =
     }
   };
 
-export const changePasswordRequest =
-  (password: string, token: string) => async (dispatch: any) => {
+export const changePasswordRequest: IChangePasswordRequest =
+  (password, token) => async (dispatch) => {
     try {
       const response = await request<TResponseDataAPI>("password-reset/reset", {
         method: "POST",

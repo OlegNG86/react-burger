@@ -1,11 +1,18 @@
-import { IIngredientWithUID } from "../../utils/types";
+import { IIngredient } from "../../utils/types";
 import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_FAILED,
+  TBurgerIngredientsActions,
 } from "../actions/burger-ingredients";
 
-const initialState = {
+type TBurgerIngredientsState = {
+  data: IIngredient[];
+  loading: boolean;
+  error: string | null;
+}
+
+const initialState: TBurgerIngredientsState = {
   data: [],
   loading: false,
   error: null,
@@ -13,8 +20,8 @@ const initialState = {
 
 const burgerIngredientsReducer = (
   state = initialState,
-  action: { type: string; payload: any; ingredients: IIngredientWithUID[] }
-) => {
+  action: TBurgerIngredientsActions
+): TBurgerIngredientsState => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST:
       return { ...state, loading: true, error: null };

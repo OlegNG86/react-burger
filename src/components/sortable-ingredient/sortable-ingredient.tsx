@@ -26,18 +26,19 @@ function SortableIngredient({
   const moveItem = (from: number, to: number) => {
     dispatch(changeIndexes(from, to));
   };
-  const ref = useRef(null);
-  const [{ handlerId }, drop] = useDrop({
+  const ref = useRef<HTMLDivElement>(null);
+  const [, drop] = useDrop<{itemCurrentIndex: number}>({
     accept: "topping",
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
       };
     },
-    hover(item: any, monitor) {
+    hover(item, monitor) {
       if (!ref.current) {
         return;
       }
+      console.log("item", item)
 
       const dragIndex = item.itemCurrentIndex;
       const hoverIndex = index;
@@ -46,15 +47,16 @@ function SortableIngredient({
         return;
       }
       // Determine rectangle on screen
-      // @ts-ignore
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
       // Get vertical middle
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       // Determine mouse position
       const clientOffset = monitor.getClientOffset();
+      if (!clientOffset) {
+        return;
+      }
       // Get pixels to the top
-      // @ts-ignore
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       // Only perform the move when the mouse has crossed half of the items height
       // When dragging downwards, only move when the cursor is below 50%
@@ -78,7 +80,7 @@ function SortableIngredient({
       item.itemCurrentIndex = hoverIndex;
     },
   });
-  const [{ isDragging }, drag] = useDrag({
+  const [, drag] = useDrag({
     type: "topping",
     item: () => {
       return { itemCurrentIndex: index };
