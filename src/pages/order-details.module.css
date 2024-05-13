@@ -19,6 +19,7 @@
   line-height: 30px;
   margin-block-end: 12px;
 }
+
 .wordDone {
   color: rgba(0, 204, 204, 1);
   font-family: "Iceland";
@@ -26,33 +27,32 @@
 }
 
 .allIngredients {
-  width: 608px;
-  height: 306px;
   width: 100%;
+  max-height: 306px; /* Изменено */
   margin: 0 auto;
   padding: 0px;
   overflow-x: hidden;
-  overflow-y: scroll;
-  margin-block-start: 60px;
+  overflow-y: auto; /* Изменено */
+  margin-block-start: 20px;
   width: 98%;
-  min-height: 100%;
 }
+
 .titleIngredients {
   font-family: "JetBrains";
   font-weight: 700;
   font-size: 24px;
   line-height: 30px;
-  margin-block-end: 24px;
-  height: 30px;
+  /* Удалено margin-block-end и height */
 }
+
 .nameIngredient {
   font-family: "JetBrains";
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
   width: 300px;
- 
 }
+
 .numbersQuantity {
   font-family: "Iceland";
   font-weight: 400;
@@ -91,7 +91,6 @@
 .dateOrderCard {
   display: flex;
   justify-content: space-between;
-
   flex-direction: row;
 }
 

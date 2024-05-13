@@ -16,11 +16,11 @@ const OrderDetailsPage: React.FC<TOrderDetails> = ({
       <h3 className={styles.foodName}>{foodName}</h3>
       <p className={styles.wordDone}>Выполнен</p>
 
+      <h3 className={styles.titleIngredients}>Состав:</h3>
       <ul className={styles.allIngredients}>
-        <h3 className={styles.titleIngredients}>Состав:</h3>
         {ingredients.map((ingredient, index) => (
-           <li key={index} className={styles.IngredientsItems}>
-              <div className={styles.coverIconsItem}>
+          <li key={index} className={styles.IngredientsItems}>
+            <div className={styles.coverIconsItem}>
               <img
                 className={styles.iconsItem}
                 src={ingredient.image_large}
@@ -34,8 +34,8 @@ const OrderDetailsPage: React.FC<TOrderDetails> = ({
                 {<CurrencyIcon type={"primary"} />}
               </span>
             </p>
-         </li>
-        ))} 
+          </li>
+        ))}
       </ul>
       <div className={styles.dateOrderCard}>
         <p className={styles.dateOrder}>{date}</p>
