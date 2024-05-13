@@ -1,6 +1,6 @@
 import { TResponseDataAPI, request } from "../../utils/connector";
 import { getTokens } from "../../utils/persistant-token";
-import { IIngredient, TOrder } from "../../utils/types";
+import { TOrder } from "../../utils/types";
 import { AppDispatch } from "../reducers";
 import { convertErrorResponseToString } from "../../utils/common";
 
