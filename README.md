@@ -1,1 +1,1 @@
-https://yandex-studens.github.io/react-intensive
+https://olegng86.github.io/react-burger/
