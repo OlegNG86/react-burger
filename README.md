@@ -1,1 +1,1 @@
-https://olegng86.github.io/react-burger/
+https://reactburger.oleg86.nomoredomainswork.ru/
