@@ -57,6 +57,7 @@ const burgerConstructorReducer = (state = initialState, action: TBurgerConstruct
         ...state,
         bun: null,
         topping: [],
+        totalPrice: 0,
       };
     default:
       return state;
