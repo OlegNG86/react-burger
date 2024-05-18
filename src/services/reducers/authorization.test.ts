@@ -1,4 +1,7 @@
-import authorizationReducer from "./authorization";
+import authorizationReducer, {
+  initialState,
+  TAuthorizationState,
+} from "./authorization";
 import {
   SET_USER_DATA,
   RESET_PASSWORD_SUCCESS,
@@ -8,28 +11,8 @@ import {
   SET_READY_STATE,
   TAuthorizationActions,
 } from "../actions/authorization";
-import { TProfileAuthorizationState } from "../../utils/types";
-
-type TAuthorizationState = {
-  auth: boolean;
-  isReady: boolean;
-  profile: TProfileAuthorizationState;
-  resetPasswordSuccess: boolean;
-  changePasswordSuccess: boolean;
-};
 
 describe("authorizationReducer", () => {
-  const initialState: TAuthorizationState = {
-    auth: false,
-    isReady: false,
-    profile: {
-      email: "",
-      name: "",
-    },
-    resetPasswordSuccess: false,
-    changePasswordSuccess: false,
-  };
-
   it("should return the initial state", () => {
     expect(
       authorizationReducer(undefined, {} as TAuthorizationActions)

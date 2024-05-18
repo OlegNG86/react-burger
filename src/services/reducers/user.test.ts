@@ -1,4 +1,4 @@
-import userReducer from './user';
+import userReducer, { TUserState, initialState } from "./user";
 import {
   GET_USER_DATA_REQUEST,
   GET_USER_DATA_SUCCESS,
@@ -7,27 +7,15 @@ import {
   UPDATE_USER_DATA_SUCCESS,
   UPDATE_USER_DATA_FAILURE,
   TUserActions,
-} from '../actions/user';
-import { TProfileAuthorizationState } from '../../utils/types';
+} from "../actions/user";
+import { TProfileAuthorizationState } from "../../utils/types";
 
-type TUserState = {
-  userData: TProfileAuthorizationState | null;
-  isLoading: boolean;
-  error: string | null;
-};
-
-describe('userReducer', () => {
-  const initialState: TUserState = {
-    userData: null,
-    isLoading: false,
-    error: null,
-  };
-
-  it('should return the initial state', () => {
+describe("userReducer", () => {
+  it("should return the initial state", () => {
     expect(userReducer(undefined, {} as TUserActions)).toEqual(initialState);
   });
 
-  it('should handle GET_USER_DATA_REQUEST', () => {
+  it("should handle GET_USER_DATA_REQUEST", () => {
     const action: TUserActions = { type: GET_USER_DATA_REQUEST };
     const expectedState: TUserState = {
       ...initialState,
@@ -37,12 +25,15 @@ describe('userReducer', () => {
     expect(userReducer(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle GET_USER_DATA_SUCCESS', () => {
+  it("should handle GET_USER_DATA_SUCCESS", () => {
     const userData: TProfileAuthorizationState = {
-      email: 'test@example.com',
-      name: 'Test User',
+      email: "test@example.com",
+      name: "Test User",
     };
-    const action: TUserActions = { type: GET_USER_DATA_SUCCESS, payload: userData };
+    const action: TUserActions = {
+      type: GET_USER_DATA_SUCCESS,
+      payload: userData,
+    };
     const expectedState: TUserState = {
       ...initialState,
       userData,
@@ -52,17 +43,20 @@ describe('userReducer', () => {
     expect(userReducer(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle GET_USER_DATA_FAILURE', () => {
-    const action: TUserActions = { type: GET_USER_DATA_FAILURE, payload: 'Error fetching user data' };
+  it("should handle GET_USER_DATA_FAILURE", () => {
+    const action: TUserActions = {
+      type: GET_USER_DATA_FAILURE,
+      payload: "Error fetching user data",
+    };
     const expectedState: TUserState = {
       ...initialState,
       isLoading: false,
-      error: 'Error fetching user data',
+      error: "Error fetching user data",
     };
     expect(userReducer(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle UPDATE_USER_DATA_REQUEST', () => {
+  it("should handle UPDATE_USER_DATA_REQUEST", () => {
     const action: TUserActions = { type: UPDATE_USER_DATA_REQUEST };
     const expectedState: TUserState = {
       ...initialState,
@@ -72,12 +66,15 @@ describe('userReducer', () => {
     expect(userReducer(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle UPDATE_USER_DATA_SUCCESS', () => {
+  it("should handle UPDATE_USER_DATA_SUCCESS", () => {
     const userData: TProfileAuthorizationState = {
-      email: 'test@example.com',
-      name: 'Updated User',
+      email: "test@example.com",
+      name: "Updated User",
     };
-    const action: TUserActions = { type: UPDATE_USER_DATA_SUCCESS, payload: userData };
+    const action: TUserActions = {
+      type: UPDATE_USER_DATA_SUCCESS,
+      payload: userData,
+    };
     const expectedState: TUserState = {
       ...initialState,
       userData,
@@ -87,12 +84,15 @@ describe('userReducer', () => {
     expect(userReducer(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle UPDATE_USER_DATA_FAILURE', () => {
-    const action: TUserActions = { type: UPDATE_USER_DATA_FAILURE, payload: 'Error updating user data' };
+  it("should handle UPDATE_USER_DATA_FAILURE", () => {
+    const action: TUserActions = {
+      type: UPDATE_USER_DATA_FAILURE,
+      payload: "Error updating user data",
+    };
     const expectedState: TUserState = {
       ...initialState,
       isLoading: false,
-      error: 'Error updating user data',
+      error: "Error updating user data",
     };
     expect(userReducer(initialState, action)).toEqual(expectedState);
   });

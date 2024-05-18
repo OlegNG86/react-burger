@@ -1,15 +1,8 @@
 import { OPEN_MODAL, CLOSE_MODAL } from "../actions/modal";
-import { modalReducer } from "./modal";
+import { modalReducer, initialModalState } from "./modal";
 import { TModalActions } from "../actions/modal";
 
-type TModalState = {
-  isModalOpen: boolean;
-};
-
 describe("modalReducer", () => {
-  const initialModalState: TModalState = {
-    isModalOpen: false,
-  };
   it("should return the initial state", () => {
     expect(modalReducer(undefined, {} as TModalActions)).toEqual(
       initialModalState

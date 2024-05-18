@@ -1,10 +1,10 @@
 import { OPEN_MODAL, CLOSE_MODAL, TModalActions } from "../actions/modal";
 
-type TModalState = {
+export type TModalState = {
   isModalOpen: boolean;
 }
 
-const initialModalState: TModalState = {
+export const initialModalState: TModalState = {
   isModalOpen: false,
 };
 

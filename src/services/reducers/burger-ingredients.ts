@@ -6,13 +6,13 @@ import {
   TBurgerIngredientsActions,
 } from "../actions/burger-ingredients";
 
-type TBurgerIngredientsState = {
+export type TBurgerIngredientsState = {
   data: IIngredient[];
   loading: boolean;
   error: string | null;
 }
 
-const initialState: TBurgerIngredientsState = {
+export const initialState: TBurgerIngredientsState = {
   data: [],
   loading: false,
   error: null,

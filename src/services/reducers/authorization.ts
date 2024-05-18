@@ -10,7 +10,7 @@ import {
 
 import { TAuthorizationActions } from "../actions/authorization";
 
-type TAuthorizationState = {
+export type TAuthorizationState = {
   auth: boolean;
   isReady: boolean;
   profile: TProfileAuthorizationState;
@@ -18,7 +18,7 @@ type TAuthorizationState = {
   changePasswordSuccess: boolean;
 }
 
-const initialState: TAuthorizationState = {
+export const initialState: TAuthorizationState = {
   auth: false,
   isReady: false,
   profile: {

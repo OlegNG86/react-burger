@@ -9,13 +9,13 @@ import {
   TOrderDetailsActions,
 } from "../actions/order-details";
 
-type TOrderDetailsState = {
+export type TOrderDetailsState = {
   orderId: number | null;
   orderObject: TOrder[] | [];
   error: string | null;
 };
 
-const initialState: TOrderDetailsState = {
+export const initialState: TOrderDetailsState = {
   orderId: null,
   orderObject: [],
   error: null,

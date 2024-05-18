@@ -1,4 +1,4 @@
-import { rootReducer } from "./index";
+import { store } from "./index";
 import burgerIngredientsReducer from "./burger-ingredients";
 import burgerConstructorReducer from "./burger-constructor";
 import { modalReducer } from "./modal";
@@ -7,13 +7,8 @@ import authorizationReducer from "./authorization";
 import userReducer from "./user";
 import { feedReducer } from "./feed";
 import { ordersReducer } from "./orders";
-import { configureStore } from "@reduxjs/toolkit";
 
 describe("rootReducer", () => {
-  let store = configureStore({
-    reducer: rootReducer,
-  });
-
   it("should handle initial state", () => {
     expect(store.getState().ingredients).toEqual(
       burgerIngredientsReducer(undefined, {} as any)

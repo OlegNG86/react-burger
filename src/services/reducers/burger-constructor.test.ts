@@ -1,4 +1,7 @@
-import burgerConstructorReducer from "./burger-constructor";
+import burgerConstructorReducer, {
+  initialState,
+  TBurgerConstructorState,
+} from "./burger-constructor";
 import {
   ADD_BUN,
   ADD_INGREDIENT,
@@ -9,19 +12,7 @@ import {
 } from "../actions/burger-constructor";
 import { IIngredient, IIngredientWithUID } from "../../utils/types";
 
-type TBurgerConstructorState = {
-  bun: IIngredient | null;
-  topping: IIngredientWithUID[];
-  totalPrice: number;
-};
-
 describe("burgerConstructorReducer", () => {
-  const initialState: TBurgerConstructorState = {
-    bun: null,
-    topping: [],
-    totalPrice: 0,
-  };
-
   it("should return the initial state", () => {
     expect(
       burgerConstructorReducer(undefined, {} as TBurgerConstructorActions)

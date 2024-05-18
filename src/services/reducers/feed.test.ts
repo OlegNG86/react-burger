@@ -6,25 +6,9 @@ import {
   TFeedActions,
 } from "../actions/feed";
 import { TOrder } from "../../utils/types";
-import { feedReducer } from "./feed";
-
-type TFeedState = {
-  orders: TOrder[];
-  total: number;
-  totalToday: number;
-  isOpen: boolean;
-  error: string | null;
-};
+import { initialState, feedReducer, TFeedState } from "./feed";
 
 describe("feedReducer", () => {
-  const initialState: TFeedState = {
-    orders: [],
-    total: 0,
-    totalToday: 0,
-    isOpen: false,
-    error: null,
-  };
-
   it("should return the initial state", () => {
     expect(feedReducer(undefined, {} as TFeedActions)).toEqual(initialState);
   });

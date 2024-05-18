@@ -1,4 +1,7 @@
-import burgerIngredientsReducer from "./burger-ingredients";
+import burgerIngredientsReducer, {
+  initialState,
+  TBurgerIngredientsState,
+} from "./burger-ingredients";
 import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
@@ -7,19 +10,7 @@ import {
 } from "../actions/burger-ingredients";
 import { IIngredient } from "../../utils/types";
 
-type TBurgerIngredientsState = {
-  data: IIngredient[];
-  loading: boolean;
-  error: string | null;
-};
-
 describe("burgerIngredientsReducer", () => {
-  const initialState: TBurgerIngredientsState = {
-    data: [],
-    loading: false,
-    error: null,
-  };
-
   it("should return the initial state", () => {
     expect(
       burgerIngredientsReducer(undefined, {} as TBurgerIngredientsActions)
