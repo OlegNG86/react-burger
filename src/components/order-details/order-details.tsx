@@ -6,9 +6,10 @@ function OrderDetails() {
   const { orderId } = useAppSelector((store) => store.order);
 
   return (
-    <div className={styles.order}>
+    <div className={styles.order} data-cy="order-details">
       <h2
         className={`text text_type_digits-large mt-30 mb-8 ${styles.order__title}`}
+        data-cy="order-id"
       >
         {orderId}
       </h2>

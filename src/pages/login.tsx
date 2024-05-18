@@ -47,14 +47,17 @@ export function LoginPage() {
             name="password"
             extraClass="mb-2"
           />
-          <Button
-            htmlType="submit"
-            type="primary"
-            size="medium"
-            extraClass="ml-2"
-          >
-            Войти
-          </Button>
+          <div data-cy="login-button">
+            <Button
+              htmlType="submit"
+              type="primary"
+              size="medium"
+              extraClass="ml-2"
+            >
+              Войти
+            </Button>
+          </div>
+
           <div className={styles.enter}>
             Вы - новый пользователь?{" "}
             <Link className={styles.linkEnter} to="/register">
