@@ -1,56 +1,72 @@
 /// <reference types="cypress" />
 
+// Константы для селекторов
+const SELECTORS = {
+  ingredientBun: '[data-cy="ingredient-bun"]',
+  ingredientMain: '[data-cy="ingredient-main"]',
+  constructor: '[data-cy="constructor"]',
+  constructorBunTop: '[data-cy="constructor-bun-top"]',
+  constructorBunBottom: '[data-cy="constructor-bun-bottom"]',
+  constructorMain: '[data-cy="constructor-main"]',
+  orderButton: '[data-cy="order-button"]',
+  modal: '[data-cy="modal"]',
+  orderDetails: '[data-cy="order-details"]',
+  orderId: '[data-cy="order-id"]',
+  modalCloseButton: '[data-cy="modal-close-button"]',
+  loginButton: '[data-cy="login-button"]',
+};
+
 describe("Burger Constructor", () => {
   before(() => {
     // Загружаем страницу конструктора перед тестами
-    cy.visit("localhost:3000");
+    cy.visit("/");
   });
 
   it("should drag and drop ingredients into the constructor and create an order and show modal with order details", () => {
     // Ожидаем загрузку элементов
-    cy.get('[data-cy="ingredient-bun"]').should("exist");
+    cy.get(SELECTORS.ingredientBun).should("exist");
 
     // Перетаскиваем булку
-    cy.get('[data-cy="ingredient-bun"]').first().trigger("dragstart");
-    cy.get('[data-cy="constructor"]').should("exist").trigger("drop");
+    cy.get(SELECTORS.ingredientBun).first().trigger("dragstart");
+    cy.get(SELECTORS.constructor).should("exist").trigger("drop");
 
     // Проверяем, что булка добавлена
-    cy.get('[data-cy="constructor-bun-top"]').should("exist");
-    cy.get('[data-cy="constructor-bun-bottom"]').should("exist");
+    cy.get(SELECTORS.constructorBunTop).should("exist");
+    cy.get(SELECTORS.constructorBunBottom).should("exist");
 
     // Перетаскиваем начинку
-    cy.get('[data-cy="ingredient-main"]').should("exist");
-    cy.get('[data-cy="ingredient-main"]').first().trigger("dragstart");
-    cy.get('[data-cy="constructor"]').trigger("drop");
-    cy.get('[data-cy="ingredient-main"]').last().trigger("dragstart");
-    cy.get('[data-cy="constructor"]').trigger("drop");
+    cy.get(SELECTORS.ingredientMain).should("exist");
+    cy.get(SELECTORS.ingredientMain).first().trigger("dragstart");
+    cy.get(SELECTORS.constructor).trigger("drop");
+    cy.get(SELECTORS.ingredientMain).last().trigger("dragstart");
+    cy.get(SELECTORS.constructor).trigger("drop");
 
     // Проверяем, что начинка добавлена
-    cy.get('[data-cy="constructor-main"]').should("have.length", 1);
+    cy.get(SELECTORS.constructorMain).should("have.length", 1);
 
     // Нажимаем на кнопку оформления заказа и попадаем в LoginPage, т.к. не были авторизованы
-    cy.get('[data-cy="order-button"]').click();
+    cy.get(SELECTORS.orderButton).click();
 
     // Нажимаем на кнопку Войти
-    cy.get('[data-cy="login-button"]').click();
+    cy.get(SELECTORS.loginButton).click();
 
     // Снова нажимаем на кнопку оформления заказа
-    cy.get('[data-cy="order-button"]').click();
+    cy.get(SELECTORS.orderButton).click();
 
     // Ждем 16 секунд, чтобы дать загрузиться модальному окну
     cy.wait(16000);
 
     // Проверяем, что открылось модальное окно
-    cy.get('[data-cy="modal"]').should("exist");
-    cy.get('[data-cy="order-details"]').should("exist");
+    cy.get(SELECTORS.modal).should("exist");
+    cy.get(SELECTORS.orderDetails).should("exist");
 
     // Проверяем наличие идентификатора заказа
-    cy.get('[data-cy="order-id"]').should("not.be.empty");
+    cy.get(SELECTORS.orderId).should("not.be.empty");
 
     // Закрываем модальное окно
-    cy.get('[data-cy="modal-close-button"]').click();
+    cy.get(SELECTORS.modalCloseButton).click();
 
     // Проверяем, что модальное окно закрыто
-    cy.get('[data-cy="modal"]').should("not.exist");
+    cy.get(SELECTORS.modal).should("not.exist");
   });
 });
