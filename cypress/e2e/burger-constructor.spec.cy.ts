@@ -6,7 +6,7 @@ describe("Burger Constructor", () => {
     cy.visit("localhost:3000");
   });
 
-  it("should drag and drop ingredients into the constructor", () => {
+  it("should drag and drop ingredients into the constructor and create an order and show modal with order details", () => {
     // Ожидаем загрузку элементов
     cy.get('[data-cy="ingredient-bun"]').should("exist");
 
