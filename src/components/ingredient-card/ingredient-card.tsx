@@ -28,8 +28,8 @@ function IngredientCard({
         state={{ ...location?.state, backgroundLocation: location }}
         className={styles.card}
         ref={dragRef}
+        data-cy={`ingredient-${ingredient.type}`} // Добавляем data-cy атрибут
       >
-        {" "}
         {count > 0 && <Counter count={count} size="default" />}
         <img
           src={ingredient.image}

@@ -9,13 +9,13 @@ import {
   TUserActions,
 } from "../actions/user";
 
-type TUserState = {
+export type TUserState = {
   userData: TProfileAuthorizationState | null;
   isLoading: boolean;
   error: string | null;
-}
+};
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   userData: null,
   isLoading: false,
   error: null,

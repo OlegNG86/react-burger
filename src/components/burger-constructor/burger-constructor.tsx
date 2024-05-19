@@ -23,27 +23,22 @@ import { useNavigate } from "react-router-dom";
 function BurgerConstructor() {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector((state) => state.authorization.auth);
-  const { bun, topping } = useAppSelector(
-    (store) => store.burgerConstructor
-  );
+  const { bun, topping } = useAppSelector((store) => store.burgerConstructor);
   const { isModalOpen } = useAppSelector((store) => store.modal);
   const { orderId } = useAppSelector((store) => store.order);
   const [isWaiting, setIsWaiting] = useState(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const calcTotalPrice = useMemo(() => {
     let totalPrice = 0;
 
-    if (bun && 'price' in bun && bun.price) {
+    if (bun && "price" in bun && bun.price) {
       totalPrice += bun.price * 2;
     }
 
     if (topping && topping.length > 0) {
-      totalPrice += topping.reduce(
-        (acc, curr) => acc + curr.price,
-        0
-      );
+      totalPrice += topping.reduce((acc, curr) => acc + curr.price, 0);
     }
 
     return totalPrice;
@@ -56,8 +51,6 @@ function BurgerConstructor() {
       dispatch(addIngredient(item));
     }
   }
-
-
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
@@ -89,16 +82,18 @@ function BurgerConstructor() {
   }
 
   return (
-    <section className={styles.section}>
-      <div className={styles.borders} ref={dropTarget}>
+    <div className={styles.section} ref={dropTarget} data-cy="constructor">
+      <div className={styles.borders}>
         {bun ? (
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text={bun.name + " (верх)"}
-            price={bun.price}
-            thumbnail={bun.image}
-          />
+          <div data-cy="constructor-bun-top">
+            <ConstructorElement
+              type="top"
+              isLocked={true}
+              text={bun.name + " (верх)"}
+              price={bun.price}
+              thumbnail={bun.image}
+            />
+          </div>
         ) : (
           <ConstructorElement
             type="top"
@@ -108,7 +103,7 @@ function BurgerConstructor() {
           />
         )}
       </div>
-      <div className={styles.scrollableContainer}>
+      <div className={styles.scrollableContainer} data-cy="constructor-main">
         {topping &&
           Array.isArray(topping) &&
           topping.map((cardData, index) => (
@@ -121,13 +116,15 @@ function BurgerConstructor() {
       </div>
       <div className={styles.borders}>
         {bun ? (
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text={bun.name + " (низ)"}
-            price={bun.price}
-            thumbnail={bun.image}
-          />
+          <div data-cy="constructor-bun-bottom">
+            <ConstructorElement
+              type="bottom"
+              isLocked={true}
+              text={bun.name + " (низ)"}
+              price={bun.price}
+              thumbnail={bun.image}
+            />
+          </div>
         ) : (
           <ConstructorElement
             type="bottom"
@@ -142,22 +139,25 @@ function BurgerConstructor() {
         <div className={styles.icon}>
           <CurrencyIcon type="primary" />
         </div>
-        <Button
-          htmlType="submit"
-          type="primary"
-          size="large"
-          onClick={handleSubmit}
-          disabled={!bun || !bun.name || isWaiting}
-        >
-          {isWaiting ? "Загрузка..." : "Оформить заказ"}
-        </Button>
+        <div data-cy="order-button">
+          <Button
+            htmlType="submit"
+            type="primary"
+            size="large"
+            onClick={handleSubmit}
+            disabled={!bun || !bun.name || isWaiting}
+          >
+            {isWaiting ? "Загрузка..." : "Оформить заказ"}
+          </Button>
+        </div>
+
         {isModalOpen && orderId && (
           <Modal onClose={handleCloseModal}>
             <OrderDetails />
           </Modal>
         )}
       </div>
-    </section>
+    </div>
   );
 }
 

@@ -41,7 +41,6 @@ const BurgerIngredients = () => {
     return <div>Произошла ошибка: {error}</div>;
   }
 
-
   return (
     <section className={styles.section}>
       <h1 className={styles.header}>Соберите бургер</h1>
@@ -88,7 +87,5 @@ const BurgerIngredients = () => {
     </section>
   );
 };
-
-
 
 export default BurgerIngredients;

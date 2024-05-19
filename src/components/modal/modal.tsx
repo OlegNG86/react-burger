@@ -33,7 +33,7 @@ const Modal = ({
 
   return ReactDOM.createPortal(
     <>
-      <div className={styles.modal}>
+      <div className={styles.modal} data-cy="modal">
         <div className={`mt-10 ${styles.header}`}>
           <h2 className={`text text_type_main-large ${styles.title}`}>
             {modalTitle}
@@ -43,6 +43,7 @@ const Modal = ({
           onClick={onClose}
           htmlType="button"
           className={styles.closeButton}
+          data-cy="modal-close-button"
         >
           <CloseIcon type={"primary"} />
         </Button>

@@ -8,13 +8,13 @@ import {
   TBurgerConstructorActions
 } from "../actions/burger-constructor";
 
-type TBurgerConstructorState = {
+export type TBurgerConstructorState = {
   bun: IIngredient | null;
   topping: IIngredientWithUID[];
   totalPrice: number;
 }
 
-const initialState: TBurgerConstructorState = {
+export const initialState: TBurgerConstructorState = {
   bun: null,
   topping: [],
   totalPrice: 0,
@@ -57,6 +57,7 @@ const burgerConstructorReducer = (state = initialState, action: TBurgerConstruct
         ...state,
         bun: null,
         topping: [],
+        totalPrice: 0,
       };
     default:
       return state;
