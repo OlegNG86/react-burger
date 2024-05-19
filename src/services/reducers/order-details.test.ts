@@ -11,7 +11,7 @@ import {
   GET_ORDER_OBJECT_FAILED,
   TOrderDetailsActions,
 } from "../actions/order-details";
-import { TOrder } from "../../utils/types";
+import { orderObject } from "../../utils/test-data";
 
 describe("orderReducer", () => {
   it("should return the initial state", () => {
@@ -66,17 +66,7 @@ describe("orderReducer", () => {
   });
 
   it("should handle GET_ORDER_OBJECT_SUCCESS", () => {
-    const orderObject: TOrder[] = [
-      {
-        _id: "1",
-        ingredients: ["ingredient1", "ingredient2"],
-        status: "done",
-        name: "Order 1",
-        createdAt: "2023-01-01T00:00:00.000Z",
-        updatedAt: "2023-01-01T00:00:00.000Z",
-        number: 1,
-      },
-    ];
+
     const action: TOrderDetailsActions = {
       type: GET_ORDER_OBJECT_SUCCESS,
       orderObject,

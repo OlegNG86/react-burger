@@ -9,6 +9,7 @@ import {
   TBurgerIngredientsActions,
 } from "../actions/burger-ingredients";
 import { IIngredient } from "../../utils/types";
+import { testIngredient3, testIngredient4 } from "../../utils/test-data";
 
 describe("burgerIngredientsReducer", () => {
   it("should return the initial state", () => {
@@ -30,34 +31,7 @@ describe("burgerIngredientsReducer", () => {
   });
 
   it("should handle GET_INGREDIENTS_SUCCESS", () => {
-    const ingredients: IIngredient[] = [
-      {
-        _id: "1",
-        name: "Ingredient 1",
-        type: "main",
-        proteins: 10,
-        fat: 10,
-        carbohydrates: 10,
-        calories: 100,
-        price: 5,
-        image: "image",
-        image_mobile: "image_mobile",
-        image_large: "image_large",
-      },
-      {
-        _id: "2",
-        name: "Ingredient 2",
-        type: "main",
-        proteins: 20,
-        fat: 20,
-        carbohydrates: 20,
-        calories: 200,
-        price: 10,
-        image: "image",
-        image_mobile: "image_mobile",
-        image_large: "image_large",
-      },
-    ];
+    const ingredients: IIngredient[] = [testIngredient3, testIngredient4];
     const action: TBurgerIngredientsActions = {
       type: GET_INGREDIENTS_SUCCESS,
       ingredients,

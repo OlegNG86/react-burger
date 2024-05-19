@@ -5,8 +5,8 @@ import {
   FEED_CONNECTION_ERROR,
   TFeedActions,
 } from "../actions/feed";
-import { TOrder } from "../../utils/types";
 import { initialState, feedReducer, TFeedState } from "./feed";
+import { orderObject as orders } from "../../utils/test-data";
 
 describe("feedReducer", () => {
   it("should return the initial state", () => {
@@ -51,17 +51,6 @@ describe("feedReducer", () => {
   });
 
   it("should handle FEED_GET_MESSAGE", () => {
-    const orders: TOrder[] = [
-      {
-        _id: "1",
-        ingredients: ["ingredient1", "ingredient2"],
-        status: "done",
-        name: "Order 1",
-        createdAt: "2023-01-01T00:00:00.000Z",
-        updatedAt: "2023-01-01T00:00:00.000Z",
-        number: 1,
-      },
-    ];
     const action: TFeedActions = {
       type: FEED_GET_MESSAGE,
       payload: {

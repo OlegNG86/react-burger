@@ -5,8 +5,8 @@ import {
   ORDERS_CONNECTION_ERROR,
   TOrdersActions,
 } from "../actions/orders";
-import { TOrder } from "../../utils/types";
 import { ordersReducer, TOrdersState, initialState } from "./orders";
+import { orderObject as orders } from "../../utils/test-data";
 
 describe("ordersReducer", () => {
   it("should return the initial state", () => {
@@ -53,17 +53,6 @@ describe("ordersReducer", () => {
   });
 
   it("should handle ORDERS_GET_MESSAGE", () => {
-    const orders: TOrder[] = [
-      {
-        _id: "1",
-        ingredients: ["ingredient1", "ingredient2"],
-        status: "done",
-        name: "Order 1",
-        createdAt: "2023-01-01T00:00:00.000Z",
-        updatedAt: "2023-01-01T00:00:00.000Z",
-        number: 1,
-      },
-    ];
     const action: TOrdersActions = {
       type: ORDERS_GET_MESSAGE,
       payload: {
